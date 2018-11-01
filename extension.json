@@ -40,8 +40,8 @@
 		"FacetedCategories": "SpecialFacetedCategories"
 	},
 	"ExtensionMessagesFiles": {
-		"FacetedCategoriesAlias": "FacetedCategories.alias.php",
-		"FacetedCategoriesMagic": "FacetedCategories.i18n.magic.php"
+		"FacetedCategoryAlias": "FacetedCategory.alias.php",
+		"FacetedCategoryMagic": "FacetedCategory.i18n.magic.php"
 	},
 	"manifest_version": 1
 }
