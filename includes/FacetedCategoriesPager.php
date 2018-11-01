@@ -2,7 +2,7 @@
 
 use MediaWiki\Linker\LinkRenderer;
 
-class FacetedCategoryPager extends AlphabeticPager {
+class FacetedCategoriesPager extends AlphabeticPager {
 
 	protected $linkRenderer;
 
@@ -17,7 +17,7 @@ class FacetedCategoryPager extends AlphabeticPager {
 		$facetName = str_replace( ' ', '_', $facetName );
 		$facetMember = str_replace( ' ', '_', $facetMember );
 
-		if($facetName!=='') 
+		if($facetName!=='')
 			$this->facetName = $facetName;
 		if($facetMember !== '')
 			$this->facetMember = $facetMember;

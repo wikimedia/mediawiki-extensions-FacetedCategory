@@ -16,12 +16,12 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 		$slash = strpos($par,'/');
 		$left = $slash===false?$par:substr($par,0,$slash);
 		$right = $slash===false?'':substr($par,$slash+1,strlen($par)-1);
-		
+
 		$facetName = $this->getRequest()->getText( 'facetName', $left );
 		$facetMember = $this->getRequest()->getText( 'facetMember', $right );
 		$includeNotExactlyMatched = $this->getRequest()->getBool( 'includeNotExactlyMatched', false );
 
-		$cap = new FacetedCategoryPager(
+		$cap = new FacetedCategoriesPager(
 			$this->getContext(),
 			$facetName,
 			$facetMember,
