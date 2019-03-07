@@ -1,14 +1,12 @@
 <?php
-$magicWords = array();
+$magicWords = [];
 
 /** English (English) */
-$magicWords['en'] = array(
-	'facetedcategories' => array( 0, 'facetedcategories' )
-);
+$magicWords['en'] = [
+	'facetedcategories' => [ 0, 'facetedcategories' ]
+];
 
 /** Korean (한국어) */
-$magicWords['ko'] = array(
-	'facetedcategories' => array( 0, '다면분류' )
-);
-
-?>
+$magicWords['ko'] = [
+	'facetedcategories' => [ 0, '다면분류' ]
+];

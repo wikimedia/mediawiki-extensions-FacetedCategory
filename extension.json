@@ -16,7 +16,7 @@
 	"AutoloadClasses": {
 		"SpecialFacetedCategories": "specials/SpecialFacetedCategories.php",
 		"FacetedCategoriesPager": "includes/FacetedCategoriesPager.php",
-		"FacetedCategoryHooks": "includes/FacetedCategory.hooks.php"
+		"FacetedCategoryHooks": "includes/FacetedCategoryHooks.php"
 	},
 	"MessagesDirs": {
 		"FacetedCategory": [
