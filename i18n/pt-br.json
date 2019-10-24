@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardo Addad de Oliveira"
+		]
+	},
+	"facetedcategories": "Categorias facetadas",
+	"facetedcategory-desc": "Adicionar páginas especiais [[Special:FacetedCategories]]",
+	"facetedcategory-search-for": "nome da categoria:",
+	"facetedcategory-not-only-match-exactly": "Não incluem exatamente igual"
+}

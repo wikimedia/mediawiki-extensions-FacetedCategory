@@ -1,7 +1,5 @@
 {
-	"@metadata": {
-		"authors": []
-	},
+	"@metadata": [],
 	"facetedcategories": "{{doc-special|FacetedCategories}}\n{{Identical|Faceted Categories}}",
 	"facetedcategory-desc": "{{desc|name=Faceted Categories|url=https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:FacetedCategory}}",
 	"facetedcategory-search-for": "Used as label for the \"Category\" input box in [[Special:FacetedCategories]]",

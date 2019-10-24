@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly"
+		]
+	},
+	"facetedcategories": "多方面分類",
+	"facetedcategory-desc": "添加 [[Special:FacetedCategories]] 特殊頁面",
+	"facetedcategory-search-for": "分類名稱：",
+	"facetedcategory-not-only-match-exactly": "包含不完全符合"
+}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Verdy p"
+		]
+	},
+	"facetedcategories": "Catégories à facettes",
+	"facetedcategory-desc": "Ajoute les pages spéciales [[Special:FacetedCategories|Spécial:Catégories à facettes]]",
+	"facetedcategory-search-for": "nom de catégorie :",
+	"facetedcategory-not-only-match-exactly": "Inclure les correspondances non exactes"
+}
