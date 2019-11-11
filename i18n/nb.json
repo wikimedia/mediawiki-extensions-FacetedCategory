@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"facetedcategories": "Fasetterte kategorier",
+	"facetedcategory-desc": "Legger til spesialsiden [[Special:FacetedCategories]]",
+	"facetedcategory-search-for": "kategorinavn:",
+	"facetedcategory-not-only-match-exactly": "Inkluder de som ikke matcher eksakt"
+}
