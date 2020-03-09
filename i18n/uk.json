@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Piramidion"
+		]
+	},
+	"facetedcategories": "Грановані категорії",
+	"facetedcategory-desc": "Додає спеціальні сторінки [[Special:FacetedCategories]]",
+	"facetedcategory-search-for": "назва категорії:",
+	"facetedcategory-not-only-match-exactly": "Включити неповні збіги"
+}
