@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hamilton Abreu"
+		]
+	},
+	"facetedcategories": "Categorias facetadas",
+	"facetedcategory-desc": "Adicionar as páginas especiais [[Special:FacetedCategories|Especial:Categorias facetadas]]",
+	"facetedcategory-search-for": "nome da categoria:",
+	"facetedcategory-not-only-match-exactly": "Incluir as correspondências não exatas"
+}
