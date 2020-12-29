@@ -18,5 +18,6 @@ of the [GNU Affero General Public License v3.0] or any later version. See
 [codecov.io status]: https://badgen.net/codecov/c/github/femiwiki/FacetedCategory
 [codecov.io link]: https://codecov.io/gh/femiwiki/FacetedCategory
 [mediawiki]: https://www.mediawiki.org/
+[how to contribute]: https://github.com/femiwiki/femiwiki/blob/main/how-to-contribute-to-extensions.md
 [gnu affero general public license v3.0]: LICENSE
 [copyright]: COPYRIGHT
