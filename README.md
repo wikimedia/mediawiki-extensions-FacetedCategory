@@ -3,6 +3,10 @@
 FacetedCategory is an extension that adds FacetedCategory special page for [MediaWiki] wikis.
 See [https://www.mediawiki.org/wiki/Extension:FacetedCategory](https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:FacetedCategory) for more information
 
+## Contributing
+
+If you are interested in contributing to the code base, please see the document [How to Contribute].
+
 ---
 
 The source code of _femiwiki/FacetedCategory_ is primarily distributed under the terms
