@@ -40,8 +40,7 @@
     "SpecialSearchResultsPrepend": "CategoryIntersectionSearchHooks::onSpecialSearchResultsPrepend"
   },
   "ExtensionMessagesFiles": {
-    "FacetedCategoryAlias": "FacetedCategory.alias.php",
-    "FacetedCategoryMagic": "FacetedCategory.i18n.magic.php"
+    "FacetedCategoryAlias": "FacetedCategory.alias.php"
   },
   "TestAutoloadNamespaces": {
     "MediaWiki\\Extension\\CategoryIntersectionSearch\\Tests\\Unit\\": "tests/phpunit/unit/"
