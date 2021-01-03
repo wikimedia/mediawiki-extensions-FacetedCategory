@@ -1,8 +1,9 @@
 {
-	"@metadata": {
-		"authors": [
-			"Rail"
-		]
-	},
-	"facetedcategory-search-for": "nazwa kategorii:"
+  "@metadata": {
+    "authors": [
+      "Rail"
+    ]
+  },
+  "categoryintersectionsearch-page-title": "Kategoria „$1”",
+  "facetedcategory-search-for": "nazwa kategorii:"
 }

@@ -1,8 +1,10 @@
 {
-	"@metadata": {
-		"authors": [
-			"Robby"
-		]
-	},
-	"facetedcategory-search-for": "Numm vun der Kategorie:"
+  "@metadata": {
+    "authors": [
+      "Robby"
+    ]
+  },
+  "categoryintersectionsearch-noinput": "Gitt wgl. e Sichbegrëff an",
+  "categoryintersectionsearch-page-title": "Kategorie \"$1\"",
+  "facetedcategory-search-for": "Numm vun der Kategorie:"
 }

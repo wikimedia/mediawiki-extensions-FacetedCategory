@@ -1,11 +1,14 @@
 {
-	"@metadata": {
-		"authors": [
-			"BaRaN6161 TURK"
-		]
-	},
-	"facetedcategories": "Yönlü Kategoriler",
-	"facetedcategory-desc": "[[Special:FacetedCategories]] özel sayfa ekleyin",
-	"facetedcategory-search-for": "kategori adı:",
-	"facetedcategory-not-only-match-exactly": "Tam olarak eşleşmeyen ekle"
+  "@metadata": {
+    "authors": [
+      "BaRaN6161 TURK"
+    ]
+  },
+  "categoryintersectionsearch": "CategoryIntersection Arama",
+  "categoryintersectionsearch-desc": "[[Special:CategoryIntersectionSearch]] ekle",
+  "categoryintersectionsearch-noinput": "Lütfen bir arama terimi girin.",
+  "categoryintersectionsearch-page-title": "\"$1\" kategori",
+  "facetedcategory-desc": "[[Special:FacetedCategories]] özel sayfa ekleyin",
+  "facetedcategory-search-for": "kategori adı:",
+  "facetedcategory-not-only-match-exactly": "Tam olarak eşleşmeyen ekle"
 }

@@ -1,12 +1,15 @@
 {
-	"@metadata": {
-		"authors": [
-			"Thibaut120094",
-			"Verdy p"
-		]
-	},
-	"facetedcategories": "Catégories à facettes",
-	"facetedcategory-desc": "Ajoute les pages spéciales [[Special:FacetedCategories|Spécial:Catégories à facettes]]",
-	"facetedcategory-search-for": "nom de catégorie :",
-	"facetedcategory-not-only-match-exactly": "Inclure les correspondances non exactes"
+  "@metadata": {
+    "authors": [
+      "Thibaut120094",
+      "Verdy p"
+    ]
+  },
+  "categoryintersectionsearch": "Recherche d’intersection de catégories",
+  "categoryintersectionsearch-desc": "Ajoute la page [[Special:CategoryIntersectionSearch|Spécial:Recherche d’intersection de catégories]]",
+  "categoryintersectionsearch-noinput": "Veuillez saisir un terme de recherche.",
+  "categoryintersectionsearch-page-title": "Catégorie « $1 »",
+  "facetedcategory-desc": "Ajoute les pages spéciales [[Special:FacetedCategories|Spécial:Catégories à facettes]]",
+  "facetedcategory-search-for": "nom de catégorie :",
+  "facetedcategory-not-only-match-exactly": "Inclure les correspondances non exactes"
 }

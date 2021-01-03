@@ -1,9 +1,9 @@
 {
-	"@metadata": {
-		"authors": [
-			"Fitoschido"
-		]
-	},
-	"facetedcategories": "Categorías facetadas",
-	"facetedcategory-search-for": "nombre de categoría:"
+  "@metadata": {
+    "authors": [
+      "Fitoschido"
+    ]
+  },
+  "categoryintersectionsearch-page-title": "Categoría «$1»",
+  "facetedcategory-search-for": "nombre de categoría:"
 }

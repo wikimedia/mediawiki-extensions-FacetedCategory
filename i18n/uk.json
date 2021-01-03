@@ -1,11 +1,14 @@
 {
-	"@metadata": {
-		"authors": [
-			"Piramidion"
-		]
-	},
-	"facetedcategories": "Грановані категорії",
-	"facetedcategory-desc": "Додає спеціальні сторінки [[Special:FacetedCategories]]",
-	"facetedcategory-search-for": "назва категорії:",
-	"facetedcategory-not-only-match-exactly": "Включити неповні збіги"
+  "@metadata": {
+    "authors": [
+      "Piramidion"
+    ]
+  },
+  "categoryintersectionsearch": "Пошук перетину категорій",
+  "categoryintersectionsearch-desc": "Додати [[Special:CategoryIntersectionSearch]]",
+  "categoryintersectionsearch-noinput": "Будь ласка, введіть умову пошуку.",
+  "categoryintersectionsearch-page-title": "Категорія «$1»",
+  "facetedcategory-desc": "Додає спеціальні сторінки [[Special:FacetedCategories]]",
+  "facetedcategory-search-for": "назва категорії:",
+  "facetedcategory-not-only-match-exactly": "Включити неповні збіги"
 }

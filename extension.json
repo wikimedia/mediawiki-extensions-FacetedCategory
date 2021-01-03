@@ -1,47 +1,50 @@
 {
-	"name": "FacetedCategory",
-	"version": "1.0.0",
-	"author": "[https://femiwiki.com/ Femiwiki Team]",
-	"url": "https://github.com/femiwiki/facetedCategory",
-	"descriptionmsg": "facetedcategory-desc",
-	"license-name": "AGPL-3.0-or-later",
-	"type": "specialpage",
-	"requires": {
-		"MediaWiki": ">= 1.35.0",
-		"extensions": {
-			"CategoryTree": "*"
-		}
-	},
-	"AutoloadClasses": {
-		"SpecialFacetedCategories": "specials/SpecialFacetedCategories.php",
-		"FacetedCategoriesPager": "includes/FacetedCategoriesPager.php",
-		"FacetedCategoryHooks": "includes/FacetedCategoryHooks.php"
-	},
-	"MessagesDirs": {
-		"FacetedCategory": [
-			"i18n"
-		]
-	},
-	"ResourceModules": {
-		"ext.facetedCategory.js": {
-			"scripts": [
-				"facetedCategory.js"
-			]
-		}
-	},
-	"ResourceFileModulePaths": {
-		"localBasePath": "modules",
-		"remoteExtPath": "FacetedCategory/modules"
-	},
-	"Hooks": {
-		"BeforePageDisplay": "FacetedCategoryHooks::onBeforePageDisplay"
-	},
-	"SpecialPages": {
-		"FacetedCategories": "SpecialFacetedCategories"
-	},
-	"ExtensionMessagesFiles": {
-		"FacetedCategoryAlias": "FacetedCategory.alias.php",
-		"FacetedCategoryMagic": "FacetedCategory.i18n.magic.php"
-	},
-	"manifest_version": 1
+  "name": "FacetedCategory",
+  "version": "1.0.0",
+  "author": "[https://femiwiki.com/ Femiwiki Team]",
+  "url": "https://github.com/femiwiki/facetedCategory",
+  "descriptionmsg": "facetedcategory-desc",
+  "license-name": "AGPL-3.0-or-later",
+  "type": "specialpage",
+  "requires": {
+    "MediaWiki": ">= 1.35.0",
+    "extensions": {
+      "CategoryTree": "*"
+    }
+  },
+  "AutoloadClasses": {
+    "SpecialFacetedCategories": "specials/SpecialFacetedCategories.php",
+    "FacetedCategoriesPager": "includes/FacetedCategoriesPager.php",
+    "FacetedCategoryHooks": "includes/FacetedCategoryHooks.php",
+    "SpecialCategoryIntersectionSearch": "includes/SpecialCategoryIntersectionSearch.php",
+    "CategoryIntersectionSearchViewer": "includes/CategoryIntersectionSearchViewer.php",
+  },
+  "MessagesDirs": {
+    "FacetedCategory": ["i18n"]
+  },
+  "ResourceModules": {
+    "ext.facetedCategory.js": {
+      "scripts": ["facetedCategory.js"]
+    }
+  },
+  "ResourceFileModulePaths": {
+    "localBasePath": "modules",
+    "remoteExtPath": "FacetedCategory/modules"
+  },
+  "Hooks": {
+    "BeforePageDisplay": "FacetedCategoryHooks::onBeforePageDisplay"
+  },
+  "SpecialPages": {
+    "FacetedCategories": "SpecialFacetedCategories",
+    "CategoryIntersectionSearch": "SpecialCategoryIntersectionSearch",
+    "SpecialSearchResultsPrepend": "CategoryIntersectionSearchHooks::onSpecialSearchResultsPrepend"
+  },
+  "ExtensionMessagesFiles": {
+    "FacetedCategoryAlias": "FacetedCategory.alias.php",
+    "FacetedCategoryMagic": "FacetedCategory.i18n.magic.php"
+  },
+  "TestAutoloadNamespaces": {
+    "MediaWiki\\Extension\\CategoryIntersectionSearch\\Tests\\Unit\\": "tests/phpunit/unit/"
+  },
+  "manifest_version": 1
 }

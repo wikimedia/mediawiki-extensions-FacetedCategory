@@ -1,11 +1,14 @@
 {
-	"@metadata": {
-		"authors": [
-			"Eduardo Addad de Oliveira"
-		]
-	},
-	"facetedcategories": "Categorias facetadas",
-	"facetedcategory-desc": "Adicionar páginas especiais [[Special:FacetedCategories]]",
-	"facetedcategory-search-for": "nome da categoria:",
-	"facetedcategory-not-only-match-exactly": "Não incluem exatamente igual"
+  "@metadata": {
+    "authors": [
+      "Eduardo Addad de Oliveira"
+    ]
+  },
+  "categoryintersectionsearch": "Pesquisa de intersecção de categorias",
+  "categoryintersectionsearch-desc": "Adicionar [[Special:CategoryIntersectionSearch]]",
+  "categoryintersectionsearch-noinput": "Por favor, digite um termo para pesquisar.",
+  "categoryintersectionsearch-page-title": "Categoria \"$1\"",
+  "facetedcategory-desc": "Adicionar páginas especiais [[Special:FacetedCategories]]",
+  "facetedcategory-search-for": "nome da categoria:",
+  "facetedcategory-not-only-match-exactly": "Não incluem exatamente igual"
 }

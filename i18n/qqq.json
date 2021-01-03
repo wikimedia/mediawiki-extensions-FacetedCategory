@@ -1,9 +1,12 @@
 {
-	"@metadata": {
-		"authors": []
-	},
-	"facetedcategories": "{{doc-special|FacetedCategories}}\n{{Identical|Faceted Categories}}",
-	"facetedcategory-desc": "{{desc|name=Faceted Categories|url=https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:FacetedCategory}}",
-	"facetedcategory-search-for": "Used as label for the \"Category\" input box in [[Special:FacetedCategories]]",
-	"facetedcategory-not-only-match-exactly": "Used as label for the \"Include not exactly matched\" checkbox in [[Special:FacetedCategories]]"
+  "@metadata": {
+    "authors": []
+  },
+  "categoryintersectionsearch": "CategoryIntersection Search",
+  "categoryintersectionsearch-desc": "{{desc|what=extension|name=CategoryIntersectionSearch}}",
+  "categoryintersectionsearch-noinput": "Error message",
+  "categoryintersectionsearch-page-title": "Title of the [[Special:IntersectionSearch]] page.",
+  "facetedcategory-desc": "{{desc|name=Faceted Categories|url=https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:FacetedCategory}}",
+  "facetedcategory-search-for": "Used as label for the \"Category\" input box in [[Special:FacetedCategories]]",
+  "facetedcategory-not-only-match-exactly": "Used as label for the \"Include not exactly matched\" checkbox in [[Special:FacetedCategories]]"
 }

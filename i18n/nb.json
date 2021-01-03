@@ -1,11 +1,14 @@
 {
-	"@metadata": {
-		"authors": [
-			"Jon Harald Søby"
-		]
-	},
-	"facetedcategories": "Fasetterte kategorier",
-	"facetedcategory-desc": "Legger til spesialsiden [[Special:FacetedCategories]]",
-	"facetedcategory-search-for": "kategorinavn:",
-	"facetedcategory-not-only-match-exactly": "Inkluder de som ikke matcher eksakt"
+  "@metadata": {
+    "authors": [
+      "Jon Harald Søby"
+    ]
+  },
+  "categoryintersectionsearch": "Kategoriskjæringspunktsøk",
+  "categoryintersectionsearch-desc": "Legg til [[Special:CategoryIntersectionSearch]]",
+  "categoryintersectionsearch-noinput": "Skriv inn et søkebegrep.",
+  "categoryintersectionsearch-page-title": "Kategorien «$1»",
+  "facetedcategory-desc": "Legger til spesialsiden [[Special:FacetedCategories]]",
+  "facetedcategory-search-for": "kategorinavn:",
+  "facetedcategory-not-only-match-exactly": "Inkluder de som ikke matcher eksakt"
 }

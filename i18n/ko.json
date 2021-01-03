@@ -1,11 +1,14 @@
 {
-	"@metadata": {
-		"authors": [
-			"Ykhwong"
-		]
-	},
-	"facetedcategories": "다면 분류 목록",
-	"facetedcategory-desc": "[[특수:다면분류]]를 추가합니다.",
-	"facetedcategory-search-for": "분류 이름:",
-	"facetedcategory-not-only-match-exactly": "정확히 일치하지 않는 항목 포함"
+  "@metadata": {
+    "authors": [
+      "Ykhwong"
+    ]
+  },
+  "categoryintersectionsearch": "교집합 분류 검색",
+  "categoryintersectionsearch-desc": "[[Special:CategoryIntersectionSearch]]를 추가합니다",
+  "categoryintersectionsearch-noinput": "검색어를 입력해 주세요.",
+  "categoryintersectionsearch-page-title": "\"$1\" 분류",
+  "facetedcategory-desc": "[[특수:다면분류]]를 추가합니다.",
+  "facetedcategory-search-for": "분류 이름:",
+  "facetedcategory-not-only-match-exactly": "정확히 일치하지 않는 항목 포함"
 }
