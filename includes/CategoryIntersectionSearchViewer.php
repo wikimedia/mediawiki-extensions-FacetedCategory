@@ -1,6 +1,13 @@
 <?php
 
 class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
+
+	/** @var array */
+	private $categories;
+
+	/** @var array */
+	private $exCategories;
+
 	/**
 	 * @param Title $title
 	 * @param IContextSource $context
@@ -64,6 +71,7 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 			}
 			// 위에서 여기까지는 mediawiki 1.27.1의 CategoryViewer.php의 doCategoryQuery()과 동일
 
+			$exSqlQueryStr = $exSqlQueryStr ?? '';
 			// phpcs:disable MediaWiki.Usage.DbrQueryUsage.DbrQueryFound
 			$res = $dbr->query(
 				"SELECT DISTINCT page_id, page_title, page_namespace, page_len, page_is_redirect, " .
@@ -82,7 +90,7 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 					"LEFT JOIN category ON category.cat_title = page.page_title AND page.page_namespace = " . NS_CATEGORY . " " .
 				// 'USE INDEX categorylinks.cl_sortkey '.
 				"WHERE " . $dbr->makeList( $extraConds, LIST_AND ) . " " .
-					'LIMIT ' . ( $this->limit + 1 ) . " ",
+					'LIMIT ' . ( $this->limit + 1 ) . " " .
 					'ORDER BY ' . ( $this->flip[$type] ? 'cl_sortkey DESC' : 'cl_sortkey' ),
 					__METHOD__
 				);

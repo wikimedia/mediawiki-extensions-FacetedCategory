@@ -11,6 +11,9 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	private $includeNotExactlyMatched;
 	private $including;
 
+	/** @var CategoryTree */
+	private $tree;
+
 	/**
 	 * @param IContextSource $context
 	 * @param string $facetName
@@ -82,7 +85,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
 	public function getDefaultQuery() {
 		parent::getDefaultQuery();
@@ -110,7 +113,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	}
 
 	/**
-	 * @param array $result
+	 * @param stdClass $result
 	 * @return string
 	 */
 	public function formatRow( $result ) {
@@ -153,7 +156,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 			Html::hidden( 'title', $this->getTitle()->getPrefixedText() ) .
 			Xml::fieldset(
 				$this->msg( 'categories' )->text(),
-				$this->msg( 'facetedcategory-search-for' ) .
+				$this->msg( 'facetedcategory-search-for' )->text() .
 				' ' .
 				Xml::input(
 					'facetName', 10, $facetName, [ 'class' => 'mw-ui-input-inline' ] ) .
@@ -167,7 +170,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 				) .
 				' ' .
 				Xml::checkLabel(
-					$this->msg( 'facetedcategory-not-only-match-exactly' ), 'includeNotExactlyMatched', 'includeNotExactlyMatched', $includeNotExactlyMatched, [] )
+					$this->msg( 'facetedcategory-not-only-match-exactly' )->text(), 'includeNotExactlyMatched', 'includeNotExactlyMatched', $includeNotExactlyMatched, [] )
 			)
 		);
 	}
