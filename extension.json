@@ -13,10 +13,10 @@
     }
   },
   "AutoloadClasses": {
-    "SpecialFacetedCategories": "specials/SpecialFacetedCategories.php",
+    "SpecialFacetedCategories": "includes/specials/SpecialFacetedCategories.php",
     "FacetedCategoriesPager": "includes/FacetedCategoriesPager.php",
     "FacetedCategoryHooks": "includes/FacetedCategoryHooks.php",
-    "SpecialCategoryIntersectionSearch": "includes/SpecialCategoryIntersectionSearch.php",
+    "SpecialCategoryIntersectionSearch": "includes/specials/SpecialCategoryIntersectionSearch.php",
     "CategoryIntersectionSearchViewer": "includes/CategoryIntersectionSearchViewer.php",
   },
   "MessagesDirs": {
