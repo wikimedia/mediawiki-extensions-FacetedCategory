@@ -26,33 +26,15 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 	 * @param array $until An array with 3 keys for until of each section (since 1.17)
 	 * @param array $query
 	 */
-	public function __construct( Title $title, IContextSource $context, $categories, $exCategories,
+	public function __construct( Title $title, IContextSource $context, $categories, $exCategories = [],
 		$from = [], $until = [], $query = [] ) {
+		parent::__construct( $title, $context, $from, $until, $query );
 		$this->categories = $categories;
 		$this->exCategories = $exCategories;
-		parent::__construct( $title, $context, $from, $until, $query );
 	}
 
 	public function doCategoryQuery() {
-		$categoriesStr = '';
-		foreach ( $this->categories as $key => $category ) {
-			if ( $key !== 0 ) { $categoriesStr .= ',';
-			}
-			$categoriesStr .= "'" . Title::newFromText( 'category:' . $category )->getDBkey() . "'";
-		}
-		if ( count( $this->exCategories ) !== 0 ) {
-			$exCategoriesStr = '';
-			foreach ( $this->exCategories as $key => $category ) {
-				if ( $key !== 0 ) { $exCategoriesStr .= ',';
-				}
-				$exCategoriesStr .= "'" . Title::newFromText( 'category:' . $category )->getDBkey() . "'";
-			}
-			$exSqlQueryStr = "AND cl_from NOT IN " .
-				"(SELECT cl_from " .
-				"FROM categorylinks " .
-				"WHERE cl_to IN ({$exCategoriesStr}))";
-		}
-		// 여기서부터 아래는 mediawiki 1.27.1의 CategoryViewer.php의 doCategoryQuery()과 동일
+		// 여기서부터 아래는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
 		$dbr = wfGetDB( DB_REPLICA, [ 'page','categorylinks','category' ] );
 
 		$this->nextPage = [
@@ -66,7 +48,11 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 			'file' => null,
 		];
 
-		$this->flip = [ 'page' => false, 'subcat' => false, 'file' => false ];
+		$this->flip = [
+			'page' => false,
+			'subcat' => false,
+			'file' => false,
+		];
 
 		foreach ( [ 'page', 'subcat', 'file' ] as $type ) {
 			$extraConds = [ 'cl_type' => $type ];
@@ -78,34 +64,11 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 					. $dbr->addQuotes( $this->collation->getSortKey( $this->until[$type] ) );
 				$this->flip[$type] = true;
 			}
-			// 위에서 여기까지는 mediawiki 1.27.1의 CategoryViewer.php의 doCategoryQuery()과 동일
+			// 위에서 여기까지는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
 
-			$exSqlQueryStr = $exSqlQueryStr ?? '';
-			// phpcs:disable MediaWiki.Usage.DbrQueryUsage.DbrQueryFound
-			$res = $dbr->query(
-				"SELECT DISTINCT page_id, page_title, page_namespace, page_len, page_is_redirect, " .
-					"cat_id, cat_title, cat_subcats, cat_pages, cat_files, " .
-					"cl_sortkey, cl_sortkey_prefix, cl_collation " .
-				"FROM " .
-					"page " .
-					"INNER JOIN " .
-						"(SELECT cl_from, COUNT(*) AS match_count FROM categorylinks " .
-							"WHERE cl_to IN ({$categoriesStr}) {$exSqlQueryStr}" .
-							"GROUP BY cl_from " .
-							"ORDER BY " . ( $this->flip[$type] ? 'cl_sortkey DESC' : 'cl_sortkey' ) . ") " .
-						"AS matches ON page.page_id = matches.cl_from " .
-						"AND matches.match_count = " . count( $this->categories ) . " " .
-					"INNER JOIN categorylinks ON page.page_id = categorylinks.cl_from " .
-					"LEFT JOIN category ON category.cat_title = page.page_title AND page.page_namespace = " . NS_CATEGORY . " " .
-				// 'USE INDEX categorylinks.cl_sortkey '.
-				"WHERE " . $dbr->makeList( $extraConds, LIST_AND ) . " " .
-					'LIMIT ' . ( $this->limit + 1 ) . " " .
-					'ORDER BY ' . ( $this->flip[$type] ? 'cl_sortkey DESC' : 'cl_sortkey' ),
-					__METHOD__
-				);
-			// phpcs:enable
+			$res = $this->selectCategories( $dbr, $type, $extraConds );
 
-			// 여기서부터 아래는 mediawiki 1.27.1의 CategoryViewer.php의 doCategoryQuery()과 동일
+			// 여기서부터 아래는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
 			Hooks::run( 'CategoryViewer::doCategoryQuery', [ $type, $res ] );
 
 			$count = 0;
@@ -139,7 +102,87 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 					$this->addPage( $title, $humanSortkey, $row->page_len, $row->page_is_redirect );
 				}
 			}
-			// 위에서 여기까지는 mediawiki 1.27.1의 CategoryViewer.php의 doCategoryQuery()과 동일
+			// 위에서 여기까지는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
 		}
+	}
+
+	/**
+	 * @param \Wikimedia\Rdbms\IDatabase $dbr
+	 * @param string $type
+	 * @param array $extraConds
+	 * @return \Wikimedia\Rdbms\IResultWrapper
+	 */
+	private function selectCategories( $dbr, $type, $extraConds ) {
+		$conds = [
+			$dbr->makeList( [ 'cl_to' => $this->categories ], $dbr::LIST_OR ),
+		];
+		if ( $this->exCategories ) {
+			$excludeCategories = $dbr->selectSQLText(
+				'categorylinks',
+				[
+					'cl_from',
+				],
+				[ $dbr->makeList( [ 'cl_to' => $this->exCategories ], $dbr::LIST_OR ) ],
+				__METHOD__,
+				[
+					'GROUP BY' => 'cl_from',
+					'ORDER BY' => 'cl_sortkey'
+				]
+			);
+			$conds[] = "cl_from NOT IN ({$excludeCategories})";
+		}
+		$categorySubQuery = $dbr->buildSelectSubquery(
+			'categorylinks',
+			[
+				'cl_from',
+				'match_count' => 'COUNT(*)',
+			],
+			$conds,
+			__METHOD__,
+			[]
+		);
+		$rows = $dbr->select(
+			[
+				'page',
+				'matches' => $categorySubQuery,
+				'categorylinks',
+				'category',
+			],
+			[
+				'page_id',
+				'page_title',
+				'page_namespace',
+				'page_len',
+				'page_is_redirect',
+				'cat_id',
+				'cat_title',
+				'cat_subcats',
+				'cat_pages',
+				'cat_files',
+				'cl_sortkey',
+				'cl_sortkey_prefix',
+				'cl_collation',
+			],
+			$extraConds,
+			__METHOD__,
+			[
+				'DISTINCT',
+				'LIMIT' => $this->limit + 1,
+				'ORDER BY' => $this->flip[$type] ? 'cl_sortkey DESC' : 'cl_sortkey',
+
+			],
+			[
+				'matches' => [ 'INNER JOIN', [
+					'page_id = matches.cl_from',
+					'match_count' => count( $this->categories ),
+				] ],
+				'categorylinks' => [ 'JOIN', 'page_id = categorylinks.cl_from' ],
+				'category' => [ 'LEFT JOIN', [
+					'cat_title = page_title',
+					'page_namespace' => NS_CATEGORY,
+				] ],
+			]
+		);
+		return $rows;
 	}
 }

@@ -1,11 +1,15 @@
 <?php
 
+namespace MediaWiki\Extension\CategoryIntersectionSearch\Tests\Integration;
+
+use MediaWiki\Extension\FacetedCategory\FacetedCategoryHookHandler;
+use MediaWikiUnitTestCase;
 use Wikimedia\TestingAccessWrapper;
 
 /**
  * @group FacetedCategory
  */
-class CategoryIntersectionSearchHooksTest extends MediaWikiUnitTestCase {
+class FacetedCategoryHookHandlerTest extends MediaWikiUnitTestCase {
 
 	public function provideSplitTerm() {
 		return [
@@ -15,14 +19,14 @@ class CategoryIntersectionSearchHooksTest extends MediaWikiUnitTestCase {
 	}
 
 	/**
-	 * @covers \CategoryIntersectionSearchHooks::splitTerm
+	 * @covers \MediaWiki\Extension\FacetedCategory\FacetedCategoryHookHandler::splitTerm
 	 * @dataProvider provideSplitTerm
 	 *
 	 * @param array|null $expected
 	 * @param string $term
 	 */
 	public function testSplitTerm( $expected, $term ) {
-		$w = TestingAccessWrapper::newFromClass( CategoryIntersectionSearchHooks::class );
+		$w = TestingAccessWrapper::newFromClass( FacetedCategoryHookHandler::class );
 		$this->assertEquals( $expected, $w->splitTerm( $term ) );
 	}
 

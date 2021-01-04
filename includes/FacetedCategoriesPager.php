@@ -8,21 +8,24 @@ use Html;
 use IContextSource;
 use LinkBatch;
 use MediaWiki\Linker\LinkRenderer;
-use stdClass;
 use Title;
 use Xml;
 
 class FacetedCategoriesPager extends AlphabeticPager {
 
+	/** @var LinkRenderer */
 	protected $linkRenderer;
-
-	private $facetName;
-	private $facetMember;
-	private $includeNotExactlyMatched;
-	private $including;
-
 	/** @var CategoryTree */
 	private $tree;
+
+	/** @var string */
+	private $facetName;
+	/** @var string */
+	private $facetMember;
+	/** @var bool */
+	private $includeNotExactlyMatched;
+	/** @var bool */
+	private $including;
 
 	/**
 	 * @param IContextSource $context
@@ -32,7 +35,8 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	 * @param LinkRenderer $linkRenderer
 	 * @param bool $including
 	 */
-	public function __construct( IContextSource $context, $facetName, $facetMember, $includeNotExactlyMatched, LinkRenderer $linkRenderer, $including
+	public function __construct( IContextSource $context, $facetName, $facetMember, $includeNotExactlyMatched,
+		LinkRenderer $linkRenderer, $including
 	) {
 		parent::__construct( $context );
 		$facetName = str_replace( ' ', '_', $facetName );
@@ -69,18 +73,27 @@ class FacetedCategoriesPager extends AlphabeticPager {
 			'conds' => [ 'cat_pages > 0' ],
 			'options' => [ 'USE INDEX' => 'cat_title' ],
 		];
+		$anyString = $this->mDb->anyString();
 
 		if ( $this->includeNotExactlyMatched ) {
-			$query['conds'][] = 'cat_title' . $this->mDb->buildLike( $this->mDb->anyString(), $this->facetName, $this->mDb->anyString(), '/', $this->mDb->anyString(), $this->facetMember, $this->mDb->anyString() );
+			$query['conds'][] = 'cat_title' . $this->mDb->buildLike(
+				$anyString,
+				$this->facetName,
+				$anyString,
+				'/',
+				$anyString,
+				$this->facetMember,
+				$anyString
+			);
 		} else {
 			if ( $this->facetName != '' && $this->facetMember != '' ) {
 				$query['conds'][] = 'cat_title' . $this->mDb->buildLike( $this->facetName . '/' . $this->facetMember );
 			} elseif ( $this->facetName != '' && $this->facetMember == '' ) {
-				$query['conds'][] = 'cat_title' . $this->mDb->buildLike( $this->facetName . '/', $this->mDb->anyString() );
+				$query['conds'][] = 'cat_title' . $this->mDb->buildLike( $this->facetName . '/', $anyString );
 			} elseif ( $this->facetName == '' && $this->facetMember != '' ) {
-				$query['conds'][] = 'cat_title' . $this->mDb->buildLike( $this->mDb->anyString(), '/' . $this->facetMember );
+				$query['conds'][] = 'cat_title' . $this->mDb->buildLike( $anyString, '/' . $this->facetMember );
 			} else {
-				$query['conds'][] = 'cat_title' . $this->mDb->buildLike( $this->mDb->anyString(), '/', $this->mDb->anyString() );
+				$query['conds'][] = 'cat_title' . $this->mDb->buildLike( $anyString, '/', $anyString );
 			}
 		}
 
@@ -88,14 +101,14 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	}
 
 	/**
-	 * @return string
+	 * @inheritDoc
 	 */
 	public function getIndexField() {
 		return 'cat_title';
 	}
 
 	/**
-	 * @return array
+	 * @inheritDoc
 	 */
 	public function getDefaultQuery() {
 		parent::getDefaultQuery();
@@ -104,8 +117,8 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	}
 
 	/**
-	 * Override getBody to apply LinksBatch on resultset before actually outputting anything.
-	 * @return string
+	 * getBody to apply LinksBatch on resultset before actually outputting anything.
+	 * @inheritDoc
 	 */
 	public function getBody() {
 		$batch = new LinkBatch;
@@ -123,8 +136,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	}
 
 	/**
-	 * @param array|stdClass $result
-	 * @return string
+	 * @inheritDoc
 	 */
 	public function formatRow( $result ) {
 		/*
@@ -140,7 +152,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 		$title = Title::makeTitle( NS_CATEGORY, $result->cat_title );
 
 		$options = [];
-		# grab all known options from the request. Normalization is done by the CategoryTree class
+		// grab all known options from the request. Normalization is done by the CategoryTree class
 		foreach ( $wgCategoryTreeDefaultOptions as $option => $default ) {
 			if ( isset( $wgCategoryTreeSpecialPageOptions[$option] ) ) {
 				$default = $wgCategoryTreeSpecialPageOptions[$option];
@@ -180,7 +192,8 @@ class FacetedCategoriesPager extends AlphabeticPager {
 				) .
 				' ' .
 				Xml::checkLabel(
-					$this->msg( 'facetedcategory-not-only-match-exactly' )->text(), 'includeNotExactlyMatched', 'includeNotExactlyMatched', $includeNotExactlyMatched, [] )
+					$this->msg( 'facetedcategory-not-only-match-exactly' )->text(), 'includeNotExactlyMatched',
+					'includeNotExactlyMatched', $includeNotExactlyMatched, [] )
 			)
 		);
 	}

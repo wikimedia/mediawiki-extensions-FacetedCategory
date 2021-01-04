@@ -2,9 +2,9 @@
 
 namespace MediaWiki\Extension\FacetedCategory\Special;
 
-use MediaWiki\Extension\FacetedCategory\FacetedCategoriesPager;
 use Html;
 use IncludableSpecialPage;
+use MediaWiki\Extension\FacetedCategory\FacetedCategoriesPager;
 
 class SpecialFacetedCategories extends IncludableSpecialPage {
 
@@ -28,7 +28,7 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 		$facetMember = $this->getRequest()->getText( 'facetMember', $right );
 		$includeNotExactlyMatched = $this->getRequest()->getBool( 'includeNotExactlyMatched', false );
 
-		$cap = new FacetedCategoriesPager(
+		$pager = new FacetedCategoriesPager(
 			$this->getContext(),
 			$facetName,
 			$facetMember,
@@ -36,17 +36,16 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 			$this->getLinkRenderer(),
 			$this->including()
 		);
-		$cap->doQuery();
+		$pager->doQuery();
 
-		$this->getOutput()->addHTML(
-			Html::openElement( 'div', [ 'class' => 'mw-spcontent' ] ) .
-				( $this->including() ? '' : $this->msg( 'categoriespagetext', $cap->getNumRows() )->parseAsBlock() ) .
-				$cap->getStartForm( $facetName, $facetMember, $includeNotExactlyMatched ) .
-				( $this->including() ? '' : $cap->getNavigationBar() ) .
-				'<ul>' . $cap->getBody() . '</ul>' .
-				( $this->including() ? '' : $cap->getNavigationBar() ) .
-				Html::closeElement( 'div' )
-		);
+		$html = ( $this->including() ? '' : $this->msg( 'categoriespagetext', $pager->getNumRows() )->parseAsBlock() );
+		$html .= $pager->getStartForm( $facetName, $facetMember, $includeNotExactlyMatched );
+		$html .= ( $this->including() ? '' : $pager->getNavigationBar() );
+		$html .= Html::rawElement( 'ul', [], $pager->getBody() );
+		$html .= ( $this->including() ? '' : $pager->getNavigationBar() );
+
+		$html = Html::rawElement( 'div', [ 'class' => 'mw-spcontent' ], $html );
+		$this->getOutput()->addHTML( $html );
 	}
 
 	/**

@@ -29,7 +29,7 @@
   },
   "HookHandlers": {
     "Main": {
-      "class": "MediaWiki\\Extension\\FacetedCategory\\HookHandler",
+      "class": "MediaWiki\\Extension\\FacetedCategory\\FacetedCategoryHookHandler",
       "services": []
     }
   },
@@ -45,7 +45,8 @@
     "FacetedCategoryAlias": "FacetedCategory.alias.php"
   },
   "TestAutoloadNamespaces": {
-    "MediaWiki\\Extension\\CategoryIntersectionSearch\\Tests\\Unit\\": "tests/phpunit/unit/"
+    "MediaWiki\\Extension\\CategoryIntersectionSearch\\Tests\\Unit\\": "tests/phpunit/unit/",
+    "MediaWiki\\Extension\\CategoryIntersectionSearch\\Tests\\Integration\\": "tests/phpunit/integration/"
   },
   "manifest_version": 1
 }

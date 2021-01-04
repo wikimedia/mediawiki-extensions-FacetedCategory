@@ -7,8 +7,6 @@ use SpecialPage;
 use Title;
 
 class SpecialCategoryIntersectionSearch extends SpecialPage {
-	private $categories = [];
-	private $exCategories = [];
 
 	public function __construct() {
 		parent::__construct( 'CategoryIntersectionSearch' );
@@ -22,29 +20,29 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 		$output = $this->getOutput();
 		$this->setHeaders();
 
-		if ( $par == '' ) {
+		if ( !$par ) {
 			$output->addWikiTextAsInterface( $this->msg( 'categoryintersectionsearch-noinput' ) );
 			return;
 		}
 		$titleParam = str_replace( '_', ' ', $par );
-		$this->splitPar( $titleParam );
+		list( $categories, $exCategories ) = $this->splitPar( $titleParam );
 
-		if ( count( $this->categories ) === 0 && count( $this->exCategories ) > 0 ) {
+		if ( count( $categories ) == 0 && count( $exCategories ) > 0 ) {
 			$output->addWikiTextAsInterface( $this->msg( 'categoryintersectionsearch-noinput' ) );
 			return;
-		} elseif ( count( $this->categories ) < 2 && count( $this->exCategories ) == 0 ) {
-			$output->redirect( Title::newFromText( 'Category:' . $titleParam )->getFullURL() );
+		} elseif ( count( $categories ) < 2 && count( $exCategories ) == 0 ) {
+			$output->redirect( Title::newFromText( $titleParam )->getFullURL(), NS_CATEGORY );
 			return;
 		}
 
-		$title = implode( '", "', $this->categories );
-		if ( count( $this->exCategories ) !== 0 ) {
-			$title .= ', -"' . implode( '", -"', $this->exCategories );
+		$title = implode( '", "', $categories );
+		if ( count( $exCategories ) != 0 ) {
+			$title .= ', -"' . implode( '", -"', $exCategories );
 		}
 
 		$output->setPageTitle( $this->msg( 'categoryintersectionsearch-page-title', $title ) );
 
-		// 여기서 아래는 mediawiki 1.27.1의 CategoryViewer.php과 동일
+		// Start: Copied from CategoryTree in MW 1.27
 		$oldFrom = $request->getVal( 'from' );
 		$oldUntil = $request->getVal( 'until' );
 
@@ -64,13 +62,13 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 		}
 		unset( $reqArray["from"] );
 		unset( $reqArray["to"] );
-		// 위에서 여기까지는 mediawiki 1.27.1의 CategoryViewer.php과 동일
+		// End: Copied from CategoryTree in MW 1.27
 
 		$viewer = new CategoryIntersectionSearchViewer(
 			Title::newFromText( $title ),
 			$this->getContext(),
-			$this->categories,
-			$this->exCategories,
+			$categories,
+			$exCategories,
 			$from,
 			$until,
 			$reqArray
@@ -80,29 +78,36 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 
 	/**
 	 * @param string $par
+	 * @return array
 	 */
 	private function splitPar( $par ) {
 		$par = explode( ",", $par );
 		$count = count( $par );
-		if ( $count === 1 ) {
-			return;
+		if ( $count == 1 ) {
+			return [ [], [] ];
 		}
 
+		$categories = [];
+		$exCategories = [];
 		for ( $i = 0; $i < $count; $i++ ) {
-			if ( strpos( $par[$i], "/" ) === false ) {
-				return;
+			if ( strpos( $par[$i], '/' ) === false ) {
+				return [ [], [] ];
 			}
 			$par[$i] = trim( $par[$i] );
-			$pos = strrchr( $par[$i], ":" );
+			$pos = strrchr( $par[$i], ':' );
 			if ( $pos !== false ) {
 				$par[$i] = trim( substr( $pos, 1 ) );
 			}
 			if ( substr( $par[$i], 0, 1 ) !== '-' ) {
-				$this->categories[] = $par[$i];
+				$categories[] = $par[$i];
 			} else {
-				$this->exCategories[] = substr( $par[$i], 1 );
+				$exCategories[] = substr( $par[$i], 1 );
 			}
 		}
+		return [
+			$categories,
+			$exCategories,
+		];
 	}
 
 	/**

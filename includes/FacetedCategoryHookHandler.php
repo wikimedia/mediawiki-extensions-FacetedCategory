@@ -4,7 +4,7 @@ namespace MediaWiki\Extension\FacetedCategory;
 
 use Title;
 
-class FacetedCategoryHooks implements
+class FacetedCategoryHookHandler implements
 	\MediaWiki\Hook\BeforePageDisplayHook,
 	\MediaWiki\Hook\SpecialSearchResultsPrependHook
 	{
