@@ -3,3 +3,6 @@
 
 # composer dependencies
 /vendor/
+
+# We use yarn instead of npm
+package-lock.json
