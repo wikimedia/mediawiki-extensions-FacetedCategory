@@ -1,6 +1,16 @@
 <?php
 
+namespace MediaWiki\Extension\FacetedCategory;
+
+use AlphabeticPager;
+use CategoryTree;
+use Html;
+use IContextSource;
+use LinkBatch;
 use MediaWiki\Linker\LinkRenderer;
+use stdClass;
+use Title;
+use Xml;
 
 class FacetedCategoriesPager extends AlphabeticPager {
 
@@ -113,7 +123,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	}
 
 	/**
-	 * @param stdClass $result
+	 * @param array|stdClass $result
 	 * @return string
 	 */
 	public function formatRow( $result ) {

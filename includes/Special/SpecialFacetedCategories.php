@@ -1,5 +1,11 @@
 <?php
 
+namespace MediaWiki\Extension\FacetedCategory\Special;
+
+use MediaWiki\Extension\FacetedCategory\FacetedCategoriesPager;
+use Html;
+use IncludableSpecialPage;
+
 class SpecialFacetedCategories extends IncludableSpecialPage {
 
 	public function __construct() {

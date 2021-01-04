@@ -1,5 +1,13 @@
 <?php
 
+namespace MediaWiki\Extension\FacetedCategory;
+
+use Category;
+use CategoryTreeCategoryViewer;
+use Hooks;
+use IContextSource;
+use Title;
+
 class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 
 	/** @var array */
@@ -18,7 +26,8 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 	 * @param array $until An array with 3 keys for until of each section (since 1.17)
 	 * @param array $query
 	 */
-	public function __construct( $title, IContextSource $context, $categories, $exCategories, $from = [], $until = [], $query = [] ) {
+	public function __construct( Title $title, IContextSource $context, $categories, $exCategories,
+		$from = [], $until = [], $query = [] ) {
 		$this->categories = $categories;
 		$this->exCategories = $exCategories;
 		parent::__construct( $title, $context, $from, $until, $query );

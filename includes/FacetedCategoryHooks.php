@@ -1,5 +1,12 @@
 <?php
 
+namespace MediaWiki\Extension\FacetedCategory;
+
+use OutputPage;
+use Skin;
+use SpecialSearch;
+use Title;
+
 class FacetedCategoryHooks {
 
 	/**
@@ -19,7 +26,7 @@ class FacetedCategoryHooks {
 	 * @param string $term Search term specified by the user
 	 * @return bool
 	 */
-	public static function onSpecialSearchResultsPrepend( $specialSearch, $output, $term ) {
+	public static function onSpecialSearchResultsPrepend( SpecialSearch $specialSearch, OutputPage $output, $term ) {
 		if ( $term === null || $term === '' || strpos( $term, "/" ) === false ) {
 			return true;
 		}

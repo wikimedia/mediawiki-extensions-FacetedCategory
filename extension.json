@@ -12,12 +12,8 @@
       "CategoryTree": "*"
     }
   },
-  "AutoloadClasses": {
-    "SpecialFacetedCategories": "includes/specials/SpecialFacetedCategories.php",
-    "FacetedCategoriesPager": "includes/FacetedCategoriesPager.php",
-    "FacetedCategoryHooks": "includes/FacetedCategoryHooks.php",
-    "SpecialCategoryIntersectionSearch": "includes/specials/SpecialCategoryIntersectionSearch.php",
-    "CategoryIntersectionSearchViewer": "includes/CategoryIntersectionSearchViewer.php",
+  "AutoloadNamespaces": {
+    "MediaWiki\\Extension\\FacetedCategory\\": "includes/"
   },
   "MessagesDirs": {
     "FacetedCategory": ["i18n"]
@@ -32,12 +28,12 @@
     "remoteExtPath": "FacetedCategory/modules"
   },
   "Hooks": {
-    "BeforePageDisplay": "FacetedCategoryHooks::onBeforePageDisplay"
+    "BeforePageDisplay": "MediaWiki\\Extension\\FacetedCategory\\FacetedCategoryHooks::onBeforePageDisplay",
+    "SpecialSearchResultsPrepend": "MediaWiki\\Extension\\FacetedCategory\\CategoryIntersectionSearchHooks::onSpecialSearchResultsPrepend"
   },
   "SpecialPages": {
-    "FacetedCategories": "SpecialFacetedCategories",
-    "CategoryIntersectionSearch": "SpecialCategoryIntersectionSearch",
-    "SpecialSearchResultsPrepend": "CategoryIntersectionSearchHooks::onSpecialSearchResultsPrepend"
+    "FacetedCategories": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialFacetedCategories",
+    "CategoryIntersectionSearch": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialCategoryIntersectionSearch"
   },
   "ExtensionMessagesFiles": {
     "FacetedCategoryAlias": "FacetedCategory.alias.php"

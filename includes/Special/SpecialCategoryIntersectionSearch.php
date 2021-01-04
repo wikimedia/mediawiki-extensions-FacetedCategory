@@ -1,5 +1,11 @@
 <?php
 
+namespace MediaWiki\Extension\FacetedCategory\Special;
+
+use MediaWiki\Extension\FacetedCategory\CategoryIntersectionSearchViewer;
+use SpecialPage;
+use Title;
+
 class SpecialCategoryIntersectionSearch extends SpecialPage {
 	private $categories = [];
 	private $exCategories = [];
