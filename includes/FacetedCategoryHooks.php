@@ -2,31 +2,24 @@
 
 namespace MediaWiki\Extension\FacetedCategory;
 
-use OutputPage;
-use Skin;
-use SpecialSearch;
 use Title;
 
-class FacetedCategoryHooks {
+class FacetedCategoryHooks implements
+	\MediaWiki\Hook\BeforePageDisplayHook,
+	\MediaWiki\Hook\SpecialSearchResultsPrependHook
+	{
 
 	/**
-	 * @param OutputPage &$out
-	 * @param Skin &$skin
-	 * @return bool
+	 * @inheritDoc
 	 */
-	public static function onBeforePageDisplay( OutputPage &$out, Skin &$skin ) {
+	public function onBeforePageDisplay( $out, $skin ): void {
 		$out->addModules( [ 'ext.facetedCategory.js' ] );
-
-		return true;
 	}
 
 	/**
-	 * @param SpecialSearch $specialSearch SpecialSearch object ($this)
-	 * @param OutputPage $output OutputPage object
-	 * @param string $term Search term specified by the user
-	 * @return bool
+	 * @inheritDoc
 	 */
-	public static function onSpecialSearchResultsPrepend( SpecialSearch $specialSearch, OutputPage $output, $term ) {
+	public function onSpecialSearchResultsPrepend( $specialSearch, $output, $term ) {
 		if ( $term === null || $term === '' || strpos( $term, "/" ) === false ) {
 			return true;
 		}

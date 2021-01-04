@@ -27,9 +27,15 @@
     "localBasePath": "modules",
     "remoteExtPath": "FacetedCategory/modules"
   },
+  "HookHandlers": {
+    "Main": {
+      "class": "MediaWiki\\Extension\\FacetedCategory\\HookHandler",
+      "services": []
+    }
+  },
   "Hooks": {
-    "BeforePageDisplay": "MediaWiki\\Extension\\FacetedCategory\\FacetedCategoryHooks::onBeforePageDisplay",
-    "SpecialSearchResultsPrepend": "MediaWiki\\Extension\\FacetedCategory\\CategoryIntersectionSearchHooks::onSpecialSearchResultsPrepend"
+    "BeforePageDisplay": "Main",
+    "SpecialSearchResultsPrepend": "Main"
   },
   "SpecialPages": {
     "FacetedCategories": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialFacetedCategories",
