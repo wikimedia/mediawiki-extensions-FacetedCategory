@@ -1,15 +1,15 @@
 {
-  "@metadata": {
-    "authors": [
-      "Joetaras"
-    ]
-  },
-  "categoryintersectionsearch": "CategoryIntersection Search",
-  "categoryintersectionsearch-desc": "Aggiunge [[Special:CategoryIntersectionSearch]]",
-  "categoryintersectionsearch-noinput": "Pe piacere mitte 'nu termine de recerche.",
-  "categoryintersectionsearch-page-title": "Categorije \"$1\"",
-  "facetedcategories": "Categorije sfaccettate",
+	"@metadata": {
+		"authors": [
+			"Joetaras"
+		]
+	},
+	"categoryintersectionsearch": "CategoryIntersection Search",
+	"categoryintersectionsearch-desc": "Aggiunge [[Special:CategoryIntersectionSearch]]",
+	"categoryintersectionsearch-noinput": "Pe piacere mitte 'nu termine de recerche.",
+	"categoryintersectionsearch-page-title": "Categorije \"$1\"",
+	"facetedcategories": "Categorije sfaccettate",
 	"facetedcategory-desc": "Aggiunge le pàggene speciale [[Special:FacetedCategories]]",
-  "facetedcategory-search-for": "nome d'a categorije:",
-  "facetedcategory-not-only-match-exactly": "'A 'nglusione non s'accocchie bbuène bbuène"
+	"facetedcategory-search-for": "nome d'a categorije:",
+	"facetedcategory-not-only-match-exactly": "'A 'nglusione non s'accocchie bbuène bbuène"
 }

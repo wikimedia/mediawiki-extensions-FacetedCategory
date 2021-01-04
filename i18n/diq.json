@@ -1,10 +1,10 @@
 {
-  "@metadata": {
-    "authors": [
-      "Mirzali"
-    ]
-  },
-  "categoryintersectionsearch-page-title": "Kategoriye $1",
-  "facetedcategories": "Kategoriyê cihetıni",
-  "facetedcategory-search-for": "nameyê kategoriye:"
+	"@metadata": {
+		"authors": [
+			"Mirzali"
+		]
+	},
+	"categoryintersectionsearch-page-title": "Kategoriye $1",
+	"facetedcategories": "Kategoriyê cihetıni",
+	"facetedcategory-search-for": "nameyê kategoriye:"
 }
