@@ -7,5 +7,9 @@
 	"categoryintersectionsearch": "CategoryIntersection 搜尋",
 	"categoryintersectionsearch-desc": "新增 [[Special:CategoryIntersectionSearch]]",
 	"categoryintersectionsearch-noinput": "請輸入搜尋項。",
-	"categoryintersectionsearch-page-title": "「$1」分類"
+	"categoryintersectionsearch-page-title": "「$1」分類",
+	"facetedcategories": "多方面分類",
+	"facetedcategory-desc": "添加 [[Special:FacetedCategories]] 特殊頁面",
+	"facetedcategory-search-for": "分類名稱：",
+	"facetedcategory-not-only-match-exactly": "包含不完全符合"
 }

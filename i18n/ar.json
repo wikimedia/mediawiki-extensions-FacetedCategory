@@ -8,6 +8,7 @@
   "categoryintersectionsearch-desc": "إضافة [[Special:CategoryIntersectionSearch]]",
   "categoryintersectionsearch-noinput": "الرجاء إدخال مصطلح البحث.",
   "categoryintersectionsearch-page-title": "تصنيف $1",
+  "facetedcategories": "تصنيفات متعددة الأوجه",
   "facetedcategory-desc": "أضف الصفحات الخاصة [[Special:FacetedCategories]]",
   "facetedcategory-search-for": "اسم التصنيف:",
   "facetedcategory-not-only-match-exactly": "لا تضمن المطابقة بالضبط"

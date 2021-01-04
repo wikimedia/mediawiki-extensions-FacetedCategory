@@ -6,6 +6,7 @@
   "categoryintersectionsearch-desc": "Add [[Special:CategoryIntersectionSearch]]",
   "categoryintersectionsearch-noinput": "Please enter a search term.",
   "categoryintersectionsearch-page-title": "\"$1\" category",
+  "facetedcategories": "Faceted Categories",
   "facetedcategory-desc": "Add [[Special:FacetedCategories]] special pages",
   "facetedcategory-search-for": "category name:",
   "facetedcategory-not-only-match-exactly": "Include not exactly matched"
