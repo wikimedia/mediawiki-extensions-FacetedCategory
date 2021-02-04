@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Sabelöga"
+		]
+	},
+	"categoryintersectionsearch": "Sökning i kategorigenomskärningar",
+	"categoryintersectionsearch-desc": "Lägg till [[Special:CategoryIntersectionSearch]]",
+	"categoryintersectionsearch-noinput": "Var god skriv en sökterm.",
+	"categoryintersectionsearch-page-title": "Kategori \"$1\"",
+	"facetedcategories": "Facetterade kategorier",
+	"facetedcategory-desc": "Lägg till specialsidan [[Special:FacetedCategories]]",
+	"facetedcategory-search-for": "kategorinamn:",
+	"facetedcategory-not-only-match-exactly": "Inkluderingen stämmer inte exakt överens"
+}
