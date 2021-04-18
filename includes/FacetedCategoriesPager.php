@@ -147,15 +147,16 @@ class FacetedCategoriesPager extends AlphabeticPager {
 		$count = $this->msg( 'nmembers' )->numParams( $result->cat_pages )->escaped();
 		*/
 
-		global $wgCategoryTreeDefaultOptions, $wgCategoryTreeSpecialPageOptions;
+		$defaultOptions = $this->getConfig()->get( 'CategoryTreeDefaultOptions' );
+		$specialPageOptions = $this->getConfig()->get( 'CategoryTreeSpecialPageOptions' );
 
 		$title = Title::makeTitle( NS_CATEGORY, $result->cat_title );
 
 		$options = [];
 		// grab all known options from the request. Normalization is done by the CategoryTree class
-		foreach ( $wgCategoryTreeDefaultOptions as $option => $default ) {
-			if ( isset( $wgCategoryTreeSpecialPageOptions[$option] ) ) {
-				$default = $wgCategoryTreeSpecialPageOptions[$option];
+		foreach ( $defaultOptions as $option => $default ) {
+			if ( isset( $specialPageOptions[$option] ) ) {
+				$default = $specialPageOptions[$option];
 			}
 			$options[$option] = $default;
 		}
