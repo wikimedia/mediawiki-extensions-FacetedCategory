@@ -3,9 +3,9 @@
 namespace MediaWiki\Extension\FacetedCategory;
 
 use Category;
-use CategoryTreeCategoryViewer;
 use Hooks;
 use IContextSource;
+use MediaWiki\Extension\CategoryTree\CategoryTreeCategoryViewer;
 use Title;
 
 class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {

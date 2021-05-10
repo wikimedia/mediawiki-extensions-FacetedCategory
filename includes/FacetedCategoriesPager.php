@@ -3,10 +3,10 @@
 namespace MediaWiki\Extension\FacetedCategory;
 
 use AlphabeticPager;
-use CategoryTree;
 use Html;
 use IContextSource;
 use LinkBatch;
+use MediaWiki\Extension\CategoryTree\CategoryTree;
 use MediaWiki\Linker\LinkRenderer;
 use Title;
 use Xml;
