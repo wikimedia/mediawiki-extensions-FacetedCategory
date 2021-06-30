@@ -13,25 +13,24 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 	}
 
 	/**
-	 * @param string $par
+	 * @param string $subPage
 	 */
-	public function execute( $par ) {
+	public function execute( $subPage ) {
 		$request = $this->getRequest();
 		$output = $this->getOutput();
 		$this->setHeaders();
 
-		if ( !$par ) {
+		if ( !$subPage ) {
 			$output->addWikiTextAsInterface( $this->msg( 'categoryintersectionsearch-noinput' ) );
 			return;
 		}
-		$titleParam = str_replace( '_', ' ', $par );
-		list( $categories, $exCategories ) = $this->splitPar( $titleParam );
+		list( $categories, $exCategories ) = self::splitCategories( $subPage );
 
 		if ( count( $categories ) == 0 && count( $exCategories ) > 0 ) {
 			$output->addWikiTextAsInterface( $this->msg( 'categoryintersectionsearch-noinput' ) );
 			return;
 		} elseif ( count( $categories ) < 2 && count( $exCategories ) == 0 ) {
-			$output->redirect( Title::newFromText( $titleParam )->getFullURL(), NS_CATEGORY );
+			$output->redirect( Title::newFromText( $subPage )->getFullURL(), NS_CATEGORY );
 			return;
 		}
 
@@ -39,6 +38,7 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 		if ( count( $exCategories ) != 0 ) {
 			$title .= ', -"' . implode( '", -"', $exCategories );
 		}
+		$title = str_replace( '_', ' ', $title );
 
 		$output->setPageTitle( $this->msg( 'categoryintersectionsearch-page-title', $title ) );
 
@@ -77,12 +77,12 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 	}
 
 	/**
-	 * @param string $par
+	 * @param string $term
 	 * @return array
 	 */
-	private function splitPar( $par ) {
-		$par = explode( ",", $par );
-		$count = count( $par );
+	private static function splitCategories( $term ) {
+		$tokens = explode( ",", $term );
+		$count = count( $tokens );
 		if ( $count == 1 ) {
 			return [ [], [] ];
 		}
@@ -90,18 +90,18 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 		$categories = [];
 		$exCategories = [];
 		for ( $i = 0; $i < $count; $i++ ) {
-			if ( strpos( $par[$i], '/' ) === false ) {
+			if ( strpos( $tokens[$i], '/' ) === false ) {
 				return [ [], [] ];
 			}
-			$par[$i] = trim( $par[$i] );
-			$pos = strrchr( $par[$i], ':' );
+			$tokens[$i] = trim( $tokens[$i], ' _' );
+			$pos = strrchr( $tokens[$i], ':' );
 			if ( $pos !== false ) {
-				$par[$i] = trim( substr( $pos, 1 ) );
+				$tokens[$i] = trim( substr( $pos, 1 ) );
 			}
-			if ( substr( $par[$i], 0, 1 ) !== '-' ) {
-				$categories[] = $par[$i];
+			if ( $tokens[$i][0] != '-' ) {
+				$categories[] = $tokens[$i];
 			} else {
-				$exCategories[] = substr( $par[$i], 1 );
+				$exCategories[] = substr( $tokens[$i], 1 );
 			}
 		}
 		return [

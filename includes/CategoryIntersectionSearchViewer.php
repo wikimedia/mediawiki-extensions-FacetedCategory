@@ -139,7 +139,10 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 			],
 			$conds,
 			__METHOD__,
-			[]
+			[
+				# Aggregated query must be with GROUP BY; column 'femiwiki.categorylinks.cl_from' is nonaggregated.
+				'GROUP BY' => 'cl_from',
+			]
 		);
 		$rows = $dbr->select(
 			[

@@ -45,8 +45,8 @@
     "FacetedCategoryAlias": "FacetedCategory.alias.php"
   },
   "TestAutoloadNamespaces": {
-    "MediaWiki\\Extension\\CategoryIntersectionSearch\\Tests\\Unit\\": "tests/phpunit/unit/",
-    "MediaWiki\\Extension\\CategoryIntersectionSearch\\Tests\\Integration\\": "tests/phpunit/integration/"
+    "MediaWiki\\Extension\\FacetedCategory\\Tests\\Unit\\": "tests/phpunit/unit/",
+    "MediaWiki\\Extension\\FacetedCategory\\Tests\\Integration\\": "tests/phpunit/integration/"
   },
   "manifest_version": 1
 }

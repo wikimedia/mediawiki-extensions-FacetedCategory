@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaWiki\Extension\CategoryIntersectionSearch\Tests\Integration;
+namespace MediaWiki\Extension\FacetedCategory\Tests\Integration;
 
 use MediaWiki\Extension\FacetedCategory\FacetedCategoryHookHandler;
 use MediaWikiUnitTestCase;
