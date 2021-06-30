@@ -326,15 +326,15 @@
     "@wdio/types" "7.4.2"
     chalk "^4.0.0"
 
-"@wdio/junit-reporter@7.4.2":
-  version "7.4.2"
-  resolved "https://registry.yarnpkg.com/@wdio/junit-reporter/-/junit-reporter-7.4.2.tgz#93a97bdac9d0096e83da8abac36548ea3482ce8d"
-  integrity sha512-ccpPc45GjG204t7p3sFw95Q/1Chtvft5vXNFIwH2FTGptKSaYmKL9n2Mc6VGXtrBDR5z+3dnt3ObJSIEb95vcw==
+"@wdio/junit-reporter@7.7.3":
+  version "7.7.3"
+  resolved "https://registry.yarnpkg.com/@wdio/junit-reporter/-/junit-reporter-7.7.3.tgz#9e185a3ae0d96da4530f154347e7c4471bde89df"
+  integrity sha512-zAG421phOpWz1mRQIH+Cblv9kGoFsRaLeTf2Ww/ZjbvvcpllMoIaBhiEEzzIBakdMz3XqnfgmZUb0WXAcIOIZQ==
   dependencies:
     "@types/json-stringify-safe" "^5.0.0"
     "@types/validator" "^13.1.3"
-    "@wdio/reporter" "7.4.2"
-    "@wdio/types" "7.4.2"
+    "@wdio/reporter" "7.7.3"
+    "@wdio/types" "7.7.3"
     json-stringify-safe "^5.0.1"
     junit-report-builder "^3.0.0"
     validator "^13.0.0"
@@ -417,6 +417,15 @@
     "@types/cucumber" "^6.0.1"
     "@wdio/types" "7.4.2"
     fs-extra "^9.0.0"
+
+"@wdio/reporter@7.7.3":
+  version "7.7.3"
+  resolved "https://registry.yarnpkg.com/@wdio/reporter/-/reporter-7.7.3.tgz#956ad81fcfad2a2f6dad52b9cdb88803a43c881b"
+  integrity sha512-zAUGgP/FZ3XF5s4RUcDGIAeum3WzkA9ll5lymytxhh/9Jj9/5c77o498ic3RGQlB8FTz+5SVmw08r7g3uekI8g==
+  dependencies:
+    "@types/node" "^14.14.31"
+    "@wdio/types" "7.7.3"
+    fs-extra "^10.0.0"
 
 "@wdio/runner@7.7.4":
   version "7.7.4"
