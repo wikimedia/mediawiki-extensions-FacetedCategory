@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Amirsara"
+		]
+	},
+	"categoryintersectionsearch-noinput": "لطفا یک عبارت برای جستجوی وارد کنید.",
+	"categoryintersectionsearch-page-title": "رده \" $1 \"",
+	"facetedcategory-search-for": "نام رده:",
+	"facetedcategory-not-only-match-exactly": "دقیقاً مطابقت نداشته باشد"
+}
