@@ -456,21 +456,6 @@
     object-inspect "^1.10.3"
     supports-color "8.1.1"
 
-"@wdio/reporter@7.9.0":
-  version "7.9.0"
-  resolved "https://registry.yarnpkg.com/@wdio/reporter/-/reporter-7.9.0.tgz#e6cbfa442d5536782446b0c20cde35aee6f2844b"
-  integrity sha512-UhulgnAJKhAY8rPbbHwoo2JFOFC1Q2uYl3+vuV5VlSP5kwo1mswRhMNk3aDpB7xuMhVx1U3LlRD5k/uns46unw==
-  dependencies:
-    "@types/diff" "^5.0.0"
-    "@types/node" "^15.12.5"
-    "@types/object-inspect" "^1.8.0"
-    "@types/supports-color" "^8.1.0"
-    "@wdio/types" "7.8.0"
-    diff "^5.0.0"
-    fs-extra "^10.0.0"
-    object-inspect "^1.10.3"
-    supports-color "8.1.1"
-
 "@wdio/runner@7.10.1":
   version "7.10.1"
   resolved "https://registry.yarnpkg.com/@wdio/runner/-/runner-7.10.1.tgz#ccbb6d99d0a7dda8cfbb02d7938ad59c8b56d077"
