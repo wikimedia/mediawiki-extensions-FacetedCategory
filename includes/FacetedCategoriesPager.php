@@ -179,7 +179,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 			Html::hidden( 'title', $this->getTitle()->getPrefixedText() ) .
 			Xml::fieldset(
 				$this->msg( 'categories' )->text(),
-				$this->msg( 'facetedcategory-search-for' )->text() .
+				$this->msg( 'facetedcategory-search-for' )->escaped() .
 				' ' .
 				Xml::input(
 					'facetName', 10, $facetName, [ 'class' => 'mw-ui-input-inline' ] ) .
@@ -188,7 +188,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 					'facetMember', 10, $facetMember, [ 'class' => 'mw-ui-input-inline' ] ) .
 				' ' .
 				Html::submitButton(
-					$this->msg( 'categories-submit' )->text(),
+					$this->msg( 'categories-submit' )->escaped(),
 					[], [ 'mw-ui-progressive' ]
 				) .
 				' ' .
