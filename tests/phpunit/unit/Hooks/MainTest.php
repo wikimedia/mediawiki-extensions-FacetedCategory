@@ -2,14 +2,14 @@
 
 namespace MediaWiki\Extension\FacetedCategory\Tests\Integration;
 
-use MediaWiki\Extension\FacetedCategory\FacetedCategoryHookHandler;
+use MediaWiki\Extension\FacetedCategory\Hooks\Main;
 use MediaWikiUnitTestCase;
 use Wikimedia\TestingAccessWrapper;
 
 /**
  * @group FacetedCategory
  */
-class FacetedCategoryHookHandlerTest extends MediaWikiUnitTestCase {
+class MainTest extends MediaWikiUnitTestCase {
 
 	public function provideSplitTerm() {
 		return [
@@ -19,14 +19,14 @@ class FacetedCategoryHookHandlerTest extends MediaWikiUnitTestCase {
 	}
 
 	/**
-	 * @covers \MediaWiki\Extension\FacetedCategory\FacetedCategoryHookHandler::splitTerm
+	 * @covers \MediaWiki\Extension\FacetedCategory\Hooks\Main::splitTerm
 	 * @dataProvider provideSplitTerm
 	 *
 	 * @param array|null $expected
 	 * @param string $term
 	 */
 	public function testSplitTerm( $expected, $term ) {
-		$w = TestingAccessWrapper::newFromClass( FacetedCategoryHookHandler::class );
+		$w = TestingAccessWrapper::newFromClass( Main::class );
 		$this->assertEquals( $expected, $w->splitTerm( $term ) );
 	}
 

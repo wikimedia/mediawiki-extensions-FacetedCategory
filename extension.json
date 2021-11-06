@@ -29,7 +29,7 @@
   },
   "HookHandlers": {
     "Main": {
-      "class": "MediaWiki\\Extension\\FacetedCategory\\FacetedCategoryHookHandler",
+      "class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\Main",
       "services": []
     }
   },

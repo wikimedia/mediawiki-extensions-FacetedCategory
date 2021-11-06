@@ -1,10 +1,10 @@
 <?php
 
-namespace MediaWiki\Extension\FacetedCategory;
+namespace MediaWiki\Extension\FacetedCategory\Hooks;
 
 use Title;
 
-class FacetedCategoryHookHandler implements
+class Main implements
 	\MediaWiki\Hook\BeforePageDisplayHook,
 	\MediaWiki\Hook\SpecialSearchResultsPrependHook
 	{
