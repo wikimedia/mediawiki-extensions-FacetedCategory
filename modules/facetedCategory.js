@@ -1,28 +1,33 @@
-$(function () {
-  // Collapsible category links
-  var catlinksToggle = $('<button></button>');
-  catlinksToggle.text('►');
-  catlinksToggle.addClass('fw-catlinks-toggle');
+// Make the list of category links collapsible
 
-  var catlinks = $('#mw-normal-catlinks li'),
-    directCatAnchors = $('#fw-catlinks li > a'),
-    directCatTexts = {};
-  for (var i = 0, len = directCatAnchors.length; i < len; i++)
-    directCatTexts[directCatAnchors[i].text] = true;
+function createToggleButton() {
+  var catlinksToggle = document.createElement('button');
+  catlinksToggle.classList.add('fw-catlinks-toggle');
 
-  if (directCatAnchors.length !== catlinks.length) {
-    for (var i = 0, len = catlinks.length; i < len; i++)
-      if (!directCatTexts[catlinks[i].innerText])
-        catlinks[i].className += ' collapsible';
+  return catlinksToggle;
+}
 
-    $('#catlinks li.collapsible').fadeOut();
-    var collapsed = true;
-    catlinksToggle.click(function () {
-      $(this).text($(this).text() == '▼' ? '►' : '▼');
-      if (collapsed) $('#catlinks li.collapsible').fadeIn();
-      else $('#catlinks li.collapsible').fadeOut();
-      collapsed = !collapsed;
-    });
-    $('#mw-normal-catlinks').prepend(catlinksToggle);
+function main() {
+  var directCats = mw.config.get('wgDirectCategories');
+
+  var catlinks = document.querySelector('#mw-normal-catlinks');
+  var catlinkItems = document.querySelectorAll('#mw-normal-catlinks li');
+
+  if (!catlinks || directCats.length == catlinkItems.length) {
+    return;
   }
-});
+  console.log(catlinkItems.length);
+  for (var i = 0, len = catlinkItems.length; i < len; i++) {
+    if (!directCats.includes(catlinkItems[i].innerText)) {
+      catlinkItems[i].classList.add('collapsible');
+    }
+  }
+
+  var catlinksToggle = createToggleButton();
+  document.querySelector('#mw-normal-catlinks ul').append(catlinksToggle);
+  catlinksToggle.addEventListener('click', function () {
+    catlinks.classList.toggle('collapsed');
+  });
+}
+
+main();

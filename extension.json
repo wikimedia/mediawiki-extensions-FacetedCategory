@@ -21,6 +21,10 @@
   "ResourceModules": {
     "ext.facetedCategory.js": {
       "scripts": ["facetedCategory.js"]
+    },
+    "ext.facetedCategory": {
+      "position": "top",
+      "styles": ["facetedCategory.less"]
     }
   },
   "ResourceFileModulePaths": {
@@ -31,10 +35,17 @@
     "Main": {
       "class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\Main",
       "services": []
+    },
+    "RecursiveCategory": {
+      "class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\RecursiveCategory",
+      "services": []
     }
   },
   "Hooks": {
     "BeforePageDisplay": "Main",
+    "ContentAlterParserOutput": "RecursiveCategory",
+    "MakeGlobalVariablesScript": "RecursiveCategory",
+    "OutputPageParserOutput": "RecursiveCategory",
     "SpecialSearchResultsPrepend": "Main"
   },
   "SpecialPages": {

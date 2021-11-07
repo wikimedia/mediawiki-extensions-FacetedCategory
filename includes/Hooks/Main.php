@@ -13,7 +13,8 @@ class Main implements
 	 * @inheritDoc
 	 */
 	public function onBeforePageDisplay( $out, $skin ): void {
-		$out->addModules( [ 'ext.facetedCategory.js' ] );
+		$out->addModules( 'ext.facetedCategory.js' );
+		$out->addModuleStyles( 'ext.facetedCategory' );
 	}
 
 	/**

@@ -1,0 +1,35 @@
+.mw-normal-catlinks {
+  .fw-catlinks-toggle:after {
+    content: '◄';
+  }
+
+  &.collapsed {
+    .fw-catlinks-toggle:after {
+      content: '►';
+    }
+    .collapsible {
+      width: 0;
+      padding: 0;
+      margin: 0;
+      border: none;
+      visibility: hidden;
+    }
+  }
+
+  li {
+    vertical-align: middle;
+    opacity: 1;
+  }
+
+  .collapsible {
+    transition: all 0.1s;
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: 0.5;
+  }
+}
+
+// Hide the legacy catlinks
+.fw-catlinks {
+  display: none;
+}
