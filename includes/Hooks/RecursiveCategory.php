@@ -25,6 +25,9 @@ class RecursiveCategory implements
 		if ( !$cats ) {
 			return;
 		}
+		$cats = array_map( static function ( $cat ) {
+			return str_replace( '_', ' ', $cat );
+		}, $cats );
 		$parserOutput->setExtensionData( self::DIRECT_CATEGORIES_PROPERTY_NAME, $cats );
 		foreach ( $cats as $text ) {
 			if ( !str_contains( $text, '/' ) ) {
