@@ -11,12 +11,13 @@ function main() {
   var directCats = mw.config.get('wgDirectCategories');
 
   var catlinks = document.querySelector('#mw-normal-catlinks');
-  var catlinkItems = document.querySelectorAll('#mw-normal-catlinks li');
+  var catlinkItems = document.querySelectorAll(
+    '#mw-normal-catlinks li, #mw-hidden-catlinks li'
+  );
 
   if (!catlinks || directCats.length == catlinkItems.length) {
     return;
   }
-  console.log(catlinkItems.length);
   for (var i = 0, len = catlinkItems.length; i < len; i++) {
     if (!directCats.includes(catlinkItems[i].innerText)) {
       catlinkItems[i].classList.add('collapsible');
