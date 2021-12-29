@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "prettier": "^2.5.1",
-    "@prettier/plugin-xml": "^1.1.0",
+    "@prettier/plugin-xml": "^1.2.0",
     "grunt-banana-checker": "^0.9.0",
     "@wdio/cli": "^7.16.12",
     "@wdio/dot-reporter": "^7.16.11",
