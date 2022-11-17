@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eleassar"
+		]
+	},
+	"categoryintersectionsearch": "Iskanje preseka kategorij",
+	"categoryintersectionsearch-desc": "Dodaj [[Special:CategoryIntersectionSearch|Posebno:Iskanje preseka kategorij]]",
+	"categoryintersectionsearch-noinput": "Vnesite iskalni izraz.",
+	"categoryintersectionsearch-page-title": "Kategorija »$1«",
+	"facetedcategories": "Fasetne kategorije",
+	"facetedcategory-desc": "Dodajte posebne strani [[Special:FacetedCategories]]",
+	"facetedcategory-search-for": "ime kategorije:",
+	"facetedcategory-not-only-match-exactly": "Vključi nenatančna ujemanja"
+}
