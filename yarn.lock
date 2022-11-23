@@ -339,15 +339,15 @@
     "@wdio/types" "7.25.0"
     chalk "^4.0.0"
 
-"@wdio/junit-reporter@^7.25.4":
-  version "7.25.4"
-  resolved "https://registry.yarnpkg.com/@wdio/junit-reporter/-/junit-reporter-7.25.4.tgz#3ae170abfc63fba5820f3cac09e32eafee779fb1"
-  integrity sha512-/MVE1qBaqV1lv3B5gA1Nmn5ISWw3z+QHgQ7BjrX+HjcwfoZsN6UDONTod3b7DFVQWJdjhn1mYP2Iihl8yMLm0g==
+"@wdio/junit-reporter@^7.26.0":
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/@wdio/junit-reporter/-/junit-reporter-7.26.0.tgz#6228bce4231ef9ed60fe0730f56a6bacf6937f1b"
+  integrity sha512-unv+7XW4ZIGSZc5cj8aWhuGXfBsfpCLLMDqKRzMl5+uewYwtMuibaxu6L2q3I3nkN6tfuLUUEAdoNld/D9rqvw==
   dependencies:
     "@types/json-stringify-safe" "^5.0.0"
     "@types/validator" "^13.1.3"
-    "@wdio/reporter" "7.25.4"
-    "@wdio/types" "7.25.4"
+    "@wdio/reporter" "7.26.0"
+    "@wdio/types" "7.26.0"
     json-stringify-safe "^5.0.1"
     junit-report-builder "^3.0.0"
     validator "^13.0.0"
@@ -438,17 +438,17 @@
     object-inspect "^1.10.3"
     supports-color "8.1.1"
 
-"@wdio/reporter@7.25.4":
-  version "7.25.4"
-  resolved "https://registry.yarnpkg.com/@wdio/reporter/-/reporter-7.25.4.tgz#b6a69652dd0c4ec131255000af128eac403a18b9"
-  integrity sha512-M37qzEmF5qNffyZmRQGjDlrXqWW21EFvgW8wsv1b/NtfpZc0c0MoRpeh6BnvX1KcE4nCXfjXgSJPOqV4ZCzUEQ==
+"@wdio/reporter@7.26.0":
+  version "7.26.0"
+  resolved "https://registry.yarnpkg.com/@wdio/reporter/-/reporter-7.26.0.tgz#26c0e7114a4c1e7b29a79e4d178e5312e04d7934"
+  integrity sha512-kEb7i1A4V4E1wJgdyvLsDbap4cEp1fPZslErGtbAbK+9HI8Lt/SlTZCiOpZbvhgzvawEqOV6UqxZT1RsL8wZWw==
   dependencies:
     "@types/diff" "^5.0.0"
     "@types/node" "^18.0.0"
     "@types/object-inspect" "^1.8.0"
     "@types/supports-color" "^8.1.0"
     "@types/tmp" "^0.2.0"
-    "@wdio/types" "7.25.4"
+    "@wdio/types" "7.26.0"
     diff "^5.0.0"
     fs-extra "^10.0.0"
     object-inspect "^1.10.3"
@@ -492,14 +492,6 @@
   version "7.25.0"
   resolved "https://registry.yarnpkg.com/@wdio/types/-/types-7.25.0.tgz#c5cc952a47e578aacba76b30399cd534df17968c"
   integrity sha512-BET/5UZSobAiBSbpWlUzcdjU1WszuUhaGBY7Pj4aAZjlvEeU5ZW5q2/655kxAvFhqHZ4AFEgd6NXg8krOEkXaA==
-  dependencies:
-    "@types/node" "^18.0.0"
-    got "^11.8.1"
-
-"@wdio/types@7.25.4":
-  version "7.25.4"
-  resolved "https://registry.yarnpkg.com/@wdio/types/-/types-7.25.4.tgz#6f8f028e3108dc880de5068264695f1572e65352"
-  integrity sha512-muvNmq48QZCvocctnbe0URq2FjJjUPIG4iLoeMmyF0AQgdbjaUkMkw3BHYNHVTbSOU9WMsr2z8alhj/I2H6NRQ==
   dependencies:
     "@types/node" "^18.0.0"
     got "^11.8.1"
