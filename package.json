@@ -10,7 +10,7 @@
     "selenium-test": "wdio tests/selenium/wdio.conf.js"
   },
   "devDependencies": {
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.1",
     "@prettier/plugin-xml": "^2.2.0",
     "grunt-banana-checker": "^0.10.0",
     "@wdio/cli": "^7.26.0",
