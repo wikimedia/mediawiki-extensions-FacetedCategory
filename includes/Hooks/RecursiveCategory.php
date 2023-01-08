@@ -42,7 +42,7 @@ class RecursiveCategory implements
 				$parentTitle = Title::newFromText( $parentText );
 				$sort = $parserOutput->getPageProperty( 'defaultsort' ) ?? '';
 				$parserOutput->addCategory(
-					$parentTitle->getText(),
+					$parentTitle->getDBkey(),
 					$sort
 				);
 			}
