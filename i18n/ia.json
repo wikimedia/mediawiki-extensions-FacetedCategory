@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"categoryintersectionsearch": "Recerca de intersection de categorias",
+	"categoryintersectionsearch-desc": "Adde le pagina [[Special:CategoryIntersectionSearch|Special:Recerca de intersection de categorias]]",
+	"categoryintersectionsearch-noinput": "Per favor insere un termino de recerca.",
+	"categoryintersectionsearch-page-title": "Categoria \"$1\"",
+	"facetedcategories": "Categorias a facettas",
+	"facetedcategory-desc": "Adde le pagina special [[Special:FacetedCategories|Special:Categorias a facettas]]",
+	"facetedcategory-search-for": "nomine de categoria:",
+	"facetedcategory-not-only-match-exactly": "Includer le correspondentias non exacte"
+}
