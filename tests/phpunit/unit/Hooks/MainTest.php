@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaWiki\Extension\FacetedCategory\Tests\Integration;
+namespace MediaWiki\Extension\FacetedCategory\Tests\Integration\Hooks;
 
 use MediaWiki\Extension\FacetedCategory\Hooks\Main;
 use MediaWikiUnitTestCase;

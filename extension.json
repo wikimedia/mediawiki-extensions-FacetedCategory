@@ -38,11 +38,12 @@
     },
     "RecursiveCategory": {
       "class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\RecursiveCategory",
-      "services": []
+      "services": ["DBLoadBalancer", "JobQueueGroup"]
     }
   },
   "Hooks": {
     "BeforePageDisplay": "Main",
+    "CategoryAfterPageAdded": "RecursiveCategory",
     "ContentAlterParserOutput": "RecursiveCategory",
     "MakeGlobalVariablesScript": "RecursiveCategory",
     "OutputPageParserOutput": "RecursiveCategory",

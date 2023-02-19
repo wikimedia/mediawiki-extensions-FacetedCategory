@@ -1,6 +1,6 @@
 <?php
 
-namespace MediaWiki\Extension\FacetedCategory\Tests\Units;
+namespace MediaWiki\Extension\FacetedCategory\Tests\Integration;
 
 use MediaWiki\Extension\FacetedCategory\Special\SpecialCategoryIntersectionSearch;
 use ReflectionMethod;
