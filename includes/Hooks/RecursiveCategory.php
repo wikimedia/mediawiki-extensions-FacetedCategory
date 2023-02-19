@@ -37,7 +37,6 @@ class RecursiveCategory implements
 	 * @inheritDoc
 	 */
 	public function onCategoryAfterPageAdded( $category, $wikiPage ) {
-		// return true;
 		$title = $wikiPage->getTitle();
 		if ( $title->getNamespace() !== NS_CATEGORY || !str_contains( $title->getText(), '/' ) ) {
 			return true;
