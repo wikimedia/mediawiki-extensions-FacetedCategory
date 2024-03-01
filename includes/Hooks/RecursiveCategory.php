@@ -61,7 +61,7 @@ class RecursiveCategory implements
 	 * @inheritDoc
 	 */
 	public function onContentAlterParserOutput( $content, $title, $parserOutput ) {
-		$cats = array_keys( $parserOutput->getCategories() );
+		$cats = $parserOutput->getCategoryNames();
 		if ( !$cats ) {
 			return;
 		}
