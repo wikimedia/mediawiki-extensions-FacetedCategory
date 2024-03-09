@@ -14,8 +14,6 @@
     "grunt-banana-checker": "^0.10.0",
 		"grunt-eslint": "24.3.0",
 		"grunt-stylelint": "0.18.0",
-    "prettier": "^2.8.3",
-    "@prettier/plugin-xml": "^2.2.0",
 		"stylelint-config-wikimedia": "0.13.0",
     "@wdio/cli": "7.16.13",
     "@wdio/dot-reporter": "7.16.13",
