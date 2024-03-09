@@ -1,64 +1,64 @@
 {
-  "name": "FacetedCategory",
-  "version": "1.0.0",
-  "author": "[https://femiwiki.com/ Femiwiki Team]",
-  "url": "https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:FacetedCategory",
-  "descriptionmsg": "facetedcategory-desc",
-  "license-name": "AGPL-3.0-or-later",
-  "type": "specialpage",
-  "requires": {
-    "MediaWiki": ">= 1.36.0",
-    "extensions": {
-      "CategoryTree": "*"
-    }
-  },
-  "AutoloadNamespaces": {
-    "MediaWiki\\Extension\\FacetedCategory\\": "includes/"
-  },
-  "MessagesDirs": {
-    "FacetedCategory": ["i18n"]
-  },
-  "ResourceModules": {
-    "ext.facetedCategory.js": {
-      "scripts": ["facetedCategory.js"]
-    },
-    "ext.facetedCategory": {
-      "position": "top",
-      "styles": ["facetedCategory.less"]
-    }
-  },
-  "ResourceFileModulePaths": {
-    "localBasePath": "modules",
-    "remoteExtPath": "FacetedCategory/modules"
-  },
-  "HookHandlers": {
-    "Main": {
-      "class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\Main",
-      "services": []
-    },
-    "RecursiveCategory": {
-      "class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\RecursiveCategory",
-      "services": ["DBLoadBalancer", "JobQueueGroup"]
-    }
-  },
-  "Hooks": {
-    "BeforePageDisplay": "Main",
-    "CategoryAfterPageAdded": "RecursiveCategory",
-    "ContentAlterParserOutput": "RecursiveCategory",
-    "MakeGlobalVariablesScript": "RecursiveCategory",
-    "OutputPageParserOutput": "RecursiveCategory",
-    "SpecialSearchResultsPrepend": "Main"
-  },
-  "SpecialPages": {
-    "FacetedCategories": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialFacetedCategories",
-    "CategoryIntersectionSearch": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialCategoryIntersectionSearch"
-  },
-  "ExtensionMessagesFiles": {
-    "FacetedCategoryAlias": "FacetedCategory.alias.php"
-  },
-  "TestAutoloadNamespaces": {
-    "MediaWiki\\Extension\\FacetedCategory\\Tests\\Unit\\": "tests/phpunit/unit/",
-    "MediaWiki\\Extension\\FacetedCategory\\Tests\\Integration\\": "tests/phpunit/integration/"
-  },
-  "manifest_version": 1
+	"name": "FacetedCategory",
+	"version": "1.0.0",
+	"author": "[https://femiwiki.com/ Femiwiki Team]",
+	"url": "https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:FacetedCategory",
+	"descriptionmsg": "facetedcategory-desc",
+	"license-name": "AGPL-3.0-or-later",
+	"type": "specialpage",
+	"requires": {
+		"MediaWiki": ">= 1.36.0",
+		"extensions": {
+			"CategoryTree": "*"
+		}
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\FacetedCategory\\": "includes/"
+	},
+	"MessagesDirs": {
+		"FacetedCategory": [ "i18n" ]
+	},
+	"ResourceModules": {
+		"ext.facetedCategory.js": {
+			"scripts": [ "facetedCategory.js" ]
+		},
+		"ext.facetedCategory": {
+			"position": "top",
+			"styles": [ "facetedCategory.less" ]
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "FacetedCategory/modules"
+	},
+	"HookHandlers": {
+		"Main": {
+			"class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\Main",
+			"services": []
+		},
+		"RecursiveCategory": {
+			"class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\RecursiveCategory",
+			"services": [ "DBLoadBalancer", "JobQueueGroup" ]
+		}
+	},
+	"Hooks": {
+		"BeforePageDisplay": "Main",
+		"CategoryAfterPageAdded": "RecursiveCategory",
+		"ContentAlterParserOutput": "RecursiveCategory",
+		"MakeGlobalVariablesScript": "RecursiveCategory",
+		"OutputPageParserOutput": "RecursiveCategory",
+		"SpecialSearchResultsPrepend": "Main"
+	},
+	"SpecialPages": {
+		"FacetedCategories": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialFacetedCategories",
+		"CategoryIntersectionSearch": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialCategoryIntersectionSearch"
+	},
+	"ExtensionMessagesFiles": {
+		"FacetedCategoryAlias": "FacetedCategory.alias.php"
+	},
+	"TestAutoloadNamespaces": {
+		"MediaWiki\\Extension\\FacetedCategory\\Tests\\Unit\\": "tests/phpunit/unit/",
+		"MediaWiki\\Extension\\FacetedCategory\\Tests\\Integration\\": "tests/phpunit/integration/"
+	},
+	"manifest_version": 1
 }

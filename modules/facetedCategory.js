@@ -1,34 +1,34 @@
 // Make the list of category links collapsible
 
 function createToggleButton() {
-  var catlinksToggle = document.createElement('button');
-  catlinksToggle.classList.add('fw-catlinks-toggle');
+	const catlinksToggle = document.createElement( 'button' );
+	catlinksToggle.classList.add( 'fw-catlinks-toggle' );
 
-  return catlinksToggle;
+	return catlinksToggle;
 }
 
 function main() {
-  var directCats = mw.config.get('wgDirectCategories');
+	const directCats = mw.config.get( 'wgDirectCategories' );
 
-  var catlinks = document.querySelector('#mw-normal-catlinks');
-  var catlinkItems = document.querySelectorAll(
-    '#mw-normal-catlinks li, #mw-hidden-catlinks li'
-  );
+	const catlinks = document.querySelector( '#mw-normal-catlinks' );
+	const catlinkItems = document.querySelectorAll(
+		'#mw-normal-catlinks li, #mw-hidden-catlinks li'
+	);
 
-  if (!catlinks || directCats.length == catlinkItems.length) {
-    return;
-  }
-  for (var i = 0, len = catlinkItems.length; i < len; i++) {
-    if (!directCats.includes(catlinkItems[i].innerText)) {
-      catlinkItems[i].classList.add('collapsible');
-    }
-  }
+	if ( !catlinks || directCats.length === catlinkItems.length ) {
+		return;
+	}
+	for ( let i = 0, len = catlinkItems.length; i < len; i++ ) {
+		if ( directCats.indexOf( catlinkItems[ i ].innerText ) === -1 ) {
+			catlinkItems[ i ].classList.add( 'collapsible' );
+		}
+	}
 
-  var catlinksToggle = createToggleButton();
-  document.querySelector('#mw-normal-catlinks ul').append(catlinksToggle);
-  catlinksToggle.addEventListener('click', function () {
-    catlinks.classList.toggle('collapsed');
-  });
+	const catlinksToggle = createToggleButton();
+	document.querySelector( '#mw-normal-catlinks ul' ).append( catlinksToggle );
+	catlinksToggle.addEventListener( 'click', function () {
+		catlinks.classList.toggle( 'collapsed' );
+	} );
 }
 
 main();
