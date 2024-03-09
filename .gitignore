@@ -6,6 +6,3 @@ tests/selenium/log
 # composer dependencies
 /vendor/
 composer.lock
-
-# We use yarn instead of npm
-package-lock.json
