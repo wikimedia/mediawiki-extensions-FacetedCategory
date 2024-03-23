@@ -50,7 +50,12 @@
 		"SpecialSearchResultsPrepend": "Main"
 	},
 	"SpecialPages": {
-		"FacetedCategories": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialFacetedCategories",
+		"FacetedCategories": {
+			"class": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialFacetedCategories",
+			"services": [
+				"LinkBatchFactory"
+			]
+		},
 		"CategoryIntersectionSearch": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialCategoryIntersectionSearch"
 	},
 	"ExtensionMessagesFiles": {

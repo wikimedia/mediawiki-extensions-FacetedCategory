@@ -5,7 +5,7 @@ namespace MediaWiki\Extension\FacetedCategory;
 use AlphabeticPager;
 use Html;
 use IContextSource;
-use LinkBatch;
+use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\CategoryTree\CategoryTree;
 use MediaWiki\Linker\LinkRenderer;
 use Title;
@@ -15,6 +15,8 @@ class FacetedCategoriesPager extends AlphabeticPager {
 
 	/** @var LinkRenderer */
 	protected $linkRenderer;
+	/** @var LinkBatchFactory */
+	private LinkBatchFactory $linkBatchFactory;
 	/** @var CategoryTree */
 	private $tree;
 
@@ -33,10 +35,17 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	 * @param string $facetMember
 	 * @param bool $includeNotExactlyMatched
 	 * @param LinkRenderer $linkRenderer
+	 * @param LinkBatchFactory $linkBatchFactory
 	 * @param bool $including
 	 */
-	public function __construct( IContextSource $context, $facetName, $facetMember, $includeNotExactlyMatched,
-		LinkRenderer $linkRenderer, $including
+	public function __construct(
+		IContextSource $context,
+		$facetName,
+		$facetMember,
+		$includeNotExactlyMatched,
+		LinkRenderer $linkRenderer,
+		LinkBatchFactory $linkBatchFactory,
+		$including
 	) {
 		parent::__construct( $context );
 		$facetName = str_replace( ' ', '_', $facetName );
@@ -61,6 +70,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 		}
 
 		$this->linkRenderer = $linkRenderer;
+		$this->linkBatchFactory = $linkBatchFactory;
 	}
 
 	/**
@@ -121,7 +131,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	 * @inheritDoc
 	 */
 	public function getBody() {
-		$batch = new LinkBatch;
+		$batch = $this->linkBatchFactory->newLinkBatch();
 
 		$this->mResult->rewind();
 
