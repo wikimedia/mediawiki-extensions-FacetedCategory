@@ -18,7 +18,7 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 	public function execute( $par ) {
 		$this->setHeaders();
 		$this->outputHeader();
-		$this->getOutput()->allowClickjacking();
+		$this->getOutput()->setPreventClickjacking( false );
 
 		$slash = strpos( $par, '/' );
 		$left = $slash === false ? $par : substr( $par, 0, $slash );
