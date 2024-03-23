@@ -4,12 +4,22 @@ namespace MediaWiki\Extension\FacetedCategory\Special;
 
 use Html;
 use IncludableSpecialPage;
+use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\FacetedCategory\FacetedCategoriesPager;
 
 class SpecialFacetedCategories extends IncludableSpecialPage {
 
-	public function __construct() {
+	/** @var LinkBatchFactory */
+	private LinkBatchFactory $linkBatchFactory;
+
+	/**
+	 * @param LinkBatchFactory $linkBatchFactory
+	 */
+	public function __construct(
+		LinkBatchFactory $linkBatchFactory
+	) {
 		parent::__construct( 'FacetedCategories' );
+		$this->linkBatchFactory = $linkBatchFactory;
 	}
 
 	/**
@@ -34,6 +44,7 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 			$facetMember,
 			$includeNotExactlyMatched,
 			$this->getLinkRenderer(),
+			$this->linkBatchFactory,
 			$this->including()
 		);
 		$pager->doQuery();
