@@ -37,7 +37,8 @@ class Main implements
 		if ( $categories !== null ) {
 			$par = '';
 			foreach ( $categories as $key => $value ) {
-				if ( $key !== 0 ) { $par .= ', ';
+				if ( $key !== 0 ) {
+					$par .= ', ';
 				}
 				$par .= $value;
 			}

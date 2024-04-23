@@ -26,13 +26,15 @@ class RecursiveCategoryTest extends MediaWikiIntegrationTestCase {
 	public function testCategorizedUsingParent() {
 		$parent = $this->createTitle( 'Category:Facet/Parent1', '[[Category:Facet/Cat1]][[Category:Facet/Cat2]]' );
 		$child = $this->createTitle( 'Child1', '[[Category:Facet/Parent1]]' );
-		$this->assertCategory( $child, [
-			'Facet/Cat1',
-			'Facet/Cat2',
-			'Facet/Parent1',
-		],
-		'Should be registered to the specified category including the grandparent categories.'
-	);
+		$this->assertCategory(
+			$child,
+			[
+				'Facet/Cat1',
+				'Facet/Cat2',
+				'Facet/Parent1',
+			],
+			'Should be registered to the specified category including the grandparent categories.'
+		);
 	}
 
 	public function testLateAddingCategoryToParent() {

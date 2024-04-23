@@ -6,6 +6,7 @@ class CategoryIntersectionSearchPage extends Page {
 	get pages() {
 		return $( '#mw-pages li' );
 	}
+
 	open( subPage = false ) {
 		let title = 'Special:CategoryIntersectionSearch';
 		if ( subPage ) {

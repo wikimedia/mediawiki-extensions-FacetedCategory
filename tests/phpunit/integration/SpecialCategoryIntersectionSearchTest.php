@@ -21,7 +21,7 @@ class SpecialCategoryIntersectionSearchTest extends SpecialPageTestBase {
 	 * @covers \MediaWiki\Extension\FacetedCategory\Special\SpecialCategoryIntersectionSearch::execute
 	 */
 	public function testEmptySubPage() {
-		list( $html, ) = $this->executeSpecialPage( '', null, 'qqx' );
+		[ $html, ] = $this->executeSpecialPage( '', null, 'qqx' );
 
 		$this->assertStringContainsString( 'categoryintersectionsearch-noinput', $html );
 	}

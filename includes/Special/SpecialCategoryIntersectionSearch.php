@@ -24,7 +24,7 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 			$output->addWikiTextAsInterface( $this->msg( 'categoryintersectionsearch-noinput' ) );
 			return;
 		}
-		list( $categories, $exCategories ) = self::splitCategories( $subPage );
+		[ $categories, $exCategories ] = self::splitCategories( $subPage );
 
 		if ( count( $categories ) == 0 && count( $exCategories ) > 0 ) {
 			$output->addWikiTextAsInterface( $this->msg( 'categoryintersectionsearch-noinput' ) );

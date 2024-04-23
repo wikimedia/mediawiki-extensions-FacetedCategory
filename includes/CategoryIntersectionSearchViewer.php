@@ -35,7 +35,7 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 
 	public function doCategoryQuery() {
 		// 여기서부터 아래는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
-		$dbr = wfGetDB( DB_REPLICA, [ 'page','categorylinks','category' ] );
+		$dbr = wfGetDB( DB_REPLICA, [ 'page', 'categorylinks', 'category' ] );
 
 		$this->nextPage = [
 			'page' => null,
