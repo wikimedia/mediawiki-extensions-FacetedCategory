@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"TomatoCake"
+		]
+	},
+	"categoryintersectionsearch-noinput": "Bitte gib einen Suchbegriff an.",
+	"categoryintersectionsearch-page-title": "Kategorie „$1“",
+	"facetedcategory-search-for": "Kategoriename:"
+}
