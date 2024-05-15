@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"McDutchie"
+		]
+	},
+	"categoryintersectionsearch": "Zoeken op categoriekruising",
+	"categoryintersectionsearch-desc": "Voegt [[Special:CategoryIntersectionSearch]] toe",
+	"categoryintersectionsearch-noinput": "Voer een zoekterm in.",
+	"categoryintersectionsearch-page-title": "Categorie “$1”",
+	"facetedcategories": "Gefacetteerde categorieën",
+	"facetedcategory-desc": "Voegt de speciale pagina [[Special:FacetedCategories]] toe",
+	"facetedcategory-search-for": "categorienaam:",
+	"facetedcategory-not-only-match-exactly": "Niet-precieze resultaten opnemen"
+}
