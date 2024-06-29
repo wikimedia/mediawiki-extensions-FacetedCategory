@@ -15,20 +15,20 @@ describe( 'Special:CategoryIntersectionSearch', () => {
 		} );
 	} );
 
-	it( 'shows a page if valid subpage is given', () => {
+	it( 'shows a page if valid subpage is given', async () => {
 		CategoryIntersectionSearchPage.open( 'A/B, C/D' );
 
 		assert.strictEqual(
-			CategoryIntersectionSearchPage.pages.getText(),
+			await CategoryIntersectionSearchPage.pages.getText(),
 			'Categorized'
 		);
 	} );
 
-	it( 'shows a page if the category contains a space', () => {
+	it( 'shows a page if the category contains a space', async () => {
 		CategoryIntersectionSearchPage.open( 'A/B, C/Foo bar' );
 
 		assert.strictEqual(
-			CategoryIntersectionSearchPage.pages.getText(),
+			await CategoryIntersectionSearchPage.pages.getText(),
 			'Categorized'
 		);
 	} );

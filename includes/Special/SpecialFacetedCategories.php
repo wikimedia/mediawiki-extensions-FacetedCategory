@@ -30,7 +30,7 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 		$this->outputHeader();
 		$this->getOutput()->setPreventClickjacking( false );
 
-		if ( is_null($subPage) ) {
+		if ( $subPage === null ) {
 			return;
 		}
 		$slash = strpos( $subPage, '/' );
