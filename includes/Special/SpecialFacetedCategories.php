@@ -23,16 +23,19 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 	}
 
 	/**
-	 * @param string $par
+	 * @param string|null $subPage
 	 */
-	public function execute( $par ) {
+	public function execute( $subPage ) {
 		$this->setHeaders();
 		$this->outputHeader();
 		$this->getOutput()->setPreventClickjacking( false );
 
-		$slash = strpos( $par, '/' );
-		$left = $slash === false ? $par : substr( $par, 0, $slash );
-		$right = $slash === false ? '' : substr( $par, $slash + 1, strlen( $par ) - 1 );
+		if ( is_null($subPage) ) {
+			return;
+		}
+		$slash = strpos( $subPage, '/' );
+		$left = $slash === false ? $subPage : substr( $subPage, 0, $slash );
+		$right = $slash === false ? '' : substr( $subPage, $slash + 1, strlen( $subPage ) - 1 );
 
 		$facetName = $this->getRequest()->getText( 'facetName', $left );
 		$facetMember = $this->getRequest()->getText( 'facetMember', $right );
