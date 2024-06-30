@@ -6,20 +6,27 @@ use Html;
 use IncludableSpecialPage;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\FacetedCategory\FacetedCategoriesPager;
+use Wikimedia\Rdbms\IConnectionProvider;
 
 class SpecialFacetedCategories extends IncludableSpecialPage {
 
 	/** @var LinkBatchFactory */
 	private LinkBatchFactory $linkBatchFactory;
 
+	/** @var IConnectionProvider */
+	private IConnectionProvider $dbProvider;
+
 	/**
 	 * @param LinkBatchFactory $linkBatchFactory
+	 * @param IConnectionProvider $dbProvider
 	 */
 	public function __construct(
-		LinkBatchFactory $linkBatchFactory
+		LinkBatchFactory $linkBatchFactory,
+		IConnectionProvider $dbProvider
 	) {
 		parent::__construct( 'FacetedCategories' );
 		$this->linkBatchFactory = $linkBatchFactory;
+		$this->dbProvider = $dbProvider;
 	}
 
 	/**
@@ -46,9 +53,9 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 			$facetName,
 			$facetMember,
 			$includeNotExactlyMatched,
-			$this->getLinkRenderer(),
+			$this->including(),
 			$this->linkBatchFactory,
-			$this->including()
+			$this->dbProvider
 		);
 		$pager->doQuery();
 
