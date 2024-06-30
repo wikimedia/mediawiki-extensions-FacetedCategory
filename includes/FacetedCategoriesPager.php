@@ -7,16 +7,16 @@ use Html;
 use IContextSource;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\CategoryTree\CategoryTree;
-use MediaWiki\Linker\LinkRenderer;
 use Title;
+use Wikimedia\Rdbms\IConnectionProvider;
 use Xml;
 
 class FacetedCategoriesPager extends AlphabeticPager {
 
-	/** @var LinkRenderer */
-	protected $linkRenderer;
 	/** @var LinkBatchFactory */
 	private LinkBatchFactory $linkBatchFactory;
+	/** @var IConnectionProvider */
+	private IConnectionProvider $dbProvider;
 	/** @var CategoryTree */
 	private $tree;
 
@@ -34,18 +34,18 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	 * @param string $facetName
 	 * @param string $facetMember
 	 * @param bool $includeNotExactlyMatched
-	 * @param LinkRenderer $linkRenderer
-	 * @param LinkBatchFactory $linkBatchFactory
 	 * @param bool $including
+	 * @param LinkBatchFactory $linkBatchFactory
+	 * @param IConnectionProvider $dbProvider
 	 */
 	public function __construct(
 		IContextSource $context,
 		$facetName,
 		$facetMember,
 		$includeNotExactlyMatched,
-		LinkRenderer $linkRenderer,
+		$including,
 		LinkBatchFactory $linkBatchFactory,
-		$including
+		IConnectionProvider $dbProvider
 	) {
 		parent::__construct( $context );
 		$facetName = str_replace( ' ', '_', $facetName );
@@ -69,8 +69,8 @@ class FacetedCategoriesPager extends AlphabeticPager {
 			$this->includeNotExactlyMatched = false;
 		}
 
-		$this->linkRenderer = $linkRenderer;
 		$this->linkBatchFactory = $linkBatchFactory;
+		$this->dbProvider = $dbProvider;
 	}
 
 	/**
@@ -152,7 +152,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 		/*
 		$title = new TitleValue( NS_CATEGORY, $result->cat_title );
 		$text = $title->getText();
-		$link = $this->linkRenderer->renderHtmlLink( $title, $text );
+		$link = $this->getLinkRenderer()->renderHtmlLink( $title, $text );
 
 		$count = $this->msg( 'nmembers' )->numParams( $result->cat_pages )->escaped();
 		*/
@@ -171,7 +171,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 			$options[$option] = $default;
 		}
 		$options['mode'] = 'categories';
-		$this->tree = new CategoryTree( $options );
+		$this->tree = new CategoryTree( $options, $this->getConfig(), $this->dbProvider, $this->getLinkRenderer() );
 
 		return $this->tree->renderNode( $title );
 	}
