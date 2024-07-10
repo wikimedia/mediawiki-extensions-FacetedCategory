@@ -13,7 +13,7 @@ use WikitextContent;
  */
 class RecursiveCategoryTest extends MediaWikiIntegrationTestCase {
 	protected function assertCategory( $title, $expected, string $message = '' ) {
-		$actual = $this->db->selectFieldValues(
+		$actual = $this->getDb()->selectFieldValues(
 			'categorylinks',
 			'cl_to',
 			[
