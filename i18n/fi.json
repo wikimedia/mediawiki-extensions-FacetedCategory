@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"MITO"
+			"MITO",
+			"Yupik"
 		]
 	},
+	"categoryintersectionsearch-noinput": "Kirjoita hakusana.",
 	"facetedcategory-search-for": "luokan nimi:"
 }
