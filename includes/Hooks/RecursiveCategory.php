@@ -42,7 +42,7 @@ class RecursiveCategory implements
 			return true;
 		}
 
-		$dbr = $this->loadBalancer->getConnectionRef( ILoadBalancer::DB_REPLICA );
+		$dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
 		$pages = $dbr->selectFieldValues(
 			'categorylinks',
 			'cl_from',
