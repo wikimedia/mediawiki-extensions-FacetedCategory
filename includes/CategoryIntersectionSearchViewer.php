@@ -3,12 +3,14 @@
 namespace MediaWiki\Extension\FacetedCategory;
 
 use Category;
-use Hooks;
 use IContextSource;
-use MediaWiki\Extension\CategoryTree\CategoryTreeCategoryViewer;
+use MediaWiki\Category\CategoryViewer;
+use MediaWiki\HookContainer\ProtectedHookAccessorTrait;
 use Title;
+use Wikimedia\Rdbms\ILoadBalancer;
 
-class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
+class CategoryIntersectionSearchViewer extends CategoryViewer {
+	use ProtectedHookAccessorTrait;
 
 	/** @var array */
 	private $categories;
@@ -16,26 +18,34 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 	/** @var array */
 	private $exCategories;
 
+	/** @var ILoadBalancer */
+	private ILoadBalancer $loadBalancer;
+
 	/**
-	 * @param Title $title
-	 * @param IContextSource $context
+	 * @inheritDoc
 	 * @param array $categories
 	 * @param array $exCategories
-	 * @param array $from An array with keys page, subcat,
-	 *        and file for offset of results of each section (since 1.17)
-	 * @param array $until An array with 3 keys for until of each section (since 1.17)
-	 * @param array $query
+	 * @param ILoadBalancer $loadBalancer
 	 */
-	public function __construct( Title $title, IContextSource $context, $categories, $exCategories = [],
-		$from = [], $until = [], $query = [] ) {
+	public function __construct(
+		Title $title,
+		IContextSource $context,
+		$from,
+		$until,
+		$query,
+		$categories,
+		$exCategories,
+		ILoadBalancer $loadBalancer
+	) {
 		parent::__construct( $title, $context, $from, $until, $query );
 		$this->categories = $categories;
 		$this->exCategories = $exCategories;
+		$this->loadBalancer = $loadBalancer;
 	}
 
 	public function doCategoryQuery() {
 		// 여기서부터 아래는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
-		$dbr = wfGetDB( DB_REPLICA, [ 'page','categorylinks','category' ] );
+		$dbr = $this->loadBalancer->getConnection( DB_REPLICA, [ 'page','categorylinks','category' ] );
 
 		$this->nextPage = [
 			'page' => null,
@@ -69,7 +79,7 @@ class CategoryIntersectionSearchViewer extends CategoryTreeCategoryViewer {
 			$res = $this->selectCategories( $dbr, $type, $extraConds );
 
 			// 여기서부터 아래는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
-			Hooks::run( 'CategoryViewer::doCategoryQuery', [ $type, $res ] );
+			$this->getHookRunner()->onCategoryViewer__doCategoryQuery( $type, $res );
 
 			$count = 0;
 			foreach ( $res as $row ) {
