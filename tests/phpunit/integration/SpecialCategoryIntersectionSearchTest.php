@@ -14,7 +14,8 @@ class SpecialCategoryIntersectionSearchTest extends SpecialPageTestBase {
 	 * @inheritDoc
 	 */
 	protected function newSpecialPage() {
-		return new SpecialCategoryIntersectionSearch();
+		$loadBalancer = $this->getServiceContainer()->getDBLoadBalancer();
+		return new SpecialCategoryIntersectionSearch( $loadBalancer );
 	}
 
 	/**
