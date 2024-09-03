@@ -56,7 +56,12 @@
 				"LinkBatchFactory"
 			]
 		},
-		"CategoryIntersectionSearch": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialCategoryIntersectionSearch"
+		"CategoryIntersectionSearch": {
+			"class": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialCategoryIntersectionSearch",
+			"services": [
+				"DBLoadBalancer"
+			]
+		}
 	},
 	"ExtensionMessagesFiles": {
 		"FacetedCategoryAlias": "FacetedCategory.alias.php"

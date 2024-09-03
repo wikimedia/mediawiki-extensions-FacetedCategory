@@ -5,11 +5,19 @@ namespace MediaWiki\Extension\FacetedCategory\Special;
 use MediaWiki\Extension\FacetedCategory\CategoryIntersectionSearchViewer;
 use SpecialPage;
 use Title;
+use Wikimedia\Rdbms\ILoadBalancer;
 
 class SpecialCategoryIntersectionSearch extends SpecialPage {
 
-	public function __construct() {
+	/** @var ILoadBalancer */
+	private ILoadBalancer $loadBalancer;
+
+	/**
+	 * @param ILoadBalancer $loadBalancer
+	 */
+	public function __construct( ILoadBalancer $loadBalancer ) {
 		parent::__construct( 'CategoryIntersectionSearch' );
+		$this->loadBalancer = $loadBalancer;
 	}
 
 	/**
@@ -67,11 +75,12 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 		$viewer = new CategoryIntersectionSearchViewer(
 			Title::newFromText( $title ),
 			$this->getContext(),
-			$categories,
-			$exCategories,
 			$from,
 			$until,
-			$reqArray
+			$reqArray,
+			$categories,
+			$exCategories,
+			$this->loadBalancer
 		);
 		$output->addHTML( $viewer->getHTML() );
 	}
