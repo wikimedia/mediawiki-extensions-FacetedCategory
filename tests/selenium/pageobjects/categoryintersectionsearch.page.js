@@ -7,12 +7,12 @@ class CategoryIntersectionSearchPage extends Page {
 		return $( '#mw-pages li' );
 	}
 
-	open( subPage = false ) {
+	async open( subPage = false ) {
 		let title = 'Special:CategoryIntersectionSearch';
 		if ( subPage ) {
 			title += '/' + subPage;
 		}
-		super.openTitle( title );
+		return super.openTitle( title );
 	}
 }
 
