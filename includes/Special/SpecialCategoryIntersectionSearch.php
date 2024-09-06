@@ -48,7 +48,7 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 		}
 		$title = str_replace( '_', ' ', $title );
 
-		$output->setPageTitle( $this->msg( 'categoryintersectionsearch-page-title', $title ) );
+		$output->setPageTitle( $this->msg( 'categoryintersectionsearch-page-title', $title )->escaped() );
 
 		// Start: Copied from CategoryTree in MW 1.27
 		$oldFrom = $request->getVal( 'from' );
