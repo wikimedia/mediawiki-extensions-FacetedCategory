@@ -198,7 +198,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 					'facetMember', 10, $facetMember, [ 'class' => 'mw-ui-input-inline' ] ) .
 				' ' .
 				Html::submitButton(
-					$this->msg( 'categories-submit' )->escaped(),
+					$this->msg( 'categories-submit' )->text(),
 					[], [ 'mw-ui-progressive' ]
 				) .
 				' ' .
