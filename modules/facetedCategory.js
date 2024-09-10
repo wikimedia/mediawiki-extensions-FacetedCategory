@@ -26,7 +26,7 @@ function main() {
 
 	const catlinksToggle = createToggleButton();
 	document.querySelector( '#mw-normal-catlinks ul' ).append( catlinksToggle );
-	catlinksToggle.addEventListener( 'click', function () {
+	catlinksToggle.addEventListener( 'click', () => {
 		catlinks.classList.toggle( 'collapsed' );
 	} );
 }
