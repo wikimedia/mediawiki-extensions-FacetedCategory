@@ -10,16 +10,9 @@ use Wikimedia\Rdbms\IConnectionProvider;
 
 class SpecialFacetedCategories extends IncludableSpecialPage {
 
-	/** @var LinkBatchFactory */
 	private LinkBatchFactory $linkBatchFactory;
-
-	/** @var IConnectionProvider */
 	private IConnectionProvider $dbProvider;
 
-	/**
-	 * @param LinkBatchFactory $linkBatchFactory
-	 * @param IConnectionProvider $dbProvider
-	 */
 	public function __construct(
 		LinkBatchFactory $linkBatchFactory,
 		IConnectionProvider $dbProvider
@@ -53,7 +46,7 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 			$facetName,
 			$facetMember,
 			$includeNotExactlyMatched,
-			$this->including(),
+			(bool)$this->including(),
 			$this->linkBatchFactory,
 			$this->dbProvider
 		);

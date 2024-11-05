@@ -49,11 +49,7 @@ class Main implements
 		return true;
 	}
 
-	/**
-	 * @param string $term
-	 * @return array|null
-	 */
-	private static function splitTerm( $term ) {
+	private static function splitTerm( string $term ): ?array {
 		if ( strpos( $term, "," ) === false ) {
 			return null;
 		}

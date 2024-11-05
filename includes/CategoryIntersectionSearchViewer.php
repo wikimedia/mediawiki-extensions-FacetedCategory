@@ -7,18 +7,15 @@ use IContextSource;
 use MediaWiki\Category\CategoryViewer;
 use MediaWiki\HookContainer\ProtectedHookAccessorTrait;
 use Title;
+use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\IResultWrapper;
 
 class CategoryIntersectionSearchViewer extends CategoryViewer {
 	use ProtectedHookAccessorTrait;
 
-	/** @var array */
-	private $categories;
-
-	/** @var array */
-	private $exCategories;
-
-	/** @var ILoadBalancer */
+	private array $categories;
+	private array $exCategories;
 	private ILoadBalancer $loadBalancer;
 
 	/**
@@ -30,11 +27,11 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 	public function __construct(
 		Title $title,
 		IContextSource $context,
-		$from,
-		$until,
-		$query,
-		$categories,
-		$exCategories,
+		array $from,
+		array $until,
+		array $query,
+		array $categories,
+		array $exCategories,
 		ILoadBalancer $loadBalancer
 	) {
 		parent::__construct( $title, $context, $from, $until, $query );
@@ -116,13 +113,7 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 		}
 	}
 
-	/**
-	 * @param \Wikimedia\Rdbms\IDatabase $dbr
-	 * @param string $type
-	 * @param array $extraConds
-	 * @return \Wikimedia\Rdbms\IResultWrapper
-	 */
-	private function selectCategories( $dbr, $type, $extraConds ) {
+	private function selectCategories( IDatabase $dbr, string $type, array $extraConds ): IResultWrapper {
 		$conds = [
 			$dbr->makeList( [ 'cl_to' => $this->categories ], $dbr::LIST_OR ),
 		];

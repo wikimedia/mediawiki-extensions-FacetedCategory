@@ -13,37 +13,20 @@ use Xml;
 
 class FacetedCategoriesPager extends AlphabeticPager {
 
-	/** @var LinkBatchFactory */
 	private LinkBatchFactory $linkBatchFactory;
-	/** @var IConnectionProvider */
 	private IConnectionProvider $dbProvider;
-	/** @var CategoryTree */
-	private $tree;
+	private CategoryTree $tree;
+	private string $facetName;
+	private string $facetMember;
+	private bool $includeNotExactlyMatched;
+	private bool $including;
 
-	/** @var string */
-	private $facetName;
-	/** @var string */
-	private $facetMember;
-	/** @var bool */
-	private $includeNotExactlyMatched;
-	/** @var bool */
-	private $including;
-
-	/**
-	 * @param IContextSource $context
-	 * @param string $facetName
-	 * @param string $facetMember
-	 * @param bool $includeNotExactlyMatched
-	 * @param bool $including
-	 * @param LinkBatchFactory $linkBatchFactory
-	 * @param IConnectionProvider $dbProvider
-	 */
 	public function __construct(
 		IContextSource $context,
-		$facetName,
-		$facetMember,
-		$includeNotExactlyMatched,
-		$including,
+		string $facetName,
+		string $facetMember,
+		bool $includeNotExactlyMatched,
+		bool $including,
 		LinkBatchFactory $linkBatchFactory,
 		IConnectionProvider $dbProvider
 	) {
@@ -51,18 +34,10 @@ class FacetedCategoriesPager extends AlphabeticPager {
 		$facetName = str_replace( ' ', '_', $facetName );
 		$facetMember = str_replace( ' ', '_', $facetMember );
 
-		if ( $facetName !== '' ) {
-			$this->facetName = $facetName;
-		}
-		if ( $facetMember !== '' ) {
-			$this->facetMember = $facetMember;
-		}
-		if ( $includeNotExactlyMatched !== '' ) {
-			$this->includeNotExactlyMatched = $includeNotExactlyMatched;
-		}
-		if ( $including !== '' ) {
-			$this->including = $including;
-		}
+		$this->facetName = $facetName;
+		$this->facetMember = $facetMember;
+		$this->includeNotExactlyMatched = $includeNotExactlyMatched;
+		$this->including = $including;
 
 		if ( $this->including ) {
 			$this->setLimit( 200 );

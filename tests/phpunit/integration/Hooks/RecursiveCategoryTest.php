@@ -68,12 +68,7 @@ class RecursiveCategoryTest extends MediaWikiIntegrationTestCase {
 		] );
 	}
 
-	/**
-	 * @param string $name
-	 * @param string $content
-	 * @return Title
-	 */
-	protected function createTitle( $name, $content ) {
+	protected function createTitle( string $name, string $content ): Title {
 		$content = new WikitextContent( $content );
 
 		$title = Title::newFromText( $name );
