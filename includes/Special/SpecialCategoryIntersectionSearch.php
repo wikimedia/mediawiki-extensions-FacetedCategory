@@ -57,15 +57,15 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 			$until[$type] = $request->getVal( "{$type}until", $oldUntil );
 
 			// Do not want old-style from/until propagating in nav links.
-			if ( !isset( $reqArray["{$type}from"] ) && isset( $reqArray["from"] ) ) {
-				$reqArray["{$type}from"] = $reqArray["from"];
+			if ( !isset( $reqArray["{$type}from"] ) && isset( $reqArray['from'] ) ) {
+				$reqArray["{$type}from"] = $reqArray['from'];
 			}
-			if ( !isset( $reqArray["{$type}to"] ) && isset( $reqArray["to"] ) ) {
-				$reqArray["{$type}to"] = $reqArray["to"];
+			if ( !isset( $reqArray["{$type}to"] ) && isset( $reqArray['to'] ) ) {
+				$reqArray["{$type}to"] = $reqArray['to'];
 			}
 		}
-		unset( $reqArray["from"] );
-		unset( $reqArray["to"] );
+		unset( $reqArray['from'] );
+		unset( $reqArray['to'] );
 		// End: Copied from CategoryTree in MW 1.27
 
 		$viewer = new CategoryIntersectionSearchViewer(
@@ -82,7 +82,7 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 	}
 
 	private static function splitCategories( string $term ): array {
-		$tokens = explode( ",", $term );
+		$tokens = explode( ',', $term );
 		$count = count( $tokens );
 		if ( $count == 1 ) {
 			return [ [], [] ];

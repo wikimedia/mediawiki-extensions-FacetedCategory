@@ -21,7 +21,7 @@ class Main implements
 	 * @inheritDoc
 	 */
 	public function onSpecialSearchResultsPrepend( $specialSearch, $output, $term ) {
-		if ( $term === null || $term === '' || strpos( $term, "/" ) === false ) {
+		if ( $term === null || $term === '' || strpos( $term, '/' ) === false ) {
 			return true;
 		}
 
@@ -50,17 +50,17 @@ class Main implements
 	}
 
 	private static function splitTerm( string $term ): ?array {
-		if ( strpos( $term, "," ) === false ) {
+		if ( strpos( $term, ',' ) === false ) {
 			return null;
 		}
 
-		$categories = explode( ",", $term );
+		$categories = explode( ',', $term );
 		foreach ( $categories as $i => $value ) {
-			if ( strpos( $value, "/" ) === false ) {
+			if ( strpos( $value, '/' ) === false ) {
 				return null;
 			}
 			$categories[$i] = trim( $value );
-			$pos = strrchr( $value, ":" );
+			$pos = strrchr( $value, ':' );
 			if ( $pos !== false ) {
 				$categories[$i] = substr( $pos, 1 );
 			}
