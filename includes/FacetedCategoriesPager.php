@@ -6,15 +6,15 @@ use AlphabeticPager;
 use IContextSource;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\CategoryTree\CategoryTree;
+use MediaWiki\Extension\CategoryTree\CategoryTreeFactory;
 use MediaWiki\Html\Html;
 use MediaWiki\Title\Title;
-use Wikimedia\Rdbms\IConnectionProvider;
 use Xml;
 
 class FacetedCategoriesPager extends AlphabeticPager {
 
+	private CategoryTreeFactory $categoryTreeFactory;
 	private LinkBatchFactory $linkBatchFactory;
-	private IConnectionProvider $dbProvider;
 	private CategoryTree $tree;
 	private string $facetName;
 	private string $facetMember;
@@ -27,8 +27,8 @@ class FacetedCategoriesPager extends AlphabeticPager {
 		string $facetMember,
 		bool $includeNotExactlyMatched,
 		bool $including,
-		LinkBatchFactory $linkBatchFactory,
-		IConnectionProvider $dbProvider
+		CategoryTreeFactory $categoryTreeFactory,
+		LinkBatchFactory $linkBatchFactory
 	) {
 		parent::__construct( $context );
 		$facetName = str_replace( ' ', '_', $facetName );
@@ -44,8 +44,8 @@ class FacetedCategoriesPager extends AlphabeticPager {
 			$this->includeNotExactlyMatched = false;
 		}
 
+		$this->categoryTreeFactory = $categoryTreeFactory;
 		$this->linkBatchFactory = $linkBatchFactory;
-		$this->dbProvider = $dbProvider;
 	}
 
 	/**
@@ -146,7 +146,7 @@ class FacetedCategoriesPager extends AlphabeticPager {
 			$options[$option] = $default;
 		}
 		$options['mode'] = 'categories';
-		$this->tree = new CategoryTree( $options, $this->getConfig(), $this->dbProvider, $this->getLinkRenderer() );
+		$this->tree = $this->categoryTreeFactory->newCategoryTree( $options );
 
 		return $this->tree->renderNode( $title );
 	}
