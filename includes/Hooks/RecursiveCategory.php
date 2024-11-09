@@ -18,16 +18,9 @@ class RecursiveCategory implements
 	/** @const string direct-categories key. */
 	public const DIRECT_CATEGORIES_PROPERTY_NAME = 'direct-categories';
 
-	/** @var ILoadBalancer */
-	private $loadBalancer;
+	private ILoadBalancer $loadBalancer;
+	private JobQueueGroup $jobQueueGroup;
 
-	/** @var JobQueueGroup */
-	private $jobQueueGroup;
-
-	/**
-	 * @param ILoadBalancer $loadBalancer
-	 * @param JobQueueGroup $jobQueueGroup
-	 */
 	public function __construct( ILoadBalancer $loadBalancer, JobQueueGroup $jobQueueGroup ) {
 		$this->loadBalancer = $loadBalancer;
 		$this->jobQueueGroup = $jobQueueGroup;

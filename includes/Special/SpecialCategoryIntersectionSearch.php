@@ -9,19 +9,15 @@ use Wikimedia\Rdbms\ILoadBalancer;
 
 class SpecialCategoryIntersectionSearch extends SpecialPage {
 
-	/** @var ILoadBalancer */
 	private ILoadBalancer $loadBalancer;
 
-	/**
-	 * @param ILoadBalancer $loadBalancer
-	 */
 	public function __construct( ILoadBalancer $loadBalancer ) {
 		parent::__construct( 'CategoryIntersectionSearch' );
 		$this->loadBalancer = $loadBalancer;
 	}
 
 	/**
-	 * @param string $subPage
+	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
 		$request = $this->getRequest();
@@ -85,11 +81,7 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 		$output->addHTML( $viewer->getHTML() );
 	}
 
-	/**
-	 * @param string $term
-	 * @return array
-	 */
-	private static function splitCategories( $term ) {
+	private static function splitCategories( string $term ): array {
 		$tokens = explode( ",", $term );
 		$count = count( $tokens );
 		if ( $count == 1 ) {
