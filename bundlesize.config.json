@@ -1,0 +1,10 @@
+[
+	{
+		"resourceModule": "ext.facetedCategory",
+		"maxSize": null
+	},
+	{
+		"resourceModule": "ext.facetedCategory.js",
+		"maxSize": null
+	}
+]
