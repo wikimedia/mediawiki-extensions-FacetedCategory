@@ -3,8 +3,8 @@
 namespace MediaWiki\Extension\FacetedCategory\Special;
 
 use MediaWiki\Extension\FacetedCategory\CategoryIntersectionSearchViewer;
+use MediaWiki\Title\Title;
 use SpecialPage;
-use Title;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class SpecialCategoryIntersectionSearch extends SpecialPage {

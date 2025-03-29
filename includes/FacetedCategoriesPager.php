@@ -3,11 +3,11 @@
 namespace MediaWiki\Extension\FacetedCategory;
 
 use AlphabeticPager;
-use Html;
 use IContextSource;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\CategoryTree\CategoryTree;
-use Title;
+use MediaWiki\Html\Html;
+use MediaWiki\Title\Title;
 use Wikimedia\Rdbms\IConnectionProvider;
 use Xml;
 

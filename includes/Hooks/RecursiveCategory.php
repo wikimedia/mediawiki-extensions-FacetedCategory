@@ -2,10 +2,10 @@
 
 namespace MediaWiki\Extension\FacetedCategory\Hooks;
 
-use Category;
 use JobQueueGroup;
+use MediaWiki\Category\Category;
+use MediaWiki\Title\Title;
 use RefreshLinksJob;
-use Title;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class RecursiveCategory implements

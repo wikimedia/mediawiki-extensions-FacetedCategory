@@ -2,7 +2,7 @@
 
 namespace MediaWiki\Extension\FacetedCategory\Hooks;
 
-use Title;
+use MediaWiki\Title\Title;
 
 class Main implements
 	\MediaWiki\Hook\BeforePageDisplayHook,

@@ -2,9 +2,9 @@
 
 namespace MediaWiki\Extension\FacetedCategory\Tests\Integration\Hooks;
 
-use CommentStoreComment;
+use MediaWiki\CommentStore\CommentStoreComment;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use WikitextContent;
 
 /**

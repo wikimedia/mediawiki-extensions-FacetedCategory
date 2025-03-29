@@ -2,11 +2,11 @@
 
 namespace MediaWiki\Extension\FacetedCategory;
 
-use Category;
 use IContextSource;
+use MediaWiki\Category\Category;
 use MediaWiki\Category\CategoryViewer;
 use MediaWiki\HookContainer\ProtectedHookAccessorTrait;
-use Title;
+use MediaWiki\Title\Title;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;

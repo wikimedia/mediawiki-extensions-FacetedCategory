@@ -2,10 +2,10 @@
 
 namespace MediaWiki\Extension\FacetedCategory\Special;
 
-use Html;
 use IncludableSpecialPage;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\FacetedCategory\FacetedCategoriesPager;
+use MediaWiki\Html\Html;
 use Wikimedia\Rdbms\IConnectionProvider;
 
 class SpecialFacetedCategories extends IncludableSpecialPage {
