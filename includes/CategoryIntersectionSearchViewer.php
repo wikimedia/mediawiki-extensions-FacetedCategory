@@ -2,9 +2,9 @@
 
 namespace MediaWiki\Extension\FacetedCategory;
 
-use IContextSource;
 use MediaWiki\Category\Category;
 use MediaWiki\Category\CategoryViewer;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\HookContainer\ProtectedHookAccessorTrait;
 use MediaWiki\Linker\LinksMigration;
 use MediaWiki\Title\Title;

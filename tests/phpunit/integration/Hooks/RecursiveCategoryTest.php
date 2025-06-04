@@ -3,9 +3,9 @@
 namespace MediaWiki\Extension\FacetedCategory\Tests\Integration\Hooks;
 
 use MediaWiki\CommentStore\CommentStoreComment;
+use MediaWiki\Content\WikitextContent;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use WikitextContent;
 
 /**
  * @group Database

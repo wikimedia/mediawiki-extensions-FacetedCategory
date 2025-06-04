@@ -4,8 +4,8 @@ namespace MediaWiki\Extension\FacetedCategory\Special;
 
 use MediaWiki\Extension\FacetedCategory\CategoryIntersectionSearchViewer;
 use MediaWiki\Linker\LinksMigration;
+use MediaWiki\SpecialPage\SpecialPage;
 use MediaWiki\Title\Title;
-use SpecialPage;
 use Wikimedia\Rdbms\ILoadBalancer;
 
 class SpecialCategoryIntersectionSearch extends SpecialPage {

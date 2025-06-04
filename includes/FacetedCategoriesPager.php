@@ -2,12 +2,12 @@
 
 namespace MediaWiki\Extension\FacetedCategory;
 
-use AlphabeticPager;
-use IContextSource;
 use MediaWiki\Cache\LinkBatchFactory;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\Extension\CategoryTree\CategoryTree;
 use MediaWiki\Extension\CategoryTree\CategoryTreeFactory;
 use MediaWiki\Html\Html;
+use MediaWiki\Pager\AlphabeticPager;
 use MediaWiki\Title\Title;
 
 class FacetedCategoriesPager extends AlphabeticPager {

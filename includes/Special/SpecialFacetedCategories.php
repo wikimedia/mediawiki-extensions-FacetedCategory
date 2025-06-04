@@ -2,11 +2,11 @@
 
 namespace MediaWiki\Extension\FacetedCategory\Special;
 
-use IncludableSpecialPage;
 use MediaWiki\Cache\LinkBatchFactory;
 use MediaWiki\Extension\CategoryTree\CategoryTreeFactory;
 use MediaWiki\Extension\FacetedCategory\FacetedCategoriesPager;
 use MediaWiki\Html\Html;
+use MediaWiki\SpecialPage\IncludableSpecialPage;
 
 class SpecialFacetedCategories extends IncludableSpecialPage {
 
