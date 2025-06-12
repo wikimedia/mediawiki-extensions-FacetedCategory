@@ -7,16 +7,16 @@
 		"selenium-test": "wdio tests/selenium/wdio.conf.js"
 	},
 	"devDependencies": {
-		"@wdio/cli": "7.40.0",
-		"@wdio/junit-reporter": "7.40.0",
-		"@wdio/local-runner": "7.40.0",
-		"@wdio/mocha-framework": "7.40.0",
-		"@wdio/spec-reporter": "7.40.0",
+		"@wdio/cli": "9.15.0",
+		"@wdio/junit-reporter": "9.15.0",
+		"@wdio/local-runner": "9.15.0",
+		"@wdio/mocha-framework": "9.15.0",
+		"@wdio/spec-reporter": "9.15.0",
 		"eslint-config-wikimedia": "0.29.1",
 		"grunt-banana-checker": "0.13.0",
 		"grunt-eslint": "24.3.0",
 		"grunt-stylelint": "0.20.1",
 		"stylelint-config-wikimedia": "0.18.0",
-		"wdio-mediawiki": "2.7.1"
+		"wdio-mediawiki": "4.1.0"
 	}
 }
