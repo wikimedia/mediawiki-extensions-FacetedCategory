@@ -7,3 +7,4 @@ tests/selenium/log
 /vendor/
 composer.lock
 /.eslintcache
+/.stylelintcache
