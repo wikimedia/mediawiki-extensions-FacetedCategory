@@ -53,8 +53,8 @@
 		"FacetedCategories": {
 			"class": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialFacetedCategories",
 			"services": [
-				"LinkBatchFactory",
-				"DBLoadBalancerFactory"
+				"CategoryTree.CategoryTreeFactory",
+				"LinkBatchFactory"
 			]
 		},
 		"CategoryIntersectionSearch": {
