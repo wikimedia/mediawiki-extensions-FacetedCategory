@@ -19,7 +19,7 @@ function main() {
 		return;
 	}
 	for ( let i = 0, len = catlinkItems.length; i < len; i++ ) {
-		if ( directCats.indexOf( catlinkItems[ i ].innerText ) === -1 ) {
+		if ( !directCats.includes( catlinkItems[ i ].innerText ) ) {
 			catlinkItems[ i ].classList.add( 'collapsible' );
 		}
 	}
