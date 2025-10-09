@@ -48,7 +48,6 @@ class SpecialCategoryIntersectionSearchTest extends SpecialPageTestBase {
 	 */
 	public function testSplitCategories( $term, $expected ) {
 		$method = new ReflectionMethod( SpecialCategoryIntersectionSearch::class, 'splitCategories' );
-		$method->setAccessible( true );
 		$rt = $method->invoke( null, $term );
 		$this->assertEquals( $expected, $rt );
 	}
