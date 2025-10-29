@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"categoryintersectionsearch": "Busca de interseccións de categorías",
+	"categoryintersectionsearch-desc": "Engade a páxina [[Special:CategoryIntersectionSearch]]",
+	"categoryintersectionsearch-noinput": "Introduce un termo de busca.",
+	"categoryintersectionsearch-page-title": "Categoría «$1»",
+	"facetedcategories": "Categorías polifacéticas",
+	"facetedcategory-desc": "Engade as páxinas especiais [[Special:FacetedCategories]]",
+	"facetedcategory-search-for": "nome da categoría:",
+	"facetedcategory-not-only-match-exactly": "Incluír as coincidencias non exactas"
+}
