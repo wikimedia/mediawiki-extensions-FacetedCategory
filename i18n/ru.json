@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
+			"Kaganer",
 			"PlushBoy"
 		]
 	},
-	"categoryintersectionsearch-page-title": "Категория \"$1\""
+	"categoryintersectionsearch-page-title": "Категория «$1»"
 }
