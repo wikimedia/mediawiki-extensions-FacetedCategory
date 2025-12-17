@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"GuoPC"
+		]
+	},
+	"categoryintersectionsearch": "CategoryIntersection搜索",
+	"categoryintersectionsearch-desc": "添加[[Special:CategoryIntersectionSearch]]",
+	"categoryintersectionsearch-noinput": "请输入搜索词。",
+	"categoryintersectionsearch-page-title": "“$1”分类",
+	"facetedcategories": "多方面分类",
+	"facetedcategory-desc": "添加[[Special:FacetedCategories]]特殊页面",
+	"facetedcategory-search-for": "分类名称：",
+	"facetedcategory-not-only-match-exactly": "包含不完全匹配"
+}
