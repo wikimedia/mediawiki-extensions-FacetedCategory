@@ -166,20 +166,25 @@ class FacetedCategoriesPager extends AlphabeticPager {
 				$this->msg( 'categories' )->text(),
 				$this->msg( 'facetedcategory-search-for' )->escaped() .
 				' ' .
-				Xml::input(
-					'facetName', 10, $facetName, [ 'class' => 'mw-ui-input-inline' ] ) .
+				Html::input(
+					'facetName', $facetName, 'text', [ 'size' => 10, 'class' => 'mw-ui-input-inline' ] ) .
 				' / ' .
-				Xml::input(
-					'facetMember', 10, $facetMember, [ 'class' => 'mw-ui-input-inline' ] ) .
+				Html::input(
+					'facetMember', $facetMember, 'text', [ 'size' => 10, 'class' => 'mw-ui-input-inline' ] ) .
 				' ' .
 				Html::submitButton(
 					$this->msg( 'categories-submit' )->text(),
 					[], [ 'mw-ui-progressive' ]
 				) .
 				' ' .
-				Xml::checkLabel(
-					$this->msg( 'facetedcategory-not-only-match-exactly' )->text(), 'includeNotExactlyMatched',
-					'includeNotExactlyMatched', $includeNotExactlyMatched, [] )
+				Html::check(
+					'includeNotExactlyMatched',
+					$includeNotExactlyMatched,
+					[ 'id' => 'includeNotExactlyMatched' ]
+				) . "\u{00A0}" . Html::label(
+					$this->msg( 'facetedcategory-not-only-match-exactly' )->text(),
+					'includeNotExactlyMatched'
+				)
 			)
 		);
 	}
