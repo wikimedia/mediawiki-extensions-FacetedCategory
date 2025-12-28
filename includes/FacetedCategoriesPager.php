@@ -9,7 +9,6 @@ use MediaWiki\Extension\CategoryTree\CategoryTree;
 use MediaWiki\Extension\CategoryTree\CategoryTreeFactory;
 use MediaWiki\Html\Html;
 use MediaWiki\Title\Title;
-use Xml;
 
 class FacetedCategoriesPager extends AlphabeticPager {
 
@@ -158,34 +157,34 @@ class FacetedCategoriesPager extends AlphabeticPager {
 	 * @return string
 	 */
 	public function getStartForm( $facetName, $facetMember, $includeNotExactlyMatched ) {
-		return $this->including ? '' : Xml::tags(
+		return $this->including ? '' : Html::rawElement(
 			'form',
 			[ 'method' => 'get', 'action' => wfScript() ],
 			Html::hidden( 'title', $this->getTitle()->getPrefixedText() ) .
-			Xml::fieldset(
-				$this->msg( 'categories' )->text(),
-				$this->msg( 'facetedcategory-search-for' )->escaped() .
-				' ' .
-				Html::input(
-					'facetName', $facetName, 'text', [ 'size' => 10, 'class' => 'mw-ui-input-inline' ] ) .
-				' / ' .
-				Html::input(
-					'facetMember', $facetMember, 'text', [ 'size' => 10, 'class' => 'mw-ui-input-inline' ] ) .
-				' ' .
-				Html::submitButton(
-					$this->msg( 'categories-submit' )->text(),
-					[], [ 'mw-ui-progressive' ]
-				) .
-				' ' .
-				Html::check(
-					'includeNotExactlyMatched',
-					$includeNotExactlyMatched,
-					[ 'id' => 'includeNotExactlyMatched' ]
-				) . "\u{00A0}" . Html::label(
-					$this->msg( 'facetedcategory-not-only-match-exactly' )->text(),
-					'includeNotExactlyMatched'
-				)
-			)
+			Html::openElement( 'fieldset' ) . "\n" .
+			Html::element( 'legend', [], $this->msg( 'categories' )->text() ) . "\n" .
+			$this->msg( 'facetedcategory-search-for' )->escaped() .
+			' ' .
+			Html::input(
+				'facetName', $facetName, 'text', [ 'size' => 10, 'class' => 'mw-ui-input-inline' ] ) .
+			' / ' .
+			Html::input(
+				'facetMember', $facetMember, 'text', [ 'size' => 10, 'class' => 'mw-ui-input-inline' ] ) .
+			' ' .
+			Html::submitButton(
+				$this->msg( 'categories-submit' )->text(),
+				[], [ 'mw-ui-progressive' ]
+			) .
+			' ' .
+			Html::check(
+				'includeNotExactlyMatched',
+				$includeNotExactlyMatched,
+				[ 'id' => 'includeNotExactlyMatched' ]
+			) . "\u{00A0}" . Html::label(
+				$this->msg( 'facetedcategory-not-only-match-exactly' )->text(),
+				'includeNotExactlyMatched'
+			) . "\n" .
+			Html::closeElement( 'fieldset' )
 		);
 	}
 }
