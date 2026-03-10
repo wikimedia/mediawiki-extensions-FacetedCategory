@@ -25,13 +25,13 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 		$this->setHeaders();
 
 		if ( !$subPage ) {
-			$output->addWikiTextAsInterface( $this->msg( 'categoryintersectionsearch-noinput' ) );
+			$output->addWikiTextAsInterface( $this->msg( 'categoryintersectionsearch-noinput' )->text() );
 			return;
 		}
 		[ $categories, $exCategories ] = self::splitCategories( $subPage );
 
 		if ( count( $categories ) == 0 && count( $exCategories ) > 0 ) {
-			$output->addWikiTextAsInterface( $this->msg( 'categoryintersectionsearch-noinput' ) );
+			$output->addWikiTextAsInterface( $this->msg( 'categoryintersectionsearch-noinput' )->text() );
 			return;
 		} elseif ( count( $categories ) < 2 && count( $exCategories ) == 0 ) {
 			$output->redirect( Title::newFromText( $subPage )->getFullURL(), NS_CATEGORY );
