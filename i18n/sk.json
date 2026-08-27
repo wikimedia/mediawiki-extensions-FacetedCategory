@@ -1,0 +1,15 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wizzard"
+		]
+	},
+	"categoryintersectionsearch": "Vyhľadávanie prieniku kategórií",
+	"categoryintersectionsearch-desc": "Pridáva stránku [[Special:CategoryIntersectionSearch]]",
+	"categoryintersectionsearch-noinput": "Zadajte, prosím, hľadaný výraz.",
+	"categoryintersectionsearch-page-title": "Kategória „$1“",
+	"facetedcategories": "Fasetové kategórie",
+	"facetedcategory-desc": "Pridáva špeciálne stránky [[Special:FacetedCategories]]",
+	"facetedcategory-search-for": "názov kategórie:",
+	"facetedcategory-not-only-match-exactly": "Zahrnúť aj nepresné zhody"
+}
