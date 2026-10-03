@@ -1,12 +1,10 @@
-'use strict';
-
-const Api = require( 'wdio-mediawiki/Api' );
-const CategoryIntersectionSearchPage = require( '../pageobjects/categoryintersectionsearch.page' );
+import { createApiClient } from 'wdio-mediawiki/Api.js';
+import CategoryIntersectionSearchPage from '../pageobjects/categoryintersectionsearch.page.js';
 
 describe( 'Special:CategoryIntersectionSearch', () => {
 	before( async () => {
-		const bot = await Api.bot();
-		await bot.edit(
+		const apiClient = await createApiClient();
+		await apiClient.edit(
 			'Categorized',
 			'[[Category:A/B]][[Category:C/D]][[Category:C/Foo bar]]'
 		);

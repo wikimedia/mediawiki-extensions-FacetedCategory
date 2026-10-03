@@ -1,6 +1,4 @@
-'use strict';
-
-const Page = require( 'wdio-mediawiki/Page' );
+import Page from 'wdio-mediawiki/Page.js';
 
 class CategoryIntersectionSearchPage extends Page {
 	get pages() {
@@ -16,4 +14,4 @@ class CategoryIntersectionSearchPage extends Page {
 	}
 }
 
-module.exports = new CategoryIntersectionSearchPage();
+export default new CategoryIntersectionSearchPage();
