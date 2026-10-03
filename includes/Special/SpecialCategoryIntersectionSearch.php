@@ -3,6 +3,7 @@
 namespace MediaWiki\Extension\FacetedCategory\Special;
 
 use MediaWiki\Extension\FacetedCategory\CategoryIntersectionSearchViewer;
+use MediaWiki\Linker\LinksMigration;
 use MediaWiki\Title\Title;
 use SpecialPage;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -10,10 +11,12 @@ use Wikimedia\Rdbms\ILoadBalancer;
 class SpecialCategoryIntersectionSearch extends SpecialPage {
 
 	private ILoadBalancer $loadBalancer;
+	private LinksMigration $linksMigration;
 
-	public function __construct( ILoadBalancer $loadBalancer ) {
+	public function __construct( ILoadBalancer $loadBalancer, LinksMigration $linksMigration ) {
 		parent::__construct( 'CategoryIntersectionSearch' );
 		$this->loadBalancer = $loadBalancer;
+		$this->linksMigration = $linksMigration;
 	}
 
 	/**
@@ -76,7 +79,8 @@ class SpecialCategoryIntersectionSearch extends SpecialPage {
 			$reqArray,
 			$categories,
 			$exCategories,
-			$this->loadBalancer
+			$this->loadBalancer,
+			$this->linksMigration
 		);
 		$output->addHTML( $viewer->getHTML() );
 	}

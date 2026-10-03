@@ -6,6 +6,7 @@ use IContextSource;
 use MediaWiki\Category\Category;
 use MediaWiki\Category\CategoryViewer;
 use MediaWiki\HookContainer\ProtectedHookAccessorTrait;
+use MediaWiki\Linker\LinksMigration;
 use MediaWiki\Title\Title;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -17,12 +18,14 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 	private array $categories;
 	private array $exCategories;
 	private ILoadBalancer $loadBalancer;
+	private LinksMigration $linksMigration;
 
 	/**
 	 * @inheritDoc
 	 * @param array $categories
 	 * @param array $exCategories
 	 * @param ILoadBalancer $loadBalancer
+	 * @param LinksMigration $linksMigration
 	 */
 	public function __construct(
 		Title $title,
@@ -32,17 +35,19 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 		array $query,
 		array $categories,
 		array $exCategories,
-		ILoadBalancer $loadBalancer
+		ILoadBalancer $loadBalancer,
+		LinksMigration $linksMigration
 	) {
 		parent::__construct( $title, $context, $from, $until, $query );
 		$this->categories = $categories;
 		$this->exCategories = $exCategories;
 		$this->loadBalancer = $loadBalancer;
+		$this->linksMigration = $linksMigration;
 	}
 
 	public function doCategoryQuery() {
 		// 여기서부터 아래는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
-		$dbr = $this->loadBalancer->getConnection( DB_REPLICA, [ 'page', 'categorylinks', 'category' ] );
+		$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
 
 		$this->nextPage = [
 			'page' => null,
@@ -81,14 +86,7 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 			$count = 0;
 			foreach ( $res as $row ) {
 				$title = Title::newFromRow( $row );
-				if ( $row->cl_collation === '' ) {
-					// Hack to make sure that while updating from 1.16 schema
-					// and db is inconsistent, that the sky doesn't fall.
-					// See r83544. Could perhaps be removed in a couple decades...
-					$humanSortkey = $row->cl_sortkey;
-				} else {
-					$humanSortkey = $title->getCategorySortkey( $row->cl_sortkey_prefix );
-				}
+				$humanSortkey = $title->getCategorySortkey( $row->cl_sortkey_prefix );
 
 				if ( ++$count > $this->limit ) {
 					# We've reached the one extra which shows that there
@@ -114,26 +112,32 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 	}
 
 	private function selectCategories( IDatabase $dbr, string $type, array $extraConds ): IResultWrapper {
+		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks' );
 		$conds = [
-			$dbr->makeList( [ 'cl_to' => $this->categories ], $dbr::LIST_OR ),
+			'lt_namespace' => NS_CATEGORY,
+			'lt_title' => $this->categories,
 		];
 		if ( $this->exCategories ) {
 			$excludeCategories = $dbr->selectSQLText(
-				'categorylinks',
+				$queryInfo['tables'],
 				[
 					'cl_from',
 				],
-				[ $dbr->makeList( [ 'cl_to' => $this->exCategories ], $dbr::LIST_OR ) ],
+				[
+					'lt_namespace' => NS_CATEGORY,
+					'lt_title' => $this->exCategories,
+				],
 				__METHOD__,
 				[
 					'GROUP BY' => 'cl_from',
 					'ORDER BY' => 'cl_sortkey'
-				]
+				],
+				$queryInfo['joins']
 			);
 			$conds[] = "cl_from NOT IN ({$excludeCategories})";
 		}
 		$categorySubQuery = $dbr->buildSelectSubquery(
-			'categorylinks',
+			$queryInfo['tables'],
 			[
 				'cl_from',
 				'match_count' => 'COUNT(*)',
@@ -143,7 +147,8 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 			[
 				# Aggregated query must be with GROUP BY; column 'femiwiki.categorylinks.cl_from' is nonaggregated.
 				'GROUP BY' => 'cl_from',
-			]
+			],
+			$queryInfo['joins']
 		);
 		$rows = $dbr->select(
 			[
@@ -165,7 +170,6 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 				'cat_files',
 				'cl_sortkey',
 				'cl_sortkey_prefix',
-				'cl_collation',
 			],
 			$extraConds,
 			__METHOD__,

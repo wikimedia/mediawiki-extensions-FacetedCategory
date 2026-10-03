@@ -13,13 +13,13 @@ use WikitextContent;
  */
 class RecursiveCategoryTest extends MediaWikiIntegrationTestCase {
 	protected function assertCategory( $title, $expected, string $message = '' ) {
-		$actual = $this->getDb()->selectFieldValues(
-			'categorylinks',
-			'cl_to',
-			[
-				'cl_from' => $title->getId(),
-			],
-		);
+		$actual = $this->getDb()->newSelectQueryBuilder()
+			->select( 'lt_title' )
+			->from( 'categorylinks' )
+			->join( 'linktarget', null, 'cl_target_id = lt_id' )
+			->where( [ 'cl_from' => $title->getId() ] )
+			->caller( __METHOD__ )
+			->fetchFieldValues();
 		$this->assertEqualsCanonicalizing( $expected, $actual, $message );
 	}
 
