@@ -68,12 +68,14 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 
 		foreach ( [ 'page', 'subcat', 'file' ] as $type ) {
 			$extraConds = [ 'cl_type' => $type ];
-			if ( isset( $this->from[$type] ) && $this->from[$type] !== null ) {
+			$from = $this->from[$type] ?? null;
+			$until = $this->until[$type] ?? null;
+			if ( $from !== null ) {
 				$extraConds[] = 'cl_sortkey >= '
-					. $dbr->addQuotes( $this->collation->getSortKey( $this->from[$type] ) );
-			} elseif ( isset( $this->until[$type] ) && $this->until[$type] !== null ) {
+					. $dbr->addQuotes( $this->collation->getSortKey( $from ) );
+			} elseif ( $until !== null ) {
 				$extraConds[] = 'cl_sortkey < '
-					. $dbr->addQuotes( $this->collation->getSortKey( $this->until[$type] ) );
+					. $dbr->addQuotes( $this->collation->getSortKey( $until ) );
 				$this->flip[$type] = true;
 			}
 			// 위에서 여기까지는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
