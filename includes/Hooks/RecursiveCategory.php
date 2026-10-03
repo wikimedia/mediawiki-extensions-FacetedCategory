@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\FacetedCategory\Hooks;
 
 use JobQueueGroup;
 use MediaWiki\Category\Category;
+use MediaWiki\Linker\LinksMigration;
 use MediaWiki\Title\Title;
 use RefreshLinksJob;
 use Wikimedia\Rdbms\ILoadBalancer;
@@ -20,10 +21,16 @@ class RecursiveCategory implements
 
 	private ILoadBalancer $loadBalancer;
 	private JobQueueGroup $jobQueueGroup;
+	private LinksMigration $linksMigration;
 
-	public function __construct( ILoadBalancer $loadBalancer, JobQueueGroup $jobQueueGroup ) {
+	public function __construct(
+		ILoadBalancer $loadBalancer,
+		JobQueueGroup $jobQueueGroup,
+		LinksMigration $linksMigration
+	) {
 		$this->loadBalancer = $loadBalancer;
 		$this->jobQueueGroup = $jobQueueGroup;
+		$this->linksMigration = $linksMigration;
 	}
 
 	/**
@@ -39,7 +46,7 @@ class RecursiveCategory implements
 		$pages = $dbr->selectFieldValues(
 			'categorylinks',
 			'cl_from',
-			[ 'cl_to' => $title->getDBKey() ],
+			$this->linksMigration->getLinksConditions( 'categorylinks', $title ),
 			__METHOD__
 		);
 		foreach ( $pages as $id ) {

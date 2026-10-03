@@ -7,7 +7,7 @@
 	"license-name": "AGPL-3.0-or-later",
 	"type": "specialpage",
 	"requires": {
-		"MediaWiki": ">= 1.40.0",
+		"MediaWiki": ">= 1.45.0",
 		"extensions": {
 			"CategoryTree": "*"
 		}
@@ -38,7 +38,7 @@
 		},
 		"RecursiveCategory": {
 			"class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\RecursiveCategory",
-			"services": [ "DBLoadBalancer", "JobQueueGroup" ]
+			"services": [ "DBLoadBalancer", "JobQueueGroup", "LinksMigration" ]
 		}
 	},
 	"Hooks": {
@@ -60,7 +60,8 @@
 		"CategoryIntersectionSearch": {
 			"class": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialCategoryIntersectionSearch",
 			"services": [
-				"DBLoadBalancer"
+				"DBLoadBalancer",
+				"LinksMigration"
 			]
 		}
 	},
