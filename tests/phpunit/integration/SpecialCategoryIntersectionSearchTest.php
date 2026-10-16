@@ -3,9 +3,9 @@
 namespace MediaWiki\Extension\FacetedCategory\Tests\Integration;
 
 use MediaWiki\Extension\FacetedCategory\Special\SpecialCategoryIntersectionSearch;
+use MediaWiki\Tests\Specials\SpecialPageTestBase;
 use MediaWiki\Title\Title;
 use ReflectionMethod;
-use SpecialPageTestBase;
 
 /**
  * @group FacetedCategory
