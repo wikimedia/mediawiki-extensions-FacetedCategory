@@ -86,6 +86,27 @@ class FacetedCategoryList {
 	}
 
 	/**
+	 * List the facets in which pages are categorized the most.
+	 *
+	 * @param int $limit
+	 * @return array<int,array{facet:string,pages:int}> DB keys. The pages of a
+	 *  facet are counted once per member, so a page in two members counts twice.
+	 */
+	public function getFacets( int $limit ): array {
+		$facets = [];
+		foreach ( $this->getAll() as $title => $pages ) {
+			$facet = strstr( (string)$title, '/', true );
+			$facets[$facet] = ( $facets[$facet] ?? 0 ) + $pages;
+		}
+		arsort( $facets );
+		$result = [];
+		foreach ( array_slice( $facets, 0, $limit, true ) as $facet => $pages ) {
+			$result[] = [ 'facet' => (string)$facet, 'pages' => $pages ];
+		}
+		return $result;
+	}
+
+	/**
 	 * @return array<string,int> Numbers of pages by DB key of faceted category
 	 */
 	private function getAll(): array {

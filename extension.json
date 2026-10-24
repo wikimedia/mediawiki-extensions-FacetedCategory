@@ -41,6 +41,10 @@
 		"remoteExtPath": "FacetedCategory/modules"
 	},
 	"APIListModules": {
+		"categoryfacets": {
+			"class": "MediaWiki\\Extension\\FacetedCategory\\Api\\ApiQueryCategoryFacets",
+			"services": [ "FacetedCategory.FacetedCategoryList" ]
+		},
 		"facetedcategories": {
 			"class": "MediaWiki\\Extension\\FacetedCategory\\Api\\ApiQueryFacetedCategories",
 			"services": [ "FacetedCategory.FacetedCategoryList" ]

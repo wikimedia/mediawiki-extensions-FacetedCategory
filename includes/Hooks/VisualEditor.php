@@ -24,6 +24,10 @@ class VisualEditor implements ResourceLoaderRegisterModulesHook {
 			'remoteExtPath' => 'FacetedCategory/modules',
 			'scripts' => [ 've/categoryInput.js' ],
 			'styles' => [ 've/categoryInput.less' ],
+			'messages' => [
+				'facetedcategory-ve-page-facets',
+				'facetedcategory-ve-common-facets',
+			],
 			'dependencies' => [ 'ext.visualEditor.mwmeta', 'mediawiki.language' ],
 		] );
 	}

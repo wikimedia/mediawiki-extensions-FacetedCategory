@@ -17,5 +17,7 @@
 	"facetedcategory-faceted-categories": "다면분류",
 	"facetedcategory-general-categories": "일반 분류",
 	"facetedcategory-combinations": "분류 조합",
-	"facetedcategory-combination-invalid": "분류 조합에는 이름과 두 개 이상의 분류가 필요합니다."
+	"facetedcategory-combination-invalid": "분류 조합에는 이름과 두 개 이상의 분류가 필요합니다.",
+	"facetedcategory-ve-page-facets": "이 문서가 쓰는 패싯",
+	"facetedcategory-ve-common-facets": "자주 쓰는 패싯"
 }

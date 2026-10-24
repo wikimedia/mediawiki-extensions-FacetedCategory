@@ -21,5 +21,10 @@
 	"apihelp-query+facetedcategories-param-facet": "{{doc-apihelp-param|query+facetedcategories|facet}}",
 	"apihelp-query+facetedcategories-param-limit": "{{doc-apihelp-param|query+facetedcategories|limit}}",
 	"apihelp-query+facetedcategories-example-search": "{{doc-apihelp-example|query+facetedcategories}}",
-	"apihelp-query+facetedcategories-example-facet": "{{doc-apihelp-example|query+facetedcategories}}"
+	"apihelp-query+facetedcategories-example-facet": "{{doc-apihelp-example|query+facetedcategories}}",
+	"apihelp-query+categoryfacets-summary": "{{doc-apihelp-summary|query+categoryfacets}}",
+	"apihelp-query+categoryfacets-param-limit": "{{doc-apihelp-param|query+categoryfacets|limit}}",
+	"apihelp-query+categoryfacets-example-limit": "{{doc-apihelp-example|query+categoryfacets}}",
+	"facetedcategory-ve-page-facets": "Heading in the suggestions of the VisualEditor category input, shown while the input is empty, above the facets of the categories the page already has. Choosing a facet fills the input with it, followed by a slash, to suggest its members.",
+	"facetedcategory-ve-common-facets": "Heading in the suggestions of the VisualEditor category input, shown while the input is empty, above the facets in which pages are categorized the most. See also {{msg-mw|facetedcategory-ve-page-facets}}."
 }
