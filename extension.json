@@ -64,6 +64,10 @@
 		"RecursiveCategory": {
 			"class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\RecursiveCategory",
 			"services": [ "ConnectionProvider", "JobQueueGroup", "LinksMigration" ]
+		},
+		"VisualEditor": {
+			"class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\VisualEditor",
+			"services": []
 		}
 	},
 	"Hooks": {
@@ -74,6 +78,7 @@
 		"MakeGlobalVariablesScript": [ "RecursiveCategory", "CategoryCombination" ],
 		"OutputPageParserOutput": "RecursiveCategory",
 		"ParserFirstCallInit": "CategoryCombination",
+		"ResourceLoaderRegisterModules": "VisualEditor",
 		"SpecialSearchResultsPrepend": "Main"
 	},
 	"SpecialPages": {
@@ -100,5 +105,8 @@
 		"MediaWiki\\Extension\\FacetedCategory\\Tests\\Unit\\": "tests/phpunit/unit/",
 		"MediaWiki\\Extension\\FacetedCategory\\Tests\\Integration\\": "tests/phpunit/integration/"
 	},
+	"VisualEditorPluginModules": [
+		"ext.facetedCategory.visualEditor"
+	],
 	"manifest_version": 1
 }
