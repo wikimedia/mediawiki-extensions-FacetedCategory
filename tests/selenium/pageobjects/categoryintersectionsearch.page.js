@@ -2,7 +2,7 @@ import Page from 'wdio-mediawiki/Page.js';
 
 class CategoryIntersectionSearchPage extends Page {
 	get pages() {
-		return $( '#mw-pages li' );
+		return $( '.ext-facetedcategory-results li' );
 	}
 
 	async open( subPage = false ) {

@@ -34,7 +34,7 @@
 		},
 		"ext.facetedCategory.special": {
 			"class": "MediaWiki\\ResourceLoader\\CodexModule",
-			"codexComponents": [ "CdxButton", "CdxTextInput" ],
+			"codexComponents": [ "CdxButton", "CdxTextInput", "CdxMessage" ],
 			"codexStyleOnly": true,
 			"styles": [ "special.less" ]
 		}
@@ -93,16 +93,14 @@
 			"class": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialFacetedCategories",
 			"services": [
 				"FacetedCategory.FacetedCategoryList",
+				"FacetedCategory.CategoryCombinations",
+				"ConnectionProvider",
 				"LinkBatchFactory",
 				"CollationFactory"
 			]
 		},
 		"CategoryIntersectionSearch": {
-			"class": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialCategoryIntersectionSearch",
-			"services": [
-				"ConnectionProvider",
-				"LinksMigration"
-			]
+			"class": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialCategoryIntersectionSearch"
 		}
 	},
 	"ExtensionMessagesFiles": {

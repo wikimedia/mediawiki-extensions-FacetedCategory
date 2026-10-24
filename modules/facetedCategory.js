@@ -79,7 +79,7 @@ function createCombinations() {
 	combinations.forEach( ( combination ) => {
 		const link = document.createElement( 'a' );
 		link.href = mw.util.getUrl(
-			'Special:CategoryIntersectionSearch/' + combination.categories.join( ', ' )
+			'Special:FacetedCategories/' + combination.categories.join( ',' )
 		);
 		link.title = combination.categories.join( ', ' );
 		// A computed combination has no name, so show its members
@@ -94,7 +94,7 @@ function createCombinations() {
 	} );
 
 	const heading = document.createElement( 'a' );
-	heading.href = mw.util.getUrl( 'Special:CategoryIntersectionSearch' );
+	heading.href = mw.util.getUrl( 'Special:FacetedCategories' );
 	heading.textContent = mw.msg( 'facetedcategory-combinations' );
 	const container = document.createElement( 'div' );
 	container.id = 'ext-facetedcategory-combinations';

@@ -142,6 +142,23 @@ class CategoryCombinations {
 	}
 
 	/**
+	 * @param string[] $categories DB keys
+	 * @return string|null The name editors gave to the combination of exactly these
+	 *  categories
+	 */
+	public function findName( array $categories ): ?string {
+		sort( $categories );
+		foreach ( $this->getNamed( $this->getNamedVersion() ) as $combination ) {
+			$set = $combination['categories'];
+			sort( $set );
+			if ( $set === $categories ) {
+				return $combination['name'];
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Invalidate the cached named combinations, after a page added or removed some.
 	 *
 	 * This changes a version rather than touching a check key, because check keys
