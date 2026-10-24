@@ -13,5 +13,11 @@
 	"facetedcategory-faceted-categories": "Faceted categories",
 	"facetedcategory-general-categories": "General categories",
 	"facetedcategory-combinations": "Category combinations",
-	"facetedcategory-combination-invalid": "A category combination needs a name and at least two categories."
+	"facetedcategory-combination-invalid": "A category combination needs a name and at least two categories.",
+	"apihelp-query+facetedcategories-summary": "Search the faceted categories by their members.",
+	"apihelp-query+facetedcategories-param-search": "Text to find in the member of a faceted category. With a slash, the text before it is the facet and the text after it starts the member. Without a text, the categories with the most pages are listed.",
+	"apihelp-query+facetedcategories-param-facet": "Only search the members of this facet.",
+	"apihelp-query+facetedcategories-param-limit": "How many categories to return.",
+	"apihelp-query+facetedcategories-example-search": "Find faceted categories whose member contains <kbd>politic</kbd>.",
+	"apihelp-query+facetedcategories-example-facet": "Find the members of the facet <kbd>Job</kbd> starting with <kbd>P</kbd>."
 }

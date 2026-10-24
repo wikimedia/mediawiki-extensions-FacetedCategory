@@ -40,6 +40,12 @@
 		"localBasePath": "modules",
 		"remoteExtPath": "FacetedCategory/modules"
 	},
+	"APIListModules": {
+		"facetedcategories": {
+			"class": "MediaWiki\\Extension\\FacetedCategory\\Api\\ApiQueryFacetedCategories",
+			"services": [ "FacetedCategory.FacetedCategoryList" ]
+		}
+	},
 	"JobClasses": {
 		"facetedCategoryCombinations": "MediaWiki\\Extension\\FacetedCategory\\CategoryCombinationsJob"
 	},

@@ -15,5 +15,11 @@
 	"facetedcategory-faceted-categories": "Heading of the list of faceted categories (categories whose names look like \"Facet/Member\") shown below the page, before the core list of the other categories ({{msg-mw|Pagecategories}}). It links to [[Special:FacetedCategories]].\n{{Identical|Faceted Categories}}",
 	"facetedcategory-general-categories": "Replaces the heading {{msg-mw|Pagecategories}} of the list of categories without a facet (categories whose names have no slash), shown below the list headed {{msg-mw|Facetedcategory-faceted-categories}}.",
 	"facetedcategory-combinations": "Heading of the list of category combinations suggested below the page, after {{msg-mw|Facetedcategory-faceted-categories}}. It links to [[Special:CategoryIntersectionSearch]], and so does each item, for the pages in all the categories of that combination.",
-	"facetedcategory-combination-invalid": "Error shown in place of the <code><nowiki>{{#categorycombination:name|category|category}}</nowiki></code> parser function when it lacks a name or has fewer than two categories."
+	"facetedcategory-combination-invalid": "Error shown in place of the <code><nowiki>{{#categorycombination:name|category|category}}</nowiki></code> parser function when it lacks a name or has fewer than two categories.",
+	"apihelp-query+facetedcategories-summary": "{{doc-apihelp-summary|query+facetedcategories}}",
+	"apihelp-query+facetedcategories-param-search": "{{doc-apihelp-param|query+facetedcategories|search}}",
+	"apihelp-query+facetedcategories-param-facet": "{{doc-apihelp-param|query+facetedcategories|facet}}",
+	"apihelp-query+facetedcategories-param-limit": "{{doc-apihelp-param|query+facetedcategories|limit}}",
+	"apihelp-query+facetedcategories-example-search": "{{doc-apihelp-example|query+facetedcategories}}",
+	"apihelp-query+facetedcategories-example-facet": "{{doc-apihelp-example|query+facetedcategories}}"
 }
