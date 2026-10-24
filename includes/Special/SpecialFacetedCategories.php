@@ -30,9 +30,8 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 		$this->outputHeader();
 		$this->getOutput()->setPreventClickjacking( false );
 
-		if ( $subPage === null ) {
-			return;
-		}
+		// The form submits to the page without a subpage, with the facet in the query
+		$subPage ??= '';
 		$slash = strpos( $subPage, '/' );
 		$left = $slash === false ? $subPage : substr( $subPage, 0, $slash );
 		$right = $slash === false ? '' : substr( $subPage, $slash + 1, strlen( $subPage ) - 1 );
