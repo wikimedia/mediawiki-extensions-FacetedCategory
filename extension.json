@@ -20,7 +20,15 @@
 	},
 	"ResourceModules": {
 		"ext.facetedCategory.js": {
-			"scripts": [ "facetedCategory.js" ]
+			"scripts": [ "facetedCategory.js" ],
+			"messages": [
+				"colon-separator",
+				"parentheses-start",
+				"parentheses-end",
+				"facetedcategory-faceted-categories",
+				"facetedcategory-general-categories"
+			],
+			"dependencies": [ "mediawiki.util" ]
 		},
 		"ext.facetedCategory": {
 			"position": "top",

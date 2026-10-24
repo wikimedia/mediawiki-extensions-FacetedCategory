@@ -9,5 +9,7 @@
 	"facetedcategories": "Faceted Categories",
 	"facetedcategory-desc": "Add [[Special:FacetedCategories]] special pages",
 	"facetedcategory-search-for": "category name:",
-	"facetedcategory-not-only-match-exactly": "Include not exactly matched"
+	"facetedcategory-not-only-match-exactly": "Include not exactly matched",
+	"facetedcategory-faceted-categories": "Faceted categories",
+	"facetedcategory-general-categories": "General categories"
 }

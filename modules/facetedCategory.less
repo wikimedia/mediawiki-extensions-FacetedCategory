@@ -1,32 +1,42 @@
-.mw-normal-catlinks {
-	.fw-catlinks-toggle::after {
-		content: '◄';
+@import 'mediawiki.skin.variables.less';
+
+.ext-facetedcategory-catlinks dl {
+	display: grid;
+	grid-template-columns: max-content 1fr;
+	gap: 0.25em 1em;
+	margin: 0 0 1em;
+	padding: 0 0.5em;
+
+	dt,
+	dd {
+		margin: 0;
 	}
 
-	.collapsible {
-		transition: all 0.1s;
-		white-space: nowrap;
-		overflow: hidden;
-		opacity: 0.5;
+	dt {
+		color: @color-subtle;
+		font-weight: normal;
 	}
 
-	&.collapsed {
-		.fw-catlinks-toggle::after {
-			content: '►';
+	ul {
+		display: inline;
+		margin: 0;
+	}
+
+	.ext-facetedcategory-inferred {
+		padding: 0 0.5em;
+		color: @color-subtle;
+
+		li:first-child {
+			padding-left: 0;
 		}
 
-		.collapsible {
-			width: 0;
-			padding: 0;
-			margin: 0;
-			border: none;
-			visibility: hidden;
+		li:last-child {
+			padding-right: 0;
 		}
 	}
 
-	li {
-		vertical-align: middle;
-		opacity: 1;
+	ul + .ext-facetedcategory-inferred {
+		padding-left: 0;
 	}
 }
 

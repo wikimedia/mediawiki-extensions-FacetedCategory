@@ -1,34 +1,140 @@
-// Make the list of category links collapsible
+// Group the list of category links by facet.
+//
+// A category named "Facet/Member" is shown as "Member" in the row of "Facet".
+// Categories which the page does not add directly, but which come from a parent
+// category, are shown after the direct ones in parentheses.
 
-function createToggleButton() {
-	const catlinksToggle = document.createElement( 'button' );
-	catlinksToggle.classList.add( 'fw-catlinks-toggle' );
-
-	return catlinksToggle;
+/**
+ * @param {string} name Category name
+ * @return {{facet: string|null, member: string}}
+ */
+function splitName( name ) {
+	const slash = name.indexOf( '/' );
+	if ( slash <= 0 || slash === name.length - 1 ) {
+		return { facet: null, member: name };
+	}
+	return {
+		facet: name.slice( 0, slash ),
+		member: name.slice( slash + 1 )
+	};
 }
 
-function main() {
-	const directCats = mw.config.get( 'wgDirectCategories' );
+/**
+ * @param {Array} entries
+ * @return {HTMLUListElement}
+ */
+function createList( entries ) {
+	const list = document.createElement( 'ul' );
+	entries.forEach( ( entry ) => {
+		const item = document.createElement( 'li' );
+		const link = entry.link.cloneNode( true );
+		link.textContent = entry.member;
+		item.append( link );
+		list.append( item );
+	} );
+	return list;
+}
 
-	const catlinks = document.querySelector( '#mw-normal-catlinks' );
-	const catlinkItems = document.querySelectorAll(
-		'#mw-normal-catlinks li, #mw-hidden-catlinks li'
-	);
+/**
+ * @param {string} label
+ * @param {Array} entries
+ * @return {DocumentFragment}
+ */
+function createRow( label, entries ) {
+	const row = document.createDocumentFragment();
+	const term = document.createElement( 'dt' );
+	const description = document.createElement( 'dd' );
+	term.textContent = label;
+	const direct = entries.filter( ( entry ) => !entry.inferred );
+	const inferred = entries.filter( ( entry ) => entry.inferred );
+	if ( direct.length ) {
+		description.append( createList( direct ) );
+	}
+	// Categories which come from a parent category, in parentheses
+	if ( inferred.length ) {
+		const wrapper = document.createElement( 'span' );
+		wrapper.className = 'ext-facetedcategory-inferred';
+		wrapper.append(
+			mw.msg( 'parentheses-start' ),
+			createList( inferred ),
+			mw.msg( 'parentheses-end' )
+		);
+		description.append( wrapper );
+	}
+	row.append( term, description );
+	return row;
+}
 
-	if ( !catlinks || directCats.length === catlinkItems.length ) {
+/**
+ * @param {HTMLElement} catlinks
+ */
+function groupCategories( catlinks ) {
+	const normal = catlinks.querySelector( '#mw-normal-catlinks' );
+	const list = normal && normal.querySelector( ':scope > ul' );
+	if ( !list ) {
 		return;
 	}
-	for ( let i = 0, len = catlinkItems.length; i < len; i++ ) {
-		if ( !directCats.includes( catlinkItems[ i ].innerText ) ) {
-			catlinkItems[ i ].classList.add( 'collapsible' );
+	const direct = mw.config.get( 'wgDirectCategories' );
+	const facets = new Map();
+
+	Array.prototype.forEach.call( list.querySelectorAll( ':scope > li' ), ( item ) => {
+		const link = item.querySelector( 'a' );
+		if ( !link ) {
+			return;
 		}
+		const name = link.textContent;
+		const parts = splitName( name );
+		if ( parts.facet === null ) {
+			return;
+		}
+		if ( !facets.has( parts.facet ) ) {
+			facets.set( parts.facet, [] );
+		}
+		facets.get( parts.facet ).push( {
+			link: link,
+			member: parts.member,
+			inferred: Array.isArray( direct ) && !direct.includes( name )
+		} );
+		// Leave only the categories without a facet in the core list
+		item.remove();
+	} );
+
+	if ( !facets.size ) {
+		return;
 	}
 
-	const catlinksToggle = createToggleButton();
-	document.querySelector( '#mw-normal-catlinks ul' ).append( catlinksToggle );
-	catlinksToggle.addEventListener( 'click', () => {
-		catlinks.classList.toggle( 'collapsed' );
-	} );
+	// Facets which the page sets directly first, then the inferred-only ones
+	const facetNames = Array.from( facets.keys() );
+	const hasDirect = ( facet ) => facets.get( facet ).some( ( entry ) => !entry.inferred );
+	const groups = document.createElement( 'dl' );
+	facetNames.filter( hasDirect )
+		.concat( facetNames.filter( ( facet ) => !hasDirect( facet ) ) )
+		.forEach( ( facet ) => {
+			groups.append( createRow( facet, facets.get( facet ) ) );
+		} );
+
+	const heading = document.createElement( 'a' );
+	heading.href = mw.util.getUrl( 'Special:FacetedCategories' );
+	heading.textContent = mw.msg( 'facetedcategory-faceted-categories' );
+	const faceted = document.createElement( 'div' );
+	faceted.id = 'ext-facetedcategory-catlinks';
+	faceted.className = 'ext-facetedcategory-catlinks';
+	faceted.append( heading, mw.msg( 'colon-separator' ), groups );
+	normal.before( faceted );
+
+	// Hide the core list when every category has a facet
+	if ( !list.querySelector( 'li' ) ) {
+		normal.hidden = true;
+		return;
+	}
+	const normalHeading = normal.querySelector( ':scope > a' );
+	if ( normalHeading ) {
+		normalHeading.textContent = mw.msg( 'facetedcategory-general-categories' );
+	}
 }
 
-main();
+mw.hook( 'wikipage.categories' ).add( ( $catlinks ) => {
+	if ( $catlinks && $catlinks[ 0 ] ) {
+		groupCategories( $catlinks[ 0 ] );
+	}
+} );
