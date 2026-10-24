@@ -45,6 +45,9 @@
 	"facetedcategory-result-count": "$1 {{PLURAL:$1|page|pages}}",
 	"facetedcategory-result-count-more": "More than $1 pages",
 	"facetedcategory-no-results": "No page is in all these categories.",
+	"facetedcategory-refine": "Narrow down",
+	"facetedcategory-refine-add": "Add $1",
+	"facetedcategory-refine-hint": "Faceted categories that some of these pages are in. Choose one to add it.",
 	"facetedcategory-exclude": "Show the pages not in $1 instead",
 	"facetedcategory-include": "Show the pages in $1 instead",
 	"facetedcategory-remove": "Remove $1"

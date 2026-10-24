@@ -103,7 +103,8 @@
 				"FacetedCategory.CategoryCombinations",
 				"ConnectionProvider",
 				"LinkBatchFactory",
-				"CollationFactory"
+				"CollationFactory",
+				"MainWANObjectCache"
 			]
 		},
 		"CategoryIntersectionSearch": {

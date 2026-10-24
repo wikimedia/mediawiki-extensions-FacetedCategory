@@ -40,6 +40,9 @@
 	"facetedcategory-result-count": "문서 $1개",
 	"facetedcategory-result-count-more": "문서 $1개 넘게",
 	"facetedcategory-no-results": "이 분류들에 모두 속한 문서가 없습니다.",
+	"facetedcategory-refine": "더 좁히기",
+	"facetedcategory-refine-add": "$1 더하기",
+	"facetedcategory-refine-hint": "결과 문서 가운데 일부가 속한 다면분류입니다. 누르면 조건에 더해집니다.",
 	"facetedcategory-exclude": "$1에 속하지 않은 문서 보기",
 	"facetedcategory-include": "$1에 속한 문서 보기",
 	"facetedcategory-remove": "$1 빼기"

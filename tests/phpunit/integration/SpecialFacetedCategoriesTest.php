@@ -25,7 +25,8 @@ class SpecialFacetedCategoriesTest extends SpecialPageTestBase {
 			$services->getService( 'FacetedCategory.CategoryCombinations' ),
 			$services->getConnectionProvider(),
 			$services->getLinkBatchFactory(),
-			$services->getCollationFactory()
+			$services->getCollationFactory(),
+			$services->getMainWANObjectCache()
 		);
 	}
 
@@ -103,6 +104,28 @@ class SpecialFacetedCategoriesTest extends SpecialPageTestBase {
 
 		[ $html, ] = $this->executeSpecialPage( 'Facet/A, Facet/Missing', null, 'qqx' );
 		$this->assertStringContainsString( 'facetedcategory-no-results', $html );
+	}
+
+	public function testRefinements() {
+		$this->editPage( 'Both', '[[Category:Facet/A]][[Category:Facet/B]][[Category:Other/X]][[Category:Plain]]' );
+		$this->editPage(
+			'AllThree',
+			'[[Category:Facet/A]][[Category:Facet/B]][[Category:Facet/C]][[Category:Other/X]]'
+		);
+
+		[ $html, ] = $this->executeSpecialPage( 'Facet/A, Facet/B', null, 'qqx' );
+		$this->assertStringContainsString( '(facetedcategory-refine)', $html );
+		// Only some of the pages are in it
+		$this->assertStringContainsString(
+			$this->newSpecialPage()->getPageTitle( 'Facet/A,Facet/B,Facet/C' )->getLocalURL(),
+			$html
+		);
+		// All the pages are in it, or it is not faceted
+		$this->assertStringNotContainsString( '(facetedcategory-refine-add: Other/X)', $html );
+		$this->assertStringNotContainsString( 'Plain', $html );
+
+		[ $html, ] = $this->executeSpecialPage( 'Facet/A, Facet/B, Facet/C', null, 'qqx' );
+		$this->assertStringNotContainsString( '(facetedcategory-refine)', $html );
 	}
 
 	public function testAddConditions() {

@@ -3,7 +3,9 @@
 namespace MediaWiki\Extension\FacetedCategory;
 
 use Wikimedia\Rdbms\IConnectionProvider;
+use Wikimedia\Rdbms\IExpression;
 use Wikimedia\Rdbms\IReadableDatabase;
+use Wikimedia\Rdbms\LikeValue;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
 /**
@@ -50,6 +52,40 @@ class CategoryIntersection {
 			->limit( $limit )
 			->caller( __METHOD__ )
 			->fetchFieldValues() );
+	}
+
+	/**
+	 * @param int $max
+	 * @return array<string,int>|null Number of the pages in each faceted
+	 *  category, by DB key, or null when there are more than $max pages
+	 */
+	public function getFacetedCategoryCounts( int $max ): ?array {
+		$ids = $this->getPageIds( $max + 1 );
+		if ( count( $ids ) > $max ) {
+			return null;
+		}
+		if ( !$ids ) {
+			return [];
+		}
+		$dbr = $this->connectionProvider->getReplicaDatabase();
+		$res = $dbr->newSelectQueryBuilder()
+			->select( [ 'lt_title', 'pages' => 'COUNT(*)' ] )
+			->from( 'categorylinks' )
+			->join( 'linktarget', null, 'lt_id = cl_target_id' )
+			->where( [
+				'cl_from' => $ids,
+				'lt_namespace' => NS_CATEGORY,
+				$dbr->expr( 'lt_title', IExpression::LIKE,
+					new LikeValue( $dbr->anyChar(), $dbr->anyString(), '/', $dbr->anyChar(), $dbr->anyString() ) ),
+			] )
+			->groupBy( 'lt_title' )
+			->caller( __METHOD__ )
+			->fetchResultSet();
+		$counts = [];
+		foreach ( $res as $row ) {
+			$counts[(string)$row->lt_title] = (int)$row->pages;
+		}
+		return $counts;
 	}
 
 	/**

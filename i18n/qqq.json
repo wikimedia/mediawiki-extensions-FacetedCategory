@@ -47,6 +47,9 @@
 	"facetedcategory-result-count": "Number of pages in all the chosen categories on [[Special:FacetedCategories]].\n\nParameters:\n* $1 - number of pages",
 	"facetedcategory-result-count-more": "Shown instead of {{msg-mw|facetedcategory-result-count}} when there are too many pages to count.\n\nParameters:\n* $1 - the most pages counted",
 	"facetedcategory-no-results": "Shown on [[Special:FacetedCategories]] when no page is in all the chosen categories.",
+	"facetedcategory-refine": "Heading of the list beside the pages in several categories on [[Special:FacetedCategories]], of faceted categories that some of the pages are in, to add one of them.",
+	"facetedcategory-refine-add": "Tooltip of a link in the list under {{msg-mw|facetedcategory-refine}}.\n\nParameters:\n* $1 - Name of a faceted category, like \"Job/Politician\"",
+	"facetedcategory-refine-hint": "Note below the list under {{msg-mw|facetedcategory-refine}}.",
 	"facetedcategory-exclude": "Tooltip of a chosen category on [[Special:FacetedCategories]]; clicking it shows the pages not in it.\n\nParameters:\n* $1 - the category",
 	"facetedcategory-include": "Tooltip of a category the pages are not in on [[Special:FacetedCategories]]; clicking it shows the pages in it.\n\nParameters:\n* $1 - the category",
 	"facetedcategory-remove": "Label of the button removing a chosen category on [[Special:FacetedCategories]].\n\nParameters:\n* $1 - the category\n{{Identical|Remove}}"

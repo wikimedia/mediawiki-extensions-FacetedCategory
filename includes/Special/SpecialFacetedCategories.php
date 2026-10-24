@@ -11,6 +11,7 @@ use MediaWiki\Extension\FacetedCategory\FacetedCategoryList;
 use MediaWiki\Html\Html;
 use MediaWiki\SpecialPage\IncludableSpecialPage;
 use MediaWiki\Title\Title;
+use Wikimedia\ObjectCache\WANObjectCache;
 use Wikimedia\Rdbms\IConnectionProvider;
 
 /**
@@ -30,19 +31,27 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 	private const PAGES = 200;
 	/** Most pages of an intersection counted */
 	private const MAX_COUNT = 1000;
+	/** Most pages of an intersection whose categories are suggested to narrow it down */
+	private const REFINE_PAGES = 500;
+	/** Facets suggested to narrow down an intersection */
+	private const REFINE_FACETS = 6;
+	/** Members of each facet suggested to narrow down an intersection */
+	private const REFINE_MEMBERS = 5;
 
 	private FacetedCategoryList $facetedCategoryList;
 	private CategoryCombinations $categoryCombinations;
 	private IConnectionProvider $connectionProvider;
 	private LinkBatchFactory $linkBatchFactory;
 	private CollationFactory $collationFactory;
+	private WANObjectCache $cache;
 
 	public function __construct(
 		FacetedCategoryList $facetedCategoryList,
 		CategoryCombinations $categoryCombinations,
 		IConnectionProvider $connectionProvider,
 		LinkBatchFactory $linkBatchFactory,
-		CollationFactory $collationFactory
+		CollationFactory $collationFactory,
+		WANObjectCache $cache
 	) {
 		parent::__construct( 'FacetedCategories' );
 		$this->facetedCategoryList = $facetedCategoryList;
@@ -50,6 +59,7 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 		$this->connectionProvider = $connectionProvider;
 		$this->linkBatchFactory = $linkBatchFactory;
 		$this->collationFactory = $collationFactory;
+		$this->cache = $cache;
 	}
 
 	/**
@@ -392,7 +402,100 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 			) );
 			return;
 		}
-		$output->addHTML( $this->makeResults( $intersection, $include, $exclude, $request->getVal( 'pagefrom' ) ) );
+		$results = $this->makeResults( $intersection, $include, $exclude, $request->getVal( 'pagefrom' ) );
+		$refine = $count <= self::REFINE_PAGES
+			? $this->makeRefinements( $intersection, $include, $exclude, $count )
+			: '';
+		$output->addHTML( $refine === ''
+			? $results
+			: Html::rawElement( 'div', [ 'class' => 'ext-facetedcategory-refined' ], $refine . $results )
+		);
+	}
+
+	/**
+	 * @param CategoryIntersection $intersection
+	 * @param Title[] $include
+	 * @param Title[] $exclude
+	 * @param int $count Number of the pages
+	 * @return string HTML of links that add the faceted categories of the pages
+	 *  to the categories, or an empty string when there are none
+	 */
+	private function makeRefinements(
+		CategoryIntersection $intersection, array $include, array $exclude, int $count
+	): string {
+		$keys = array_map(
+			static fn ( Title $title ) => $title->getDBkey(),
+			array_merge( $include, $exclude )
+		);
+		$conditions = $this->getConditionsTitle( $include, $exclude )->getDBkey();
+		$counts = $this->cache->getWithSetCallback(
+			$this->cache->makeKey( 'facetedcategory-refine', sha1( $conditions ) ),
+			WANObjectCache::TTL_MINUTE * 10,
+			static fn () => $intersection->getFacetedCategoryCounts( self::REFINE_PAGES ),
+			[ 'version' => 1 ]
+		);
+		if ( !$counts ) {
+			return '';
+		}
+		$facets = [];
+		foreach ( $counts as $category => $pages ) {
+			$category = (string)$category;
+			// A category all the pages are in does not narrow them down
+			if ( in_array( $category, $keys, true ) || $pages >= $count ) {
+				continue;
+			}
+			[ $facet, $member ] = explode( '/', $category, 2 );
+			$facets[$facet][$member] = $pages;
+		}
+		foreach ( $facets as &$members ) {
+			uksort( $members, static fn ( $a, $b ) =>
+				$members[$b] <=> $members[$a] ?: strcmp( (string)$a, (string)$b ) );
+		}
+		unset( $members );
+		uksort( $facets, static fn ( $a, $b ) =>
+			max( $facets[$b] ) <=> max( $facets[$a] ) ?: strcmp( (string)$a, (string)$b ) );
+
+		$groups = '';
+		foreach ( array_slice( $facets, 0, self::REFINE_FACETS, true ) as $facet => $members ) {
+			$items = '';
+			foreach ( array_slice( $members, 0, self::REFINE_MEMBERS, true ) as $member => $pages ) {
+				$title = Title::makeTitle( NS_CATEGORY, "$facet/$member" );
+				$text = strtr( (string)$member, '_', ' ' );
+				$items .= Html::rawElement(
+					'li',
+					[],
+					Html::element(
+						'a',
+						[
+							'href' => $this->getConditionsTitle( [ ...$include, $title ], $exclude )->getLocalURL(),
+							'title' => $this->msg( 'facetedcategory-refine-add', $title->getText() )->text(),
+						],
+						$text
+					) .
+					$this->makeCount( $pages )
+				);
+			}
+			$groups .= Html::element( 'h3', [], strtr( (string)$facet, '_', ' ' ) ) .
+				Html::rawElement( 'ul', [], $items );
+		}
+		if ( $groups === '' ) {
+			return '';
+		}
+		return Html::rawElement(
+			'nav',
+			[ 'class' => 'ext-facetedcategory-refine', 'aria-labelledby' => 'ext-facetedcategory-refine-heading' ],
+			Html::element(
+				'h2',
+				[ 'id' => 'ext-facetedcategory-refine-heading' ],
+				$this->msg( 'facetedcategory-refine' )->text()
+			) .
+			$groups .
+			Html::element(
+				'p',
+				[ 'class' => 'ext-facetedcategory-refine-hint' ],
+				$this->msg( 'facetedcategory-refine-hint' )->text()
+			)
+		);
 	}
 
 	/**
