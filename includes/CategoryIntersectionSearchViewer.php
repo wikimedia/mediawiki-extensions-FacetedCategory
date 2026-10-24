@@ -11,6 +11,7 @@ use MediaWiki\Title\Title;
 use Wikimedia\Rdbms\IDatabase;
 use Wikimedia\Rdbms\ILoadBalancer;
 use Wikimedia\Rdbms\IResultWrapper;
+use Wikimedia\Rdbms\SelectQueryBuilder;
 
 class CategoryIntersectionSearchViewer extends CategoryViewer {
 	use ProtectedHookAccessorTrait;
@@ -71,11 +72,9 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 			$from = $this->from[$type] ?? null;
 			$until = $this->until[$type] ?? null;
 			if ( $from !== null ) {
-				$extraConds[] = 'cl_sortkey >= '
-					. $dbr->addQuotes( $this->collation->getSortKey( $from ) );
+				$extraConds[] = $dbr->expr( 'cl_sortkey', '>=', $this->collation->getSortKey( $from ) );
 			} elseif ( $until !== null ) {
-				$extraConds[] = 'cl_sortkey < '
-					. $dbr->addQuotes( $this->collation->getSortKey( $until ) );
+				$extraConds[] = $dbr->expr( 'cl_sortkey', '<', $this->collation->getSortKey( $until ) );
 				$this->flip[$type] = true;
 			}
 			// 위에서 여기까지는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
@@ -120,46 +119,33 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 			'lt_title' => $this->categories,
 		];
 		if ( $this->exCategories ) {
-			$excludeCategories = $dbr->selectSQLText(
-				$queryInfo['tables'],
-				[
-					'cl_from',
-				],
-				[
+			$excludeCategories = $dbr->newSelectQueryBuilder()
+				->select( 'cl_from' )
+				->tables( $queryInfo['tables'] )
+				->joinConds( $queryInfo['joins'] )
+				->where( [
 					'lt_namespace' => NS_CATEGORY,
 					'lt_title' => $this->exCategories,
-				],
-				__METHOD__,
-				[
-					'GROUP BY' => 'cl_from',
-					'ORDER BY' => 'cl_sortkey'
-				],
-				$queryInfo['joins']
-			);
+				] )
+				->groupBy( 'cl_from' )
+				->orderBy( 'cl_sortkey' )
+				->caller( __METHOD__ )
+				->getSQL();
 			$conds[] = "cl_from NOT IN ({$excludeCategories})";
 		}
-		$categorySubQuery = $dbr->buildSelectSubquery(
-			$queryInfo['tables'],
-			[
+		$categorySubQuery = $dbr->newSelectQueryBuilder()
+			->select( [
 				'cl_from',
 				'match_count' => 'COUNT(*)',
-			],
-			$conds,
-			__METHOD__,
-			[
-				# Aggregated query must be with GROUP BY; column 'femiwiki.categorylinks.cl_from' is nonaggregated.
-				'GROUP BY' => 'cl_from',
-			],
-			$queryInfo['joins']
-		);
-		$rows = $dbr->select(
-			[
-				'page',
-				'matches' => $categorySubQuery,
-				'categorylinks',
-				'category',
-			],
-			[
+			] )
+			->tables( $queryInfo['tables'] )
+			->joinConds( $queryInfo['joins'] )
+			->where( $conds )
+			# Aggregated query must be with GROUP BY; column 'femiwiki.categorylinks.cl_from' is nonaggregated.
+			->groupBy( 'cl_from' )
+			->caller( __METHOD__ );
+		$rows = $dbr->newSelectQueryBuilder()
+			->select( [
 				'page_id',
 				'page_title',
 				'page_namespace',
@@ -172,27 +158,23 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 				'cat_files',
 				'cl_sortkey',
 				'cl_sortkey_prefix',
-			],
-			$extraConds,
-			__METHOD__,
-			[
-				'DISTINCT',
-				'LIMIT' => $this->limit + 1,
-				'ORDER BY' => $this->flip[$type] ? 'cl_sortkey DESC' : 'cl_sortkey',
-
-			],
-			[
-				'matches' => [ 'INNER JOIN', [
-					'page_id = matches.cl_from',
-					'match_count' => count( $this->categories ),
-				] ],
-				'categorylinks' => [ 'JOIN', 'page_id = categorylinks.cl_from' ],
-				'category' => [ 'LEFT JOIN', [
-					'cat_title = page_title',
-					'page_namespace' => NS_CATEGORY,
-				] ],
-			]
-		);
+			] )
+			->distinct()
+			->from( 'page' )
+			->join( $categorySubQuery, 'matches', [
+				'page_id = matches.cl_from',
+				'match_count' => count( $this->categories ),
+			] )
+			->join( 'categorylinks', null, 'page_id = categorylinks.cl_from' )
+			->leftJoin( 'category', null, [
+				'cat_title = page_title',
+				'page_namespace' => NS_CATEGORY,
+			] )
+			->where( $extraConds )
+			->orderBy( 'cl_sortkey', $this->flip[$type] ? SelectQueryBuilder::SORT_DESC : SelectQueryBuilder::SORT_ASC )
+			->limit( $this->limit + 1 )
+			->caller( __METHOD__ )
+			->fetchResultSet();
 		return $rows;
 	}
 }

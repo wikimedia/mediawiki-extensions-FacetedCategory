@@ -43,12 +43,12 @@ class RecursiveCategory implements
 		}
 
 		$dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
-		$pages = $dbr->selectFieldValues(
-			'categorylinks',
-			'cl_from',
-			$this->linksMigration->getLinksConditions( 'categorylinks', $title ),
-			__METHOD__
-		);
+		$pages = $dbr->newSelectQueryBuilder()
+			->select( 'cl_from' )
+			->from( 'categorylinks' )
+			->where( $this->linksMigration->getLinksConditions( 'categorylinks', $title ) )
+			->caller( __METHOD__ )
+			->fetchFieldValues();
 		foreach ( $pages as $id ) {
 			$title = Title::newFromId( $id );
 			$job = new RefreshLinksJob( $title, [ 'parseThreshold' => 0 ] );
