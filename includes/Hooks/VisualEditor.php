@@ -22,11 +22,13 @@ class VisualEditor implements ResourceLoaderRegisterModulesHook {
 		$rl->register( 'ext.facetedCategory.visualEditor', [
 			'localBasePath' => dirname( __DIR__, 2 ) . '/modules',
 			'remoteExtPath' => 'FacetedCategory/modules',
-			'scripts' => [ 've/categoryInput.js' ],
-			'styles' => [ 've/categoryInput.less' ],
+			'scripts' => [ 've/categoryInput.js', 've/categoryWidget.js' ],
+			'styles' => [ 've/categoryInput.less', 've/categoryWidget.less' ],
 			'messages' => [
 				'facetedcategory-ve-page-facets',
 				'facetedcategory-ve-common-facets',
+				'facetedcategory-general-categories',
+				'hidden-categories',
 			],
 			'dependencies' => [ 'ext.visualEditor.mwmeta', 'mediawiki.language' ],
 		] );
