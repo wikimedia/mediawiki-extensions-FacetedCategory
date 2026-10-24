@@ -18,7 +18,7 @@ class SpecialCategoryIntersectionSearchTest extends SpecialPageTestBase {
 	protected function newSpecialPage(): SpecialCategoryIntersectionSearch {
 		$services = $this->getServiceContainer();
 		return new SpecialCategoryIntersectionSearch(
-			$services->getDBLoadBalancer(),
+			$services->getConnectionProvider(),
 			$services->getLinksMigration()
 		);
 	}

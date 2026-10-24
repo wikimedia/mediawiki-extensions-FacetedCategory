@@ -7,7 +7,7 @@ use MediaWiki\JobQueue\JobQueueGroup;
 use MediaWiki\JobQueue\Jobs\RefreshLinksJob;
 use MediaWiki\Linker\LinksMigration;
 use MediaWiki\Title\Title;
-use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\IConnectionProvider;
 
 class RecursiveCategory implements
 	\MediaWiki\Page\Hook\CategoryAfterPageAddedHook,
@@ -19,16 +19,16 @@ class RecursiveCategory implements
 	/** @const string direct-categories key. */
 	public const DIRECT_CATEGORIES_PROPERTY_NAME = 'direct-categories';
 
-	private ILoadBalancer $loadBalancer;
+	private IConnectionProvider $connectionProvider;
 	private JobQueueGroup $jobQueueGroup;
 	private LinksMigration $linksMigration;
 
 	public function __construct(
-		ILoadBalancer $loadBalancer,
+		IConnectionProvider $connectionProvider,
 		JobQueueGroup $jobQueueGroup,
 		LinksMigration $linksMigration
 	) {
-		$this->loadBalancer = $loadBalancer;
+		$this->connectionProvider = $connectionProvider;
 		$this->jobQueueGroup = $jobQueueGroup;
 		$this->linksMigration = $linksMigration;
 	}
@@ -42,7 +42,7 @@ class RecursiveCategory implements
 			return true;
 		}
 
-		$dbr = $this->loadBalancer->getConnection( ILoadBalancer::DB_REPLICA );
+		$dbr = $this->connectionProvider->getReplicaDatabase();
 		$pages = $dbr->newSelectQueryBuilder()
 			->select( 'cl_from' )
 			->from( 'categorylinks' )

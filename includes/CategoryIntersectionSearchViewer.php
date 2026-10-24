@@ -8,8 +8,8 @@ use MediaWiki\Context\IContextSource;
 use MediaWiki\HookContainer\ProtectedHookAccessorTrait;
 use MediaWiki\Linker\LinksMigration;
 use MediaWiki\Title\Title;
-use Wikimedia\Rdbms\IDatabase;
-use Wikimedia\Rdbms\ILoadBalancer;
+use Wikimedia\Rdbms\IConnectionProvider;
+use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\IResultWrapper;
 use Wikimedia\Rdbms\SelectQueryBuilder;
 
@@ -18,14 +18,14 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 
 	private array $categories;
 	private array $exCategories;
-	private ILoadBalancer $loadBalancer;
+	private IConnectionProvider $connectionProvider;
 	private LinksMigration $linksMigration;
 
 	/**
 	 * @inheritDoc
 	 * @param array $categories
 	 * @param array $exCategories
-	 * @param ILoadBalancer $loadBalancer
+	 * @param IConnectionProvider $connectionProvider
 	 * @param LinksMigration $linksMigration
 	 */
 	public function __construct(
@@ -36,19 +36,19 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 		array $query,
 		array $categories,
 		array $exCategories,
-		ILoadBalancer $loadBalancer,
+		IConnectionProvider $connectionProvider,
 		LinksMigration $linksMigration
 	) {
 		parent::__construct( $title, $context, $from, $until, $query );
 		$this->categories = $categories;
 		$this->exCategories = $exCategories;
-		$this->loadBalancer = $loadBalancer;
+		$this->connectionProvider = $connectionProvider;
 		$this->linksMigration = $linksMigration;
 	}
 
 	public function doCategoryQuery() {
 		// 여기서부터 아래는 mediawiki 1.27의 CategoryViewer.php의 doCategoryQuery()과 동일
-		$dbr = $this->loadBalancer->getConnection( DB_REPLICA );
+		$dbr = $this->connectionProvider->getReplicaDatabase();
 
 		$this->nextPage = [
 			'page' => null,
@@ -112,7 +112,7 @@ class CategoryIntersectionSearchViewer extends CategoryViewer {
 		}
 	}
 
-	private function selectCategories( IDatabase $dbr, string $type, array $extraConds ): IResultWrapper {
+	private function selectCategories( IReadableDatabase $dbr, string $type, array $extraConds ): IResultWrapper {
 		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks' );
 		$conds = [
 			'lt_namespace' => NS_CATEGORY,

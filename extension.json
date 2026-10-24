@@ -57,7 +57,7 @@
 		},
 		"RecursiveCategory": {
 			"class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\RecursiveCategory",
-			"services": [ "DBLoadBalancer", "JobQueueGroup", "LinksMigration" ]
+			"services": [ "ConnectionProvider", "JobQueueGroup", "LinksMigration" ]
 		}
 	},
 	"Hooks": {
@@ -81,7 +81,7 @@
 		"CategoryIntersectionSearch": {
 			"class": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialCategoryIntersectionSearch",
 			"services": [
-				"DBLoadBalancer",
+				"ConnectionProvider",
 				"LinksMigration"
 			]
 		}
