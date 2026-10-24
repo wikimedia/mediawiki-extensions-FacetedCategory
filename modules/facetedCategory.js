@@ -66,6 +66,44 @@ function createRow( label, entries ) {
 }
 
 /**
+ * List the category combinations suggested for the page.
+ *
+ * @return {HTMLElement|null}
+ */
+function createCombinations() {
+	const combinations = mw.config.get( 'wgFacetedCategoryCombinations' );
+	if ( !Array.isArray( combinations ) || !combinations.length ) {
+		return null;
+	}
+	const list = document.createElement( 'ul' );
+	combinations.forEach( ( combination ) => {
+		const link = document.createElement( 'a' );
+		link.href = mw.util.getUrl(
+			'Special:CategoryIntersectionSearch/' + combination.categories.join( ', ' )
+		);
+		link.title = combination.categories.join( ', ' );
+		// A computed combination has no name, so show its members
+		link.textContent = combination.name ||
+			combination.categories.map( ( name ) => splitName( name ).member ).join( ' · ' );
+		const count = document.createElement( 'span' );
+		count.className = 'ext-facetedcategory-combination-count';
+		count.textContent = mw.language.convertNumber( combination.count );
+		const item = document.createElement( 'li' );
+		item.append( link, ' ', count );
+		list.append( item );
+	} );
+
+	const heading = document.createElement( 'a' );
+	heading.href = mw.util.getUrl( 'Special:CategoryIntersectionSearch' );
+	heading.textContent = mw.msg( 'facetedcategory-combinations' );
+	const container = document.createElement( 'div' );
+	container.id = 'ext-facetedcategory-combinations';
+	container.className = 'ext-facetedcategory-combinations';
+	container.append( heading, mw.msg( 'colon-separator' ), list );
+	return container;
+}
+
+/**
  * @param {HTMLElement} catlinks
  */
 function groupCategories( catlinks ) {
@@ -121,6 +159,11 @@ function groupCategories( catlinks ) {
 	faceted.className = 'ext-facetedcategory-catlinks';
 	faceted.append( heading, mw.msg( 'colon-separator' ), groups );
 	normal.before( faceted );
+
+	const combinations = createCombinations();
+	if ( combinations ) {
+		faceted.after( combinations );
+	}
 
 	// Hide the core list when every category has a facet
 	if ( !list.querySelector( 'li' ) ) {

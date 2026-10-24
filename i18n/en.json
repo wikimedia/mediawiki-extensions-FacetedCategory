@@ -11,5 +11,7 @@
 	"facetedcategory-search-for": "category name:",
 	"facetedcategory-not-only-match-exactly": "Include not exactly matched",
 	"facetedcategory-faceted-categories": "Faceted categories",
-	"facetedcategory-general-categories": "General categories"
+	"facetedcategory-general-categories": "General categories",
+	"facetedcategory-combinations": "Category combinations",
+	"facetedcategory-combination-invalid": "A category combination needs a name and at least two categories."
 }

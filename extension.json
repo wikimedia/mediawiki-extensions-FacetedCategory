@@ -26,9 +26,10 @@
 				"parentheses-start",
 				"parentheses-end",
 				"facetedcategory-faceted-categories",
-				"facetedcategory-general-categories"
+				"facetedcategory-general-categories",
+				"facetedcategory-combinations"
 			],
-			"dependencies": [ "mediawiki.util" ]
+			"dependencies": [ "mediawiki.language", "mediawiki.util" ]
 		},
 		"ext.facetedCategory": {
 			"position": "top",
@@ -39,7 +40,17 @@
 		"localBasePath": "modules",
 		"remoteExtPath": "FacetedCategory/modules"
 	},
+	"JobClasses": {
+		"facetedCategoryCombinations": "MediaWiki\\Extension\\FacetedCategory\\CategoryCombinationsJob"
+	},
+	"ServiceWiringFiles": [
+		"includes/ServiceWiring.php"
+	],
 	"HookHandlers": {
+		"CategoryCombination": {
+			"class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\CategoryCombination",
+			"services": [ "FacetedCategory.CategoryCombinations" ]
+		},
 		"Main": {
 			"class": "MediaWiki\\Extension\\FacetedCategory\\Hooks\\Main",
 			"services": []
@@ -53,8 +64,10 @@
 		"BeforePageDisplay": "Main",
 		"CategoryAfterPageAdded": "RecursiveCategory",
 		"ContentAlterParserOutput": "RecursiveCategory",
-		"MakeGlobalVariablesScript": "RecursiveCategory",
+		"LinksUpdateComplete": "CategoryCombination",
+		"MakeGlobalVariablesScript": [ "RecursiveCategory", "CategoryCombination" ],
 		"OutputPageParserOutput": "RecursiveCategory",
+		"ParserFirstCallInit": "CategoryCombination",
 		"SpecialSearchResultsPrepend": "Main"
 	},
 	"SpecialPages": {
@@ -74,7 +87,8 @@
 		}
 	},
 	"ExtensionMessagesFiles": {
-		"FacetedCategoryAlias": "FacetedCategory.alias.php"
+		"FacetedCategoryAlias": "FacetedCategory.alias.php",
+		"FacetedCategoryMagic": "FacetedCategory.i18n.magic.php"
 	},
 	"TestAutoloadNamespaces": {
 		"MediaWiki\\Extension\\FacetedCategory\\Tests\\Unit\\": "tests/phpunit/unit/",
