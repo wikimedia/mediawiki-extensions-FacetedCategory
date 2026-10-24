@@ -125,6 +125,7 @@
 }
 
 .ext-facetedcategory-conditions {
+	position: relative;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
@@ -193,4 +194,57 @@ a.ext-facetedcategory-chip-remove {
 
 .ext-facetedcategory-paging {
 	margin-top: 1em;
+}
+
+.ext-facetedcategory-hint {
+	margin-top: -0.5em;
+	color: @color-subtle;
+	font-size: @font-size-small;
+
+	.client-nojs & {
+		display: none;
+	}
+}
+
+.client-js .ext-facetedcategory-conditions-submit {
+	display: none;
+}
+
+.ext-facetedcategory-suggestions {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	left: 0;
+	z-index: @z-index-dropdown;
+	max-height: 20em;
+	overflow-y: auto;
+	margin: 0.25em 0 0;
+	border: @border-width-base @border-style-base @border-color-base;
+	border-radius: @border-radius-base;
+	padding: 0.25em 0;
+	background-color: @background-color-base;
+	box-shadow: @box-shadow-drop-medium;
+	list-style: none;
+
+	&[ hidden ] {
+		display: none;
+	}
+}
+
+.ext-facetedcategory-suggestion {
+	display: flex;
+	justify-content: space-between;
+	gap: 1em;
+	margin: 0;
+	padding: 0.375em 0.75em;
+	cursor: pointer;
+
+	&:hover {
+		background-color: @background-color-interactive-subtle--hover;
+	}
+
+	&[ aria-selected='true' ] {
+		background-color: @background-color-progressive-subtle;
+		color: @color-progressive;
+	}
 }

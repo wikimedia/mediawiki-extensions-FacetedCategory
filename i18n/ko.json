@@ -28,6 +28,7 @@
 	"facetedcategory-pages": "문서",
 	"facetedcategory-no-members": "맞는 구성원이 없습니다.",
 	"facetedcategory-find": "분류 찾기",
+	"facetedcategory-find-hint": "구성원 이름만 쳐도 찾습니다. 분류를 둘 이상 고르면 함께 속한 문서를 보여 줍니다.",
 	"facetedcategory-add": "분류 더하기",
 	"facetedcategory-add-submit": "더하기",
 	"facetedcategory-show-intersection": "고른 분류에 모두 속한 문서 보기",

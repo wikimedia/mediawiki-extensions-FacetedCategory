@@ -37,6 +37,13 @@
 			"codexComponents": [ "CdxButton", "CdxTextInput", "CdxMessage" ],
 			"codexStyleOnly": true,
 			"styles": [ "special.less" ]
+		},
+		"ext.facetedCategory.special.js": {
+			"scripts": [ "special.js" ],
+			"dependencies": [
+				"mediawiki.api",
+				"mediawiki.language"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {

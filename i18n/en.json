@@ -33,6 +33,7 @@
 	"facetedcategory-pages": "Pages",
 	"facetedcategory-no-members": "No member matches.",
 	"facetedcategory-find": "Find categories",
+	"facetedcategory-find-hint": "Type a member, like \"novelist\", to find its category. Choose two or more categories to see the pages in all of them.",
 	"facetedcategory-add": "Add a category",
 	"facetedcategory-add-submit": "Add",
 	"facetedcategory-show-intersection": "Show the pages in all the chosen categories",

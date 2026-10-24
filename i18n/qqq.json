@@ -35,6 +35,7 @@
 	"facetedcategory-pages": "Column heading of the numbers of pages of the members of a facet on [[Special:FacetedCategories]].\n{{Identical|Page}}",
 	"facetedcategory-no-members": "Shown on [[Special:FacetedCategories]] when no member of a facet matches the filter, or the facet has none.",
 	"facetedcategory-find": "Placeholder and label of the box at the top of [[Special:FacetedCategories]], in which one finds categories to see the pages in all of them.",
+	"facetedcategory-find-hint": "Hint below {{msg-mw|facetedcategory-find}} on [[Special:FacetedCategories]], shown only when JavaScript is on, since the suggestions need it.",
 	"facetedcategory-add": "Placeholder and label of the input after the chosen categories on [[Special:FacetedCategories]], to add one more.",
 	"facetedcategory-add-submit": "Button after {{msg-mw|facetedcategory-add}} or {{msg-mw|facetedcategory-find}}, for browsers without JavaScript.\n{{Identical|Add}}",
 	"facetedcategory-show-intersection": "Button below the members of a facet on [[Special:FacetedCategories]], to show the pages in all the checked members.",

@@ -6,5 +6,9 @@
 	{
 		"resourceModule": "ext.facetedCategory.js",
 		"maxSize": null
+	},
+	{
+		"resourceModule": "ext.facetedCategory.special.js",
+		"maxSize": null
 	}
 ]

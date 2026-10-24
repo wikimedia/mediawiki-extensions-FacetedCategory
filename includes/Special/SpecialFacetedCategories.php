@@ -59,6 +59,9 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 		$this->setHeaders();
 		$output = $this->getOutput();
 		$output->addModuleStyles( 'ext.facetedCategory.special' );
+		if ( !$this->including() ) {
+			$output->addModules( 'ext.facetedCategory.special.js' );
+		}
 		$request = $this->getRequest();
 
 		// The form of the old version of this page asked for a facet and a member
@@ -180,6 +183,11 @@ class SpecialFacetedCategories extends IncludableSpecialPage {
 			$this->msg( 'facetedcategory-intro' )->text()
 		) );
 		$output->addHTML( $this->makeConditionBox( [], [] ) );
+		$output->addHTML( Html::element(
+			'p',
+			[ 'class' => 'ext-facetedcategory-hint' ],
+			$this->msg( 'facetedcategory-find-hint' )->text()
+		) );
 
 		$cards = '';
 		foreach ( array_slice( $summaries, 0, self::CARDS ) as $summary ) {
