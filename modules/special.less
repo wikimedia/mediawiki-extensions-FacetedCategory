@@ -1,0 +1,111 @@
+@import 'mediawiki.skin.variables.less';
+
+.ext-facetedcategory-lead {
+	color: @color-subtle;
+}
+
+.ext-facetedcategory-count {
+	color: @color-subtle;
+	font-size: 0.875em;
+	font-weight: normal;
+}
+
+.ext-facetedcategory-cards {
+	display: grid;
+	grid-template-columns: repeat( auto-fill, minmax( 16em, 1fr ) );
+	gap: 1em;
+	margin: 1.5em 0;
+}
+
+.ext-facetedcategory-card {
+	border: @border-width-base @border-style-base @border-color-subtle;
+	border-radius: @border-radius-base;
+	padding: 0.75em 1em;
+
+	h2 {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin: 0 0 0.25em;
+		border: 0;
+		padding: 0;
+		font-family: inherit;
+		font-size: 1.125em;
+		font-weight: bold;
+
+		.ext-facetedcategory-count {
+			font-size: 0.75em;
+		}
+	}
+
+	ul {
+		margin: 0;
+		list-style: none;
+	}
+
+	li {
+		display: flex;
+		justify-content: space-between;
+		gap: 1em;
+	}
+}
+
+.ext-facetedcategory-card-more {
+	margin: 0.25em 0 0;
+	font-size: 0.875em;
+}
+
+.ext-facetedcategory-other-facets {
+	margin: 0;
+	list-style: none;
+
+	li {
+		display: inline-block;
+		margin: 0 1.5em 0.25em 0;
+	}
+}
+
+.ext-facetedcategory-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5em 1.5em;
+	margin: 1em 0 0.5em;
+
+	form {
+		display: flex;
+		gap: 0.5em;
+	}
+
+	.cdx-text-input {
+		width: 20em;
+		max-width: 100%;
+	}
+}
+
+.ext-facetedcategory-sort {
+	display: flex;
+	gap: 0.25em;
+}
+
+.ext-facetedcategory-members {
+	width: 100%;
+	border-collapse: collapse;
+
+	th,
+	td {
+		border-bottom: @border-width-base @border-style-base @border-color-subtle;
+		padding: 0.25em 0.5em;
+		text-align: left;
+	}
+
+	th {
+		color: @color-subtle;
+		font-size: 0.875em;
+	}
+
+	.ext-facetedcategory-number {
+		color: @color-subtle;
+		text-align: right;
+	}
+}

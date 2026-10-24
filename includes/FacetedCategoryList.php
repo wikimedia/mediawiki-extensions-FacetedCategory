@@ -93,17 +93,65 @@ class FacetedCategoryList {
 	 *  facet are counted once per member, so a page in two members counts twice.
 	 */
 	public function getFacets( int $limit ): array {
+		return array_map(
+			static fn ( $summary ) => [ 'facet' => $summary['facet'], 'pages' => $summary['pages'] ],
+			$this->getFacetSummaries( $limit, 0 )
+		);
+	}
+
+	/**
+	 * Summarize the facets in which pages are categorized the most, with their
+	 * members with the most pages.
+	 *
+	 * @param int $limit Most facets
+	 * @param int $members Most members of each facet
+	 * @return array<int,array{facet:string,pages:int,count:int,members:array<int,array{member:string,pages:int}>}>
+	 *  DB keys. The pages of a facet are counted once per member, and count is
+	 *  the number of its members.
+	 */
+	public function getFacetSummaries( int $limit, int $members ): array {
 		$facets = [];
 		foreach ( $this->getAll() as $title => $pages ) {
-			$facet = strstr( (string)$title, '/', true );
-			$facets[$facet] = ( $facets[$facet] ?? 0 ) + $pages;
+			[ $facet, $member ] = explode( '/', (string)$title, 2 );
+			$facets[$facet][] = [ 'member' => $member, 'pages' => $pages ];
 		}
-		arsort( $facets );
-		$result = [];
-		foreach ( array_slice( $facets, 0, $limit, true ) as $facet => $pages ) {
-			$result[] = [ 'facet' => (string)$facet, 'pages' => $pages ];
+		$summaries = [];
+		foreach ( $facets as $facet => $list ) {
+			$summaries[] = [
+				'facet' => (string)$facet,
+				'pages' => array_sum( array_column( $list, 'pages' ) ),
+				'count' => count( $list ),
+				'members' => array_slice( self::sortMembers( $list ), 0, $members ),
+			];
 		}
-		return $result;
+		usort( $summaries, static fn ( $a, $b ) => [ $b['pages'], $a['facet'] ] <=> [ $a['pages'], $b['facet'] ] );
+		return array_slice( $summaries, 0, $limit );
+	}
+
+	/**
+	 * @param string $facet DB key of a facet
+	 * @return array<int,array{member:string,pages:int}> DB keys of all the members
+	 *  of the facet, the ones with the most pages first
+	 */
+	public function getMembers( string $facet ): array {
+		$prefix = $facet . '/';
+		$members = [];
+		foreach ( $this->getAll() as $title => $pages ) {
+			$title = (string)$title;
+			if ( str_starts_with( $title, $prefix ) ) {
+				$members[] = [ 'member' => substr( $title, strlen( $prefix ) ), 'pages' => $pages ];
+			}
+		}
+		return self::sortMembers( $members );
+	}
+
+	/**
+	 * @param array<int,array{member:string,pages:int}> $members
+	 * @return array<int,array{member:string,pages:int}> The ones with the most pages first
+	 */
+	private static function sortMembers( array $members ): array {
+		usort( $members, static fn ( $a, $b ) => [ $b['pages'], $a['member'] ] <=> [ $a['pages'], $b['member'] ] );
+		return $members;
 	}
 
 	/**

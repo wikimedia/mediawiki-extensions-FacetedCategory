@@ -10,8 +10,6 @@
 	"categoryintersectionsearch-page-title": "Title of the [[Special:IntersectionSearch]] page.",
 	"facetedcategories": "{{doc-special|FacetedCategories}}\n{{Identical|Faceted Categories}}",
 	"facetedcategory-desc": "{{desc|name=Faceted Category|url=https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:FacetedCategory}}",
-	"facetedcategory-search-for": "Used as label for the \"Category\" input box in [[Special:FacetedCategories]]",
-	"facetedcategory-not-only-match-exactly": "Used as label for the \"Include not exactly matched\" checkbox in [[Special:FacetedCategories]]",
 	"facetedcategory-faceted-categories": "Heading of the list of faceted categories (categories whose names look like \"Facet/Member\") shown below the page, before the core list of the other categories ({{msg-mw|Pagecategories}}). It links to [[Special:FacetedCategories]].\n{{Identical|Faceted Categories}}",
 	"facetedcategory-general-categories": "Replaces the heading {{msg-mw|Pagecategories}} of the list of categories without a facet (categories whose names have no slash), shown below the list headed {{msg-mw|Facetedcategory-faceted-categories}}.",
 	"facetedcategory-combinations": "Heading of the list of category combinations suggested below the page, after {{msg-mw|Facetedcategory-faceted-categories}}. It links to [[Special:CategoryIntersectionSearch]], and so does each item, for the pages in all the categories of that combination.",
@@ -26,5 +24,16 @@
 	"apihelp-query+categoryfacets-param-limit": "{{doc-apihelp-param|query+categoryfacets|limit}}",
 	"apihelp-query+categoryfacets-example-limit": "{{doc-apihelp-example|query+categoryfacets}}",
 	"facetedcategory-ve-page-facets": "Heading in the suggestions of the VisualEditor category input, shown while the input is empty, above the facets of the categories the page already has. Choosing a facet fills the input with it, followed by a slash, to suggest its members.",
-	"facetedcategory-ve-common-facets": "Heading in the suggestions of the VisualEditor category input, shown while the input is empty, above the facets in which pages are categorized the most. See also {{msg-mw|facetedcategory-ve-page-facets}}."
+	"facetedcategory-ve-common-facets": "Heading in the suggestions of the VisualEditor category input, shown while the input is empty, above the facets in which pages are categorized the most. See also {{msg-mw|facetedcategory-ve-page-facets}}.",
+	"facetedcategory-intro": "Text at the top of [[Special:FacetedCategories]], above a card for each facet.",
+	"facetedcategory-all-members": "Link at the bottom of the card of a facet on [[Special:FacetedCategories]], to the list of all its members.\n\nParameters:\n* $1 - number of members of the facet",
+	"facetedcategory-other-facets": "Heading on [[Special:FacetedCategories]] above the links to the facets without a card, after the cards of the facets with the most pages.",
+	"facetedcategory-facet-summary": "Text below the title of [[Special:FacetedCategories]] when it lists the members of a facet.\n\nParameters:\n* $1 - number of members\n* $2 - number of pages in all the members, a page in two members counted twice",
+	"facetedcategory-filter": "Placeholder and label of the input which filters the members of a facet on [[Special:FacetedCategories]].",
+	"facetedcategory-filter-submit": "Button which filters and sorts the members of a facet on [[Special:FacetedCategories]].\n{{Identical|Show}}",
+	"facetedcategory-sort-pages": "Option to list the members of a facet with the most pages first, on [[Special:FacetedCategories]]. See also {{msg-mw|facetedcategory-sort-name}}.",
+	"facetedcategory-sort-name": "Option to list the members of a facet in alphabetical order, on [[Special:FacetedCategories]]. See also {{msg-mw|facetedcategory-sort-pages}}.",
+	"facetedcategory-member": "Column heading of the members of a facet on [[Special:FacetedCategories]].",
+	"facetedcategory-pages": "Column heading of the numbers of pages of the members of a facet on [[Special:FacetedCategories]].\n{{Identical|Page}}",
+	"facetedcategory-no-members": "Shown on [[Special:FacetedCategories]] when no member of a facet matches the filter, or the facet has none."
 }

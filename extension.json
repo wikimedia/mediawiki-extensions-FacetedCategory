@@ -7,10 +7,7 @@
 	"license-name": "AGPL-3.0-or-later",
 	"type": "specialpage",
 	"requires": {
-		"MediaWiki": ">= 1.46.0",
-		"extensions": {
-			"CategoryTree": "*"
-		}
+		"MediaWiki": ">= 1.46.0"
 	},
 	"AutoloadNamespaces": {
 		"MediaWiki\\Extension\\FacetedCategory\\": "includes/"
@@ -34,6 +31,12 @@
 		"ext.facetedCategory": {
 			"position": "top",
 			"styles": [ "facetedCategory.less" ]
+		},
+		"ext.facetedCategory.special": {
+			"class": "MediaWiki\\ResourceLoader\\CodexModule",
+			"codexComponents": [ "CdxButton", "CdxTextInput" ],
+			"codexStyleOnly": true,
+			"styles": [ "special.less" ]
 		}
 	},
 	"ResourceFileModulePaths": {
@@ -89,8 +92,9 @@
 		"FacetedCategories": {
 			"class": "MediaWiki\\Extension\\FacetedCategory\\Special\\SpecialFacetedCategories",
 			"services": [
-				"CategoryTree.CategoryTreeFactory",
-				"LinkBatchFactory"
+				"FacetedCategory.FacetedCategoryList",
+				"LinkBatchFactory",
+				"CollationFactory"
 			]
 		},
 		"CategoryIntersectionSearch": {
