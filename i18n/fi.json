@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"MITO",
+			"Wikipeedikko",
 			"Yupik"
 		]
 	},
-	"categoryintersectionsearch-noinput": "Kirjoita hakusana.",
-	"facetedcategory-search-for": "luokan nimi:"
+	"facetedcategory-general-categories": "Yleiset luokat",
+	"facetedcategory-combinations": "Luokkien yhdistelmät",
+	"facetedcategory-combination-invalid": "Luokkien yhdistelmällä on oltava nimi ja siihen on kuuluttava vähintään kaksi luokkaa."
 }

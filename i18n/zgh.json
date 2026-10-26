@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"Daoudsfouli"
+		]
+	},
+	"facetedcategory-filter": " ⵙⵜⵉ ⵉⴳⵎⴰⵎⵏ",
+	"facetedcategory-sort-pages": "ⵓⴳⴳⴰⵔ ⵏ ⵜⴰⵙⵏⵉⵡⵉⵏ ⵣⵡⴰⵔ",
+	"facetedcategory-add": "ⵔⵏⵓ ⴰⵙⵎⵉⵍ",
+	"facetedcategory-add-submit": "ⵔⵏⵓ",
+	"facetedcategory-result-count-more": "ⵓⴳⴳⴰⵔ ⵏ $1 ⵜⴰⵙⵏⵉⵡⵉⵏ",
+	"facetedcategory-refine": "ⴽⵔⵢ ⴰⵏⵙⴰ",
+	"facetedcategory-remove": "ⴽⴽⵙ $1"
+}

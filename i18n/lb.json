@@ -1,10 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
-	"categoryintersectionsearch-noinput": "Gitt wgl. e Sichbegrëff an",
-	"categoryintersectionsearch-page-title": "Kategorie \"$1\"",
-	"facetedcategory-search-for": "Numm vun der Kategorie:"
+	"facetedcategory-general-categories": "Allgemeng Kategorien",
+	"facetedcategory-facet-summary": "$1 {{PLURAL:$1|Member|Memberen}} · $2 {{PLURAL:$2|Säit|Säiten}}",
+	"facetedcategory-filter-submit": "Weisen",
+	"facetedcategory-sort-name": "Alphabetesch",
+	"facetedcategory-member": "Member",
+	"facetedcategory-pages": "Säiten",
+	"facetedcategory-add": "Eng Kategorie derbäisetzen",
+	"facetedcategory-condition": "$1: $2",
+	"facetedcategory-condition-excluded": "net $1",
+	"facetedcategory-excluded": "net",
+	"facetedcategory-result-count": "$1 {{PLURAL:$1|Säit|Säiten}}",
+	"facetedcategory-result-count-more": "Méi wéi $1 Säiten"
 }

@@ -5,10 +5,6 @@
 		]
 	},
 	"categoryintersectionsearch-desc": "Afegeix [[Special:CategoryIntersectionSearch]]",
-	"categoryintersectionsearch-noinput": "Entra un terme de cerca.",
-	"categoryintersectionsearch-page-title": "Categoria $1",
 	"facetedcategories": "Categories facetades",
-	"facetedcategory-desc": "Afegeix pàgines especials de [[Special:FacetedCategories]]",
-	"facetedcategory-search-for": "nom de la categoria:",
-	"facetedcategory-not-only-match-exactly": "Inclou els no exactament iguals"
+	"facetedcategory-desc": "Afegeix pàgines especials de [[Special:FacetedCategories]]"
 }
