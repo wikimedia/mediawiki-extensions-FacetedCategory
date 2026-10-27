@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Beta16"
+		]
+	},
+	"facetedcategory-all-members": "Vedi $1 {{PLURAL:$1|membro|membri}}",
+	"facetedcategory-add-submit": "Aggiungi",
+	"facetedcategory-condition-excluded": "non $1"
+}
